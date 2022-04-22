@@ -1,0 +1,145 @@
+<form #validateForm="ngForm"  appIdentityRevealed
+  nzLayout="inline"
+  autocomplete="off"
+  class="create-paradigm grid-colum-1"
+  *ngIf="inputDto">
+
+  <ng-container *ngFor="let field of fields">
+    <ng-container [ngSwitch]="field.type">
+      <!-- 文本: number, string, date;  文本域: textarea-->
+      <ng-container *ngSwitchCase="0">
+        <!-- 文本域: textarea-->
+        <ng-container *ngIf="field.rows > 1;else textBlock">
+          <kf-textarea
+            ngModel
+            [name]="field.key"
+            [ngModelOptions]="{name: field.key}"
+            [(ngModel)]="inputDto[field.key]"
+            [title]="inputDto.label"
+            [required]="field.isRequired"
+            [rows]="field.rows">
+            <kf-input-title [title]="inputDto.label"></kf-input-title>
+          </kf-textarea>
+        </ng-container>
+
+        <!-- 文本:number, string, date; -->
+        <ng-template #textBlock>
+          <ng-container [ngSwitch]="field.valueType">
+            <!-- number -->
+            <ng-container *ngSwitchCase="0">
+              <kf-input-text
+                ngModel
+                [name]="field.key"
+                [title]="inputDto.label"
+                [placeholder]="field.placeholder"
+                [ngModelOptions]="{name: field.key}"
+                [(ngModel)]="inputDto[field.key]"
+                [maxlength]="field.maxlength"
+                [appAllowableFormat]="orderRex"
+                [required]="field.isRequired">
+                 <kf-input-title [title]="inputDto.label"></kf-input-title>
+              </kf-input-text>
+
+              <!-- <div >
+                <div class="text-danger"
+                  *ngIf="validateForm.controls['order']?.invalid &&
+                  (validateForm.controls['order']?.dirty || validateForm.controls['order']?.touched)">
+                  <ng-container *ngIf="
+                  validateForm.controls['order']?.errors.allowableFormat">
+                    请输入正数
+                  </ng-container>
+                </div>
+              </div> -->
+            </ng-container>
+            <!-- string -->
+            <ng-container *ngSwitchCase="1">
+              <kf-input-text
+                ngModel
+                [name]="field.key"
+                [ngModelOptions]="{name: field.key}"
+                [(ngModel)]="inputDto[field.key]"
+                [placeholder]="field.placeholder"
+                [maxlength]="field.maxlength"
+                [size]="size"
+                [title]="inputDto.label"
+                [required]="field.isRequired">
+                  <kf-input-title [title]="inputDto.label"></kf-input-title>
+              </kf-input-text>
+            </ng-container>
+            <!-- date -->
+            <ng-container *ngSwitchCase="2">
+              <kf-input-date
+                ngModel
+                [name]="field.key"
+                [placeholder]="field.placeholder"
+                [ngModelOptions]="{name: field.key}"
+                [(ngModel)]="inputDto[field.key]"
+                [size]="size"
+                [title]="inputDto.label"
+                [required]="field.isRequired">
+                  <kf-input-title [title]="inputDto.label"></kf-input-title>
+              </kf-input-date>
+            </ng-container>
+          </ng-container>
+        </ng-template>
+
+      </ng-container>
+      <!-- 下拉框: ComboBox/List;  选择框: CheckBox/Radio-->
+      <ng-container *ngSwitchCase="1">
+        <ng-container [ngSwitch]="field.style">
+          <!-- 复选框: checkbox / 单选框: Radio-->
+          <ng-container *ngSwitchCase="0">
+             <!-- 复选框: checkbox-->
+            <ng-container *ngIf="field.isMulti; else checkBlock">
+              <kf-checkbox-group
+                ngModel
+                [name]="field.key"
+                [ngModelOptions]="{name: field.key}"
+                [(ngModel)]="inputDto[field.key]"
+                [required]="field.isRequired"
+              >
+              </kf-checkbox-group>
+            </ng-container>
+            <ng-template #checkBlock>
+              <kf-radio-group
+                ngModel
+                [name]="'radio'"
+                [ngModelOptions]="{name: 'radio'}"
+                [options]="field.options"
+                [(ngModel)]="inputDto[field.key]"
+                [required]="field.isRequired">
+                <kf-input-title [title]="field.label"></kf-input-title>
+              </kf-radio-group>
+            </ng-template>
+          </ng-container>
+          <!-- 下拉框: ComboBox-->
+          <ng-container *ngSwitchCase="1">
+            <kf-select
+              ngModel
+              [name]="field.key"
+              [ngModelOptions]="{name: field.key}"
+              [(ngModel)]="inputDto[field.key]"
+              [size]="size"
+              [title]="field.label"
+              [isMulti]="field.isMulti"
+              [options]="field.options"
+              [required]="field.isRequired"
+              (selectOuter)="selectChange($event)"
+            >
+              <kf-input-title [title]="field.label"></kf-input-title>
+            </kf-select>
+          </ng-container>
+          <!-- 带有复选框的下拉框: List-->
+          <ng-container *ngSwitchCase="2">
+          </ng-container>
+        </ng-container>
+      </ng-container>
+
+      <!-- 文件上传: FileUpload -->
+      <ng-container *ngSwitchCase="2">
+
+      </ng-container>
+
+    </ng-container>
+  </ng-container>
+</form>

@@ -1,0 +1,9 @@
+<ng-container *ngIf="forms">
+  <kf-tabs
+    [tabs]="forms.tabs"
+    [tabsTemplate]="slotTpl">
+  </kf-tabs>
+  <ng-template #slotTpl  let-tabIndex>
+    <kf-from [fields]="forms.tabs[tabIndex].fields" [inputDto]="inputDto"></kf-from>
+  </ng-template>
+</ng-container>

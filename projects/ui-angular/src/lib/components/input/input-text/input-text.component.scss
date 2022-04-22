@@ -1,0 +1,18 @@
+@import '../../../styles/forms/inputs';
+
+.kf-text {
+  @extend .kf-form-item;
+
+  font-size: 0.875rem;
+  width: 9.875rem;
+  max-width: 100%;
+  min-width: 100%;
+}
+
+.ant-input-lg {
+  font-size: inherit;
+}
+
+.ant-input {
+  border-radius: 0.25rem;
+}

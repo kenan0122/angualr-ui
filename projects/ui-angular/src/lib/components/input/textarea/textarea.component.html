@@ -1,0 +1,18 @@
+<div class="kf-textarea">
+  <ng-content></ng-content>
+
+  <textarea
+    [name]="name"
+    [(ngModel)]="value"
+    [required]="required"
+    [placeholder]="placeholder"
+    [rows]="rows"
+    (focus)="focus()">
+  </textarea>
+
+  <div *ngIf="required && (!value || value.length <= 0) && !firstLoad">
+    <div class="text-danger">
+      {{title}}不能为空
+    </div>
+  </div>
+</div>

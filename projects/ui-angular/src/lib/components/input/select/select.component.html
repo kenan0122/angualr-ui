@@ -1,0 +1,25 @@
+<div class="kf-select">
+  <ng-content></ng-content>
+
+  <nz-select
+    [name]="name"
+    [nzSize]="size"
+    nzShowSearch
+    nzAllowClear
+    [nzMode]="selectMode"
+    [nzPlaceHolder]="'请选择'+title"
+    [(ngModel)]="value"
+    [required]="required"
+    (ngModelChange)="selectChange($event)"
+    (nzFocus)="focus()">
+    <ng-container *ngFor="let item of options | keyvalue;let i = index">
+      <nz-option [nzLabel]="item.key" [nzValue]="item.value" ></nz-option>
+    </ng-container>
+  </nz-select>
+
+  <div *ngIf="required && (!value || value.length <= 0) && !firstLoad">
+    <div class="text-danger">
+      {{title}}不能为空
+    </div>
+  </div>
+</div>

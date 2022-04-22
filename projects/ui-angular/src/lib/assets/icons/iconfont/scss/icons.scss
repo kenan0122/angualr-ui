@@ -1,0 +1,2047 @@
+/*------------------------
+	icons
+-------------------------*/
+@function unicode($str) {
+  @return unquote("\"\\#{$str}\"");
+}
+
+$kf-3d-rotate: unicode(ea01);
+$kf-action-close: unicode(ea02);
+$kf-action-maximize-inverse: unicode(ea03);
+$kf-action-maximize: unicode(ea04);
+$kf-action-minimize: unicode(ea05);
+$kf-action-outline-small: unicode(ea06);
+$kf-action-outline: unicode(ea07);
+$kf-action: unicode(ea08);
+$kf-add-circle-filled: unicode(ea09);
+$kf-add-circle-medium: unicode(ea0a);
+$kf-add-circle-thin: unicode(ea0b);
+$kf-add-circle: unicode(ea0c);
+$kf-add-edge: unicode(ea0d);
+$kf-add-new: unicode(ea0e);
+$kf-add-node: unicode(ea0f);
+$kf-advanced-pie: unicode(ea10);
+$kf-alert: unicode(ea11);
+$kf-app-store: unicode(ea12);
+$kf-app-workspaces: unicode(ea13);
+$kf-applet: unicode(ea14);
+$kf-applets: unicode(ea15);
+$kf-application: unicode(ea16);
+$kf-apps: unicode(ea17);
+$kf-area-chart: unicode(ea18);
+$kf-arrow-bold-circle-left: unicode(ea19);
+$kf-arrow-bold-circle-right: unicode(ea1a);
+$kf-arrow-bold-down: unicode(ea1b);
+$kf-arrow-bold-left: unicode(ea1c);
+$kf-arrow-bold-right: unicode(ea1d);
+$kf-arrow-bold-up: unicode(ea1e);
+$kf-arrow-down: unicode(ea1f);
+$kf-arrow-input: unicode(ea20);
+$kf-arrow-left: unicode(ea21);
+$kf-arrow-output: unicode(ea22);
+$kf-arrow-right-down-medium: unicode(ea23);
+$kf-arrow-right-medium: unicode(ea24);
+$kf-arrow-right: unicode(ea25);
+$kf-arrow-tail-left: unicode(ea26);
+$kf-arrow-tail-right: unicode(ea27);
+$kf-arrow-tail-solid-left: unicode(ea28);
+$kf-arrow-tail-solid-right: unicode(ea29);
+$kf-arrow-tail-subright: unicode(ea2a);
+$kf-arrow-up: unicode(ea2b);
+$kf-asset-outline-small: unicode(ea2c);
+$kf-asset-outline: unicode(ea2d);
+$kf-assets: unicode(ea2e);
+$kf-attachment: unicode(ea2f);
+$kf-automation-alternate: unicode(ea30);
+$kf-automation: unicode(ea31);
+$kf-back-arrow-filled: unicode(ea32);
+$kf-back-arrow: unicode(ea33);
+$kf-bars: unicode(ea34);
+$kf-bell-alarm: unicode(ea35);
+$kf-bell: unicode(ea36);
+$kf-bold: unicode(ea37);
+$kf-bolt: unicode(ea38);
+$kf-branch-node-vert: unicode(ea39);
+$kf-branch-node: unicode(ea3a);
+$kf-broom: unicode(ea3b);
+$kf-browser-size: unicode(ea3c);
+$kf-bug: unicode(ea3d);
+$kf-builder-outline: unicode(ea3e);
+$kf-builder: unicode(ea3f);
+$kf-button-push-outline-large: unicode(ea40);
+$kf-button-push-outline-small: unicode(ea41);
+$kf-button-push-outline: unicode(ea42);
+$kf-calendar-clock: unicode(ea43);
+$kf-calendar: unicode(ea44);
+$kf-calender-clock: unicode(ea45);
+$kf-cards: unicode(ea46);
+$kf-center-align: unicode(ea47);
+$kf-chart-area: unicode(ea48);
+$kf-chart-bar-bar: unicode(ea49);
+$kf-chart-bubble: unicode(ea4a);
+$kf-chart-donut: unicode(ea4b);
+$kf-chart-full-stacked-area: unicode(ea4c);
+$kf-chart-heat: unicode(ea4d);
+$kf-chart-horz-full-stack-bar: unicode(ea4e);
+$kf-chart-number-card: unicode(ea4f);
+$kf-chart-pie-grid: unicode(ea50);
+$kf-chart-pie: unicode(ea51);
+$kf-chart-scatter: unicode(ea52);
+$kf-chart-spider: unicode(ea53);
+$kf-chart-stacked-area: unicode(ea54);
+$kf-chart-vert-bar: unicode(ea55);
+$kf-chart-vert-bar2: unicode(ea56);
+$kf-chart-vert-stacked-bar: unicode(ea57);
+$kf-check-filled-sm: unicode(ea58);
+$kf-check-filled: unicode(ea59);
+$kf-check-square-filled: unicode(ea5a);
+$kf-check: unicode(ea5b);
+$kf-checklist: unicode(ea5c);
+$kf-chevron-bold-down: unicode(ea5d);
+$kf-chevron-bold-left: unicode(ea5e);
+$kf-chevron-bold-right: unicode(ea5f);
+$kf-chevron-bold-up: unicode(ea60);
+$kf-circle-filled: unicode(ea61);
+$kf-circle: unicode(ea62);
+$kf-circles: unicode(ea63);
+$kf-circuit-board: unicode(ea64);
+$kf-clipboard: unicode(ea65);
+$kf-clock: unicode(ea66);
+$kf-cloud-download: unicode(ea67);
+$kf-cloud-upload: unicode(ea68);
+$kf-code: unicode(ea69);
+$kf-cog: unicode(ea6a);
+$kf-collapse: unicode(ea6b);
+$kf-commandline: unicode(ea6c);
+$kf-comments: unicode(ea6d);
+$kf-condition: unicode(ea6e);
+$kf-copy-app: unicode(ea6f);
+$kf-copy-filled: unicode(ea70);
+$kf-copy: unicode(ea71);
+$kf-credit-card: unicode(ea72);
+$kf-dashboard-outline: unicode(ea73);
+$kf-dashboard: unicode(ea74);
+$kf-database: unicode(ea75);
+$kf-devil: unicode(ea76);
+$kf-disable: unicode(ea77);
+$kf-document: unicode(ea78);
+$kf-documentation: unicode(ea79);
+$kf-domain: unicode(ea7a);
+$kf-dots-horz: unicode(ea7b);
+$kf-dots-vert-round: unicode(ea7c);
+$kf-dots-vert: unicode(ea7d);
+$kf-double-down: unicode(ea7e);
+$kf-double-left: unicode(ea7f);
+$kf-double-right: unicode(ea80);
+$kf-double-up: unicode(ea81);
+$kf-downgrade-horizontal: unicode(ea82);
+$kf-downgrade: unicode(ea83);
+$kf-download-outline-large: unicode(ea84);
+$kf-download-outline-small: unicode(ea85);
+$kf-download-outline: unicode(ea86);
+$kf-drag: unicode(ea87);
+$kf-edit-app: unicode(ea88);
+$kf-edit-outline-large: unicode(ea89);
+$kf-edit-outline-small: unicode(ea8a);
+$kf-edit-outline: unicode(ea8b);
+$kf-edit: unicode(ea8c);
+$kf-email: unicode(ea8d);
+$kf-enrich-small: unicode(ea8e);
+$kf-escalate: unicode(ea8f);
+$kf-events-outline-small: unicode(ea90);
+$kf-events-outline: unicode(ea91);
+$kf-expand: unicode(ea92);
+$kf-explore: unicode(ea93);
+$kf-export-filled: unicode(ea94);
+$kf-export-outline-large: unicode(ea95);
+$kf-export-outline-small: unicode(ea96);
+$kf-export-outline: unicode(ea97);
+$kf-export: unicode(ea98);
+$kf-eye-disabled: unicode(ea99);
+$kf-eye-hidden: unicode(ea9a);
+$kf-eye: unicode(ea9b);
+$kf-field-created-by: unicode(ea9c);
+$kf-field-created-date: unicode(ea9d);
+$kf-field-date: unicode(ea9e);
+$kf-field-double-select: unicode(ea9f);
+$kf-field-edited-by: unicode(eaa0);
+$kf-field-edited-date: unicode(eaa1);
+$kf-field-grid: unicode(eaa2);
+$kf-field-html: unicode(eaa3);
+$kf-field-json: unicode(eaa4);
+$kf-field-list-small: unicode(eaa5);
+$kf-field-list: unicode(eaa6);
+$kf-field-lists: unicode(eaa7);
+$kf-field-multiselect: unicode(eaa8);
+$kf-field-number: unicode(eaa9);
+$kf-field-numeric: unicode(eaaa);
+$kf-field-richtext: unicode(eaab);
+$kf-field-single-select: unicode(eaac);
+$kf-field-singleline: unicode(eaad);
+$kf-field-text: unicode(eaae);
+$kf-field-textarea: unicode(eaaf);
+$kf-field-textual: unicode(eab0);
+$kf-field-users: unicode(eab2);
+$kf-filter-bar: unicode(eab1);
+$kf-filter: unicode(eab3);
+$kf-find-page: unicode(eab4);
+$kf-flame: unicode(eab5);
+$kf-folder-closed-small: unicode(eab6);
+$kf-folder-open-small: unicode(eab7);
+$kf-folder: unicode(eab8);
+$kf-folders: unicode(eab9);
+$kf-font: unicode(eaba);
+$kf-format-indent-decrease: unicode(eabb);
+$kf-format-indent-increase: unicode(eabc);
+$kf-formula: unicode(eabd);
+$kf-forward-arrow-filled: unicode(eabe);
+$kf-forward-arrow: unicode(eabf);
+$kf-full-align: unicode(eac0);
+$kf-gauge: unicode(eac1);
+$kf-gear-small: unicode(eac2);
+$kf-gear-square: unicode(eac3);
+$kf-gear: unicode(eac4);
+$kf-globe: unicode(eac5);
+$kf-graph-alt1: unicode(eac6);
+$kf-graph: unicode(eac7);
+$kf-grid-view: unicode(eac8);
+$kf-hand: unicode(eac9);
+$kf-handle: unicode(eaca);
+$kf-heat: unicode(eacb);
+$kf-helper: unicode(eacc);
+$kf-history: unicode(eacd);
+$kf-horz-bar-graph-grouped: unicode(eace);
+$kf-horz-stacked-bar: unicode(eacf);
+$kf-html-code: unicode(ead0);
+$kf-icon-chart-bar-horizontal: unicode(ead1);
+$kf-icon-chart-horz-bar: unicode(ead2);
+$kf-import-outline-large: unicode(ead3);
+$kf-import-outline-small: unicode(ead4);
+$kf-import-outline: unicode(ead5);
+$kf-info-filled-2: unicode(ead6);
+$kf-info-filled-small: unicode(ead7);
+$kf-info-filled: unicode(ead8);
+$kf-ingest-small: unicode(ead9);
+$kf-inspect: unicode(eada);
+$kf-integration: unicode(eadb);
+$kf-integrations: unicode(eadc);
+$kf-ip: unicode(eadd);
+$kf-italic: unicode(eade);
+$kf-key-outline-small: unicode(eadf);
+$kf-key-outline: unicode(eae0);
+$kf-key: unicode(eae1);
+$kf-keyboard-return: unicode(eae2);
+$kf-keyboard: unicode(eae3);
+$kf-layer: unicode(eae4);
+$kf-left-align: unicode(eae5);
+$kf-line-chart: unicode(eae6);
+$kf-line-graph: unicode(eae7);
+$kf-linear-gauge: unicode(eae8);
+$kf-link: unicode(eae9);
+$kf-list-1: unicode(eaea);
+$kf-list-view: unicode(eaeb);
+$kf-list: unicode(eaec);
+$kf-loading: unicode(eaed);
+$kf-locate-filled: unicode(eaee);
+$kf-locate-outline-large: unicode(eaef);
+$kf-locate-outline: unicode(eaf0);
+$kf-location: unicode(eaf1);
+$kf-lock-sm: unicode(eaf2);
+$kf-lock: unicode(eaf3);
+$kf-mail-1: unicode(eaf4);
+$kf-mail: unicode(eaf5);
+$kf-map: unicode(eaf6);
+$kf-menu: unicode(eaf7);
+$kf-mfa: unicode(eaf8);
+$kf-mic: unicode(eaf9);
+$kf-minus: unicode(eafa);
+$kf-money: unicode(eafb);
+$kf-mouse-hold: unicode(eafc);
+$kf-multi-line: unicode(eafd);
+$kf-new-app: unicode(eafe);
+$kf-notation-arrow-down-left: unicode(eaff);
+$kf-notation-arrow-up: unicode(eb00);
+$kf-numbered-list: unicode(eb02);
+$kf-open: unicode(eb01);
+$kf-orchestration: unicode(eb03);
+$kf-paragraph: unicode(eb04);
+$kf-pause-circle: unicode(eb05);
+$kf-pause: unicode(eb06);
+$kf-phone: unicode(eb07);
+$kf-photo: unicode(eb08);
+$kf-pie-chart: unicode(eb09);
+$kf-pin: unicode(eb0a);
+$kf-plane: unicode(eb0b);
+$kf-play-circle: unicode(eb0c);
+$kf-play: unicode(eb0d);
+$kf-playbook-outline-small: unicode(eb0e);
+$kf-playbook-outline: unicode(eb0f);
+$kf-plugin-outline-small: unicode(eb10);
+$kf-plugin-outline: unicode(eb11);
+$kf-plugin: unicode(eb12);
+$kf-plus-bold: unicode(eb13);
+$kf-plus: unicode(eb14);
+$kf-prev: unicode(eb15);
+$kf-printer: unicode(eb16);
+$kf-profile-filled: unicode(eb17);
+$kf-profile: unicode(eb18);
+$kf-promote-horizontal: unicode(eb19);
+$kf-promote: unicode(eb1a);
+$kf-question-filled-sm: unicode(eb1b);
+$kf-question-filled: unicode(eb1c);
+$kf-question: unicode(eb1d);
+$kf-radio-button: unicode(eb1e);
+$kf-redo-all: unicode(eb1f);
+$kf-redo: unicode(eb20);
+$kf-reference-grid: unicode(eb21);
+$kf-reference-multi: unicode(eb22);
+$kf-reference-single: unicode(eb23);
+$kf-reference-tree: unicode(eb24);
+$kf-reference: unicode(eb25);
+$kf-refresh-circle: unicode(eb26);
+$kf-refresh-small: unicode(eb27);
+$kf-refresh: unicode(eb28);
+$kf-remove-edge: unicode(eb29);
+$kf-remove-node: unicode(eb2a);
+$kf-remove-users: unicode(eb2b);
+$kf-remove: unicode(eb2c);
+$kf-repeat: unicode(eb2d);
+$kf-replace: unicode(eb2e);
+$kf-reports-outline: unicode(eb2f);
+$kf-reports: unicode(eb30);
+$kf-resize: unicode(eb31);
+$kf-right-align: unicode(eb32);
+$kf-rocket: unicode(eb33);
+$kf-rotate: unicode(eb34);
+$kf-rule-outline: unicode(eb35);
+$kf-runner: unicode(eb36);
+$kf-runs-outline-small: unicode(eb37);
+$kf-runs-outline: unicode(eb38);
+$kf-save-outline-large: unicode(eb39);
+$kf-save-outline-small: unicode(eb3a);
+$kf-save-outline: unicode(eb3b);
+$kf-save: unicode(eb3c);
+$kf-screen-1: unicode(eb3d);
+$kf-screen: unicode(eb3e);
+$kf-search: unicode(eb3f);
+$kf-section: unicode(eb40);
+$kf-select-all: unicode(eb41);
+$kf-select-user: unicode(eb42);
+$kf-select-users: unicode(eb43);
+$kf-sensor-outline-small: unicode(eb44);
+$kf-sensor-outline: unicode(eb45);
+$kf-server: unicode(eb46);
+$kf-shield: unicode(eb47);
+$kf-shrink: unicode(eb48);
+$kf-skip: unicode(eb49);
+$kf-slide-left: unicode(eb4a);
+$kf-slide-right: unicode(eb4b);
+$kf-smartphone: unicode(eb4c);
+$kf-smiley-frown: unicode(eb4d);
+$kf-snapshot: unicode(eb4e);
+$kf-spaces-list: unicode(eb4f);
+$kf-spaces-outline-large: unicode(eb50);
+$kf-spaces-outline: unicode(eb51);
+$kf-spaces: unicode(eb52);
+$kf-speedometer: unicode(eb53);
+$kf-split-handle: unicode(eb54);
+$kf-square-filled: unicode(eb55);
+$kf-square: unicode(eb56);
+$kf-star-filled: unicode(eb57);
+$kf-star: unicode(eb58);
+$kf-stars: unicode(eb59);
+$kf-stopwatch: unicode(eb5a);
+$kf-superscript: unicode(eb5b);
+$kf-swap: unicode(eb5c);
+$kf-switch: unicode(eb5d);
+$kf-system-diagnostics-2: unicode(eb5e);
+$kf-system-diagnostics: unicode(eb5f);
+$kf-table: unicode(eb60);
+$kf-tabs: unicode(eb61);
+$kf-tag-filled: unicode(eb62);
+$kf-tags-outline: unicode(eb63);
+$kf-target: unicode(eb64);
+$kf-task-outline: unicode(eb65);
+$kf-thumb-down-filled: unicode(eb66);
+$kf-thumb-down-outline-large: unicode(eb67);
+$kf-thumb-down-outline: unicode(eb68);
+$kf-thumb-up-filled: unicode(eb69);
+$kf-thumb-up-outline-large: unicode(eb6a);
+$kf-thumb-up-outline: unicode(eb6b);
+$kf-tracking-id: unicode(eb6c);
+$kf-transfer: unicode(eb6d);
+$kf-trash: unicode(eb6e);
+$kf-tree-collapse: unicode(eb6f);
+$kf-tree-expand: unicode(eb70);
+$kf-tree: unicode(eb71);
+$kf-trend-down: unicode(eb72);
+$kf-trend-level: unicode(eb73);
+$kf-trend-up: unicode(eb74);
+$kf-trending: unicode(eb75);
+$kf-underline: unicode(eb76);
+$kf-undo-all: unicode(eb77);
+$kf-undo: unicode(eb78);
+$kf-unlink: unicode(eb79);
+$kf-upload-outline-large: unicode(eb7a);
+$kf-upload-outline-small: unicode(eb7b);
+$kf-upload-outline: unicode(eb7c);
+$kf-user-add: unicode(eb7d);
+$kf-user-circle: unicode(eb7e);
+$kf-user-groups: unicode(eb7f);
+$kf-user: unicode(eb80);
+$kf-users: unicode(eb81);
+$kf-version: unicode(eb82);
+$kf-vert-bar-graph-grouped: unicode(eb83);
+$kf-vert-full-stack-bar: unicode(eb84);
+$kf-view-code: unicode(eb85);
+$kf-view-designer: unicode(eb86);
+$kf-view-split: unicode(eb87);
+$kf-wand: unicode(eb88);
+$kf-warning-filled-sm: unicode(eb89);
+$kf-warning-filled: unicode(eb8a);
+$kf-warning-thin: unicode(eb8b);
+$kf-web-api: unicode(eb8c);
+$kf-widget: unicode(eb8d);
+$kf-worker: unicode(eb8e);
+$kf-workflow-alternate-large: unicode(eb8f);
+$kf-workflow-alternate-small: unicode(eb90);
+$kf-workflow-alternate: unicode(eb91);
+$kf-workflow: unicode(eb92);
+$kf-workspaces: unicode(eb93);
+$kf-workstation: unicode(eb94);
+$kf-wrench: unicode(eb95);
+$kf-x-filled: unicode(eb96);
+$kf-x-small: unicode(eb97);
+$kf-x: unicode(eb98);
+
+.kf-icon.kf-3d-rotate::before {
+  content: $kf-3d-rotate;
+}
+
+.kf-icon.kf-action-close::before {
+  content: $kf-action-close;
+}
+
+.kf-icon.kf-action-maximize-inverse::before {
+  content: $kf-action-maximize-inverse;
+}
+
+.kf-icon.kf-action-maximize::before {
+  content: $kf-action-maximize;
+}
+
+.kf-icon.kf-action-minimize::before {
+  content: $kf-action-minimize;
+}
+
+.kf-icon.kf-action-outline-small::before {
+  content: $kf-action-outline-small;
+}
+
+.kf-icon.kf-action-outline::before {
+  content: $kf-action-outline;
+}
+
+.kf-icon.kf-action::before {
+  content: $kf-action;
+}
+
+.kf-icon.kf-add-circle-filled::before {
+  content: $kf-add-circle-filled;
+}
+
+.kf-icon.kf-add-circle-medium::before {
+  content: $kf-add-circle-medium;
+}
+
+.kf-icon.kf-add-circle-thin::before {
+  content: $kf-add-circle-thin;
+}
+
+.kf-icon.kf-add-circle::before {
+  content: $kf-add-circle;
+}
+
+.kf-icon.kf-add-edge::before {
+  content: $kf-add-edge;
+}
+
+.kf-icon.kf-add-new::before {
+  content: $kf-add-new;
+}
+
+.kf-icon.kf-add-node::before {
+  content: $kf-add-node;
+}
+
+.kf-icon.kf-advanced-pie::before {
+  content: $kf-advanced-pie;
+}
+
+.kf-icon.kf-alert::before {
+  content: $kf-alert;
+}
+
+.kf-icon.kf-app-store::before {
+  content: $kf-app-store;
+}
+
+.kf-icon.kf-app-workspaces::before {
+  content: $kf-app-workspaces;
+}
+
+.kf-icon.kf-applet::before {
+  content: $kf-applet;
+}
+
+.kf-icon.kf-applets::before {
+  content: $kf-applets;
+}
+
+.kf-icon.kf-application::before {
+  content: $kf-application;
+}
+
+.kf-icon.kf-apps::before {
+  content: $kf-apps;
+}
+
+.kf-icon.kf-area-chart::before {
+  content: $kf-area-chart;
+}
+
+.kf-icon.kf-arrow-bold-circle-left::before {
+  content: $kf-arrow-bold-circle-left;
+}
+
+.kf-icon.kf-arrow-bold-circle-right::before {
+  content: $kf-arrow-bold-circle-right;
+}
+
+.kf-icon.kf-arrow-bold-down::before {
+  content: $kf-arrow-bold-down;
+}
+
+.kf-icon.kf-arrow-bold-left::before {
+  content: $kf-arrow-bold-left;
+}
+
+.kf-icon.kf-arrow-bold-right::before {
+  content: $kf-arrow-bold-right;
+}
+
+.kf-icon.kf-arrow-bold-up::before {
+  content: $kf-arrow-bold-up;
+}
+
+.kf-icon.kf-arrow-down::before {
+  content: $kf-arrow-down;
+}
+
+.kf-icon.kf-arrow-input::before {
+  content: $kf-arrow-input;
+}
+
+.kf-icon.kf-arrow-left::before {
+  content: $kf-arrow-left;
+}
+
+.kf-icon.kf-arrow-output::before {
+  content: $kf-arrow-output;
+}
+
+.kf-icon.kf-arrow-right-down-medium::before {
+  content: $kf-arrow-right-down-medium;
+}
+
+.kf-icon.kf-arrow-right-medium::before {
+  content: $kf-arrow-right-medium;
+}
+
+.kf-icon.kf-arrow-right::before {
+  content: $kf-arrow-right;
+}
+
+.kf-icon.kf-arrow-tail-left::before {
+  content: $kf-arrow-tail-left;
+}
+
+.kf-icon.kf-arrow-tail-right::before {
+  content: $kf-arrow-tail-right;
+}
+
+.kf-icon.kf-arrow-tail-solid-left::before {
+  content: $kf-arrow-tail-solid-left;
+}
+
+.kf-icon.kf-arrow-tail-solid-right::before {
+  content: $kf-arrow-tail-solid-right;
+}
+
+.kf-icon.kf-arrow-tail-subright::before {
+  content: $kf-arrow-tail-subright;
+}
+
+.kf-icon.kf-arrow-up::before {
+  content: $kf-arrow-up;
+}
+
+.kf-icon.kf-asset-outline-small::before {
+  content: $kf-asset-outline-small;
+}
+
+.kf-icon.kf-asset-outline::before {
+  content: $kf-asset-outline;
+}
+
+.kf-icon.kf-assets::before {
+  content: $kf-assets;
+}
+
+.kf-icon.kf-attachment::before {
+  content: $kf-attachment;
+}
+
+.kf-icon.kf-automation-alternate::before {
+  content: $kf-automation-alternate;
+}
+
+.kf-icon.kf-automation::before {
+  content: $kf-automation;
+}
+
+.kf-icon.kf-back-arrow-filled::before {
+  content: $kf-back-arrow-filled;
+}
+
+.kf-icon.kf-back-arrow::before {
+  content: $kf-back-arrow;
+}
+
+.kf-icon.kf-bars::before {
+  content: $kf-bars;
+}
+
+.kf-icon.kf-bell-alarm::before {
+  content: $kf-bell-alarm;
+}
+
+.kf-icon.kf-bell::before {
+  content: $kf-bell;
+}
+
+.kf-icon.kf-bold::before {
+  content: $kf-bold;
+}
+
+.kf-icon.kf-bolt::before {
+  content: $kf-bolt;
+}
+
+.kf-icon.kf-branch-node-vert::before {
+  content: $kf-branch-node-vert;
+}
+
+.kf-icon.kf-branch-node::before {
+  content: $kf-branch-node;
+}
+
+.kf-icon.kf-broom::before {
+  content: $kf-broom;
+}
+
+.kf-icon.kf-browser-size::before {
+  content: $kf-browser-size;
+}
+
+.kf-icon.kf-bug::before {
+  content: $kf-bug;
+}
+
+.kf-icon.kf-builder-outline::before {
+  content: $kf-builder-outline;
+}
+
+.kf-icon.kf-builder::before {
+  content: $kf-builder;
+}
+
+.kf-icon.kf-button-push-outline-large::before {
+  content: $kf-button-push-outline-large;
+}
+
+.kf-icon.kf-button-push-outline-small::before {
+  content: $kf-button-push-outline-small;
+}
+
+.kf-icon.kf-button-push-outline::before {
+  content: $kf-button-push-outline;
+}
+
+.kf-icon.kf-calendar-clock::before {
+  content: $kf-calendar-clock;
+}
+
+.kf-icon.kf-calendar::before {
+  content: $kf-calendar;
+}
+
+.kf-icon.kf-calender-clock::before {
+  content: $kf-calender-clock;
+}
+
+.kf-icon.kf-cards::before {
+  content: $kf-cards;
+}
+
+.kf-icon.kf-center-align::before {
+  content: $kf-center-align;
+}
+
+.kf-icon.kf-chart-area::before {
+  content: $kf-chart-area;
+}
+
+.kf-icon.kf-chart-bar-bar::before {
+  content: $kf-chart-bar-bar;
+}
+
+.kf-icon.kf-chart-bubble::before {
+  content: $kf-chart-bubble;
+}
+
+.kf-icon.kf-chart-donut::before {
+  content: $kf-chart-donut;
+}
+
+.kf-icon.kf-chart-full-stacked-area::before {
+  content: $kf-chart-full-stacked-area;
+}
+
+.kf-icon.kf-chart-heat::before {
+  content: $kf-chart-heat;
+}
+
+.kf-icon.kf-chart-horz-full-stack-bar::before {
+  content: $kf-chart-horz-full-stack-bar;
+}
+
+.kf-icon.kf-chart-number-card::before {
+  content: $kf-chart-number-card;
+}
+
+.kf-icon.kf-chart-pie-grid::before {
+  content: $kf-chart-pie-grid;
+}
+
+.kf-icon.kf-chart-pie::before {
+  content: $kf-chart-pie;
+}
+
+.kf-icon.kf-chart-scatter::before {
+  content: $kf-chart-scatter;
+}
+
+.kf-icon.kf-chart-spider::before {
+  content: $kf-chart-spider;
+}
+
+.kf-icon.kf-chart-stacked-area::before {
+  content: $kf-chart-stacked-area;
+}
+
+.kf-icon.kf-chart-vert-bar::before {
+  content: $kf-chart-vert-bar;
+}
+
+.kf-icon.kf-chart-vert-bar2::before {
+  content: $kf-chart-vert-bar2;
+}
+
+.kf-icon.kf-chart-vert-stacked-bar::before {
+  content: $kf-chart-vert-stacked-bar;
+}
+
+.kf-icon.kf-check-filled-sm::before {
+  content: $kf-check-filled-sm;
+}
+
+.kf-icon.kf-check-filled::before {
+  content: $kf-check-filled;
+}
+
+.kf-icon.kf-check-square-filled::before {
+  content: $kf-check-square-filled;
+}
+
+.kf-icon.kf-check::before {
+  content: $kf-check;
+}
+
+.kf-icon.kf-checklist::before {
+  content: $kf-checklist;
+}
+
+.kf-icon.kf-chevron-bold-down::before {
+  content: $kf-chevron-bold-down;
+}
+
+.kf-icon.kf-chevron-bold-left::before {
+  content: $kf-chevron-bold-left;
+}
+
+.kf-icon.kf-chevron-bold-right::before {
+  content: $kf-chevron-bold-right;
+}
+
+.kf-icon.kf-chevron-bold-up::before {
+  content: $kf-chevron-bold-up;
+}
+
+.kf-icon.kf-circle-filled::before {
+  content: $kf-circle-filled;
+}
+
+.kf-icon.kf-circle::before {
+  content: $kf-circle;
+}
+
+.kf-icon.kf-circles::before {
+  content: $kf-circles;
+}
+
+.kf-icon.kf-circuit-board::before {
+  content: $kf-circuit-board;
+}
+
+.kf-icon.kf-clipboard::before {
+  content: $kf-clipboard;
+}
+
+.kf-icon.kf-clock::before {
+  content: $kf-clock;
+}
+
+.kf-icon.kf-cloud-download::before {
+  content: $kf-cloud-download;
+}
+
+.kf-icon.kf-cloud-upload::before {
+  content: $kf-cloud-upload;
+}
+
+.kf-icon.kf-code::before {
+  content: $kf-code;
+}
+
+.kf-icon.kf-cog::before {
+  content: $kf-cog;
+}
+
+.kf-icon.kf-collapse::before {
+  content: $kf-collapse;
+}
+
+.kf-icon.kf-commandline::before {
+  content: $kf-commandline;
+}
+
+.kf-icon.kf-comments::before {
+  content: $kf-comments;
+}
+
+.kf-icon.kf-condition::before {
+  content: $kf-condition;
+}
+
+.kf-icon.kf-copy-app::before {
+  content: $kf-copy-app;
+}
+
+.kf-icon.kf-copy-filled::before {
+  content: $kf-copy-filled;
+}
+
+.kf-icon.kf-copy::before {
+  content: $kf-copy;
+}
+
+.kf-icon.kf-credit-card::before {
+  content: $kf-credit-card;
+}
+
+.kf-icon.kf-dashboard-outline::before {
+  content: $kf-dashboard-outline;
+}
+
+.kf-icon.kf-dashboard::before {
+  content: $kf-dashboard;
+}
+
+.kf-icon.kf-database::before {
+  content: $kf-database;
+}
+
+.kf-icon.kf-devil::before {
+  content: $kf-devil;
+}
+
+.kf-icon.kf-disable::before {
+  content: $kf-disable;
+}
+
+.kf-icon.kf-document::before {
+  content: $kf-document;
+}
+
+.kf-icon.kf-documentation::before {
+  content: $kf-documentation;
+}
+
+.kf-icon.kf-domain::before {
+  content: $kf-domain;
+}
+
+.kf-icon.kf-dots-horz::before {
+  content: $kf-dots-horz;
+}
+
+.kf-icon.kf-dots-vert-round::before {
+  content: $kf-dots-vert-round;
+}
+
+.kf-icon.kf-dots-vert::before {
+  content: $kf-dots-vert;
+}
+
+.kf-icon.kf-double-down::before {
+  content: $kf-double-down;
+}
+
+.kf-icon.kf-double-left::before {
+  content: $kf-double-left;
+}
+
+.kf-icon.kf-double-right::before {
+  content: $kf-double-right;
+}
+
+.kf-icon.kf-double-up::before {
+  content: $kf-double-up;
+}
+
+.kf-icon.kf-downgrade-horizontal::before {
+  content: $kf-downgrade-horizontal;
+}
+
+.kf-icon.kf-downgrade::before {
+  content: $kf-downgrade;
+}
+
+.kf-icon.kf-download-outline-large::before {
+  content: $kf-download-outline-large;
+}
+
+.kf-icon.kf-download-outline-small::before {
+  content: $kf-download-outline-small;
+}
+
+.kf-icon.kf-download-outline::before {
+  content: $kf-download-outline;
+}
+
+.kf-icon.kf-drag::before {
+  content: $kf-drag;
+}
+
+.kf-icon.kf-edit-app::before {
+  content: $kf-edit-app;
+}
+
+.kf-icon.kf-edit-outline-large::before {
+  content: $kf-edit-outline-large;
+}
+
+.kf-icon.kf-edit-outline-small::before {
+  content: $kf-edit-outline-small;
+}
+
+.kf-icon.kf-edit-outline::before {
+  content: $kf-edit-outline;
+}
+
+.kf-icon.kf-edit::before {
+  content: $kf-edit;
+}
+
+.kf-icon.kf-email::before {
+  content: $kf-email;
+}
+
+.kf-icon.kf-enrich-small::before {
+  content: $kf-enrich-small;
+}
+
+.kf-icon.kf-escalate::before {
+  content: $kf-escalate;
+}
+
+.kf-icon.kf-events-outline-small::before {
+  content: $kf-events-outline-small;
+}
+
+.kf-icon.kf-events-outline::before {
+  content: $kf-events-outline;
+}
+
+.kf-icon.kf-expand::before {
+  content: $kf-expand;
+}
+
+.kf-icon.kf-explore::before {
+  content: $kf-explore;
+}
+
+.kf-icon.kf-export-filled::before {
+  content: $kf-export-filled;
+}
+
+.kf-icon.kf-export-outline-large::before {
+  content: $kf-export-outline-large;
+}
+
+.kf-icon.kf-export-outline-small::before {
+  content: $kf-export-outline-small;
+}
+
+.kf-icon.kf-export-outline::before {
+  content: $kf-export-outline;
+}
+
+.kf-icon.kf-export::before {
+  content: $kf-export;
+}
+
+.kf-icon.kf-eye-disabled::before {
+  content: $kf-eye-disabled;
+}
+
+.kf-icon.kf-eye-hidden::before {
+  content: $kf-eye-hidden;
+}
+
+.kf-icon.kf-eye::before {
+  content: $kf-eye;
+}
+
+.kf-icon.kf-field-created-by::before {
+  content: $kf-field-created-by;
+}
+
+.kf-icon.kf-field-created-date::before {
+  content: $kf-field-created-date;
+}
+
+.kf-icon.kf-field-date::before {
+  content: $kf-field-date;
+}
+
+.kf-icon.kf-field-double-select::before {
+  content: $kf-field-double-select;
+}
+
+.kf-icon.kf-field-edited-by::before {
+  content: $kf-field-edited-by;
+}
+
+.kf-icon.kf-field-edited-date::before {
+  content: $kf-field-edited-date;
+}
+
+.kf-icon.kf-field-grid::before {
+  content: $kf-field-grid;
+}
+
+.kf-icon.kf-field-html::before {
+  content: $kf-field-html;
+}
+
+.kf-icon.kf-field-json::before {
+  content: $kf-field-json;
+}
+
+.kf-icon.kf-field-list-small::before {
+  content: $kf-field-list-small;
+}
+
+.kf-icon.kf-field-list::before {
+  content: $kf-field-list;
+}
+
+.kf-icon.kf-field-lists::before {
+  content: $kf-field-lists;
+}
+
+.kf-icon.kf-field-multiselect::before {
+  content: $kf-field-multiselect;
+}
+
+.kf-icon.kf-field-number::before {
+  content: $kf-field-number;
+}
+
+.kf-icon.kf-field-numeric::before {
+  content: $kf-field-numeric;
+}
+
+.kf-icon.kf-field-richtext::before {
+  content: $kf-field-richtext;
+}
+
+.kf-icon.kf-field-single-select::before {
+  content: $kf-field-single-select;
+}
+
+.kf-icon.kf-field-singleline::before {
+  content: $kf-field-singleline;
+}
+
+.kf-icon.kf-field-text::before {
+  content: $kf-field-text;
+}
+
+.kf-icon.kf-field-textarea::before {
+  content: $kf-field-textarea;
+}
+
+.kf-icon.kf-field-textual::before {
+  content: $kf-field-textual;
+}
+
+.kf-icon.kf-field-users::before {
+  content: $kf-field-users;
+}
+
+.kf-icon.kf-filter-bar::before {
+  content: $kf-filter-bar;
+}
+
+.kf-icon.kf-filter::before {
+  content: $kf-filter;
+}
+
+.kf-icon.kf-find-page::before {
+  content: $kf-find-page;
+}
+
+.kf-icon.kf-flame::before {
+  content: $kf-flame;
+}
+
+.kf-icon.kf-folder-closed-small::before {
+  content: $kf-folder-closed-small;
+}
+
+.kf-icon.kf-folder-open-small::before {
+  content: $kf-folder-open-small;
+}
+
+.kf-icon.kf-folder::before {
+  content: $kf-folder;
+}
+
+.kf-icon.kf-folders::before {
+  content: $kf-folders;
+}
+
+.kf-icon.kf-font::before {
+  content: $kf-font;
+}
+
+.kf-icon.kf-format-indent-decrease::before {
+  content: $kf-format-indent-decrease;
+}
+
+.kf-icon.kf-format-indent-increase::before {
+  content: $kf-format-indent-increase;
+}
+
+.kf-icon.kf-formula::before {
+  content: $kf-formula;
+}
+
+.kf-icon.kf-forward-arrow-filled::before {
+  content: $kf-forward-arrow-filled;
+}
+
+.kf-icon.kf-forward-arrow::before {
+  content: $kf-forward-arrow;
+}
+
+.kf-icon.kf-full-align::before {
+  content: $kf-full-align;
+}
+
+.kf-icon.kf-gauge::before {
+  content: $kf-gauge;
+}
+
+.kf-icon.kf-gear-small::before {
+  content: $kf-gear-small;
+}
+
+.kf-icon.kf-gear-square::before {
+  content: $kf-gear-square;
+}
+
+.kf-icon.kf-gear::before {
+  content: $kf-gear;
+}
+
+.kf-icon.kf-globe::before {
+  content: $kf-globe;
+}
+
+.kf-icon.kf-graph-alt1::before {
+  content: $kf-graph-alt1;
+}
+
+.kf-icon.kf-graph::before {
+  content: $kf-graph;
+}
+
+.kf-icon.kf-grid-view::before {
+  content: $kf-grid-view;
+}
+
+.kf-icon.kf-hand::before {
+  content: $kf-hand;
+}
+
+.kf-icon.kf-handle::before {
+  content: $kf-handle;
+}
+
+.kf-icon.kf-heat::before {
+  content: $kf-heat;
+}
+
+.kf-icon.kf-helper::before {
+  content: $kf-helper;
+}
+
+.kf-icon.kf-history::before {
+  content: $kf-history;
+}
+
+.kf-icon.kf-horz-bar-graph-grouped::before {
+  content: $kf-horz-bar-graph-grouped;
+}
+
+.kf-icon.kf-horz-stacked-bar::before {
+  content: $kf-horz-stacked-bar;
+}
+
+.kf-icon.kf-html-code::before {
+  content: $kf-html-code;
+}
+
+.kf-icon.kf-icon-chart-bar-horizontal::before {
+  content: $kf-icon-chart-bar-horizontal;
+}
+
+.kf-icon.kf-icon-chart-horz-bar::before {
+  content: $kf-icon-chart-horz-bar;
+}
+
+.kf-icon.kf-import-outline-large::before {
+  content: $kf-import-outline-large;
+}
+
+.kf-icon.kf-import-outline-small::before {
+  content: $kf-import-outline-small;
+}
+
+.kf-icon.kf-import-outline::before {
+  content: $kf-import-outline;
+}
+
+.kf-icon.kf-info-filled-2::before {
+  content: $kf-info-filled-2;
+}
+
+.kf-icon.kf-info-filled-small::before {
+  content: $kf-info-filled-small;
+}
+
+.kf-icon.kf-info-filled::before {
+  content: $kf-info-filled;
+}
+
+.kf-icon.kf-ingest-small::before {
+  content: $kf-ingest-small;
+}
+
+.kf-icon.kf-inspect::before {
+  content: $kf-inspect;
+}
+
+.kf-icon.kf-integration::before {
+  content: $kf-integration;
+}
+
+.kf-icon.kf-integrations::before {
+  content: $kf-integrations;
+}
+
+.kf-icon.kf-ip::before {
+  content: $kf-ip;
+}
+
+.kf-icon.kf-italic::before {
+  content: $kf-italic;
+}
+
+.kf-icon.kf-key-outline-small::before {
+  content: $kf-key-outline-small;
+}
+
+.kf-icon.kf-key-outline::before {
+  content: $kf-key-outline;
+}
+
+.kf-icon.kf-key::before {
+  content: $kf-key;
+}
+
+.kf-icon.kf-keyboard-return::before {
+  content: $kf-keyboard-return;
+}
+
+.kf-icon.kf-keyboard::before {
+  content: $kf-keyboard;
+}
+
+.kf-icon.kf-layer::before {
+  content: $kf-layer;
+}
+
+.kf-icon.kf-left-align::before {
+  content: $kf-left-align;
+}
+
+.kf-icon.kf-line-chart::before {
+  content: $kf-line-chart;
+}
+
+.kf-icon.kf-line-graph::before {
+  content: $kf-line-graph;
+}
+
+.kf-icon.kf-linear-gauge::before {
+  content: $kf-linear-gauge;
+}
+
+.kf-icon.kf-link::before {
+  content: $kf-link;
+}
+
+.kf-icon.kf-list-1::before {
+  content: $kf-list-1;
+}
+
+.kf-icon.kf-list-view::before {
+  content: $kf-list-view;
+}
+
+.kf-icon.kf-list::before {
+  content: $kf-list;
+}
+
+.kf-icon.kf-loading::before {
+  content: $kf-loading;
+}
+
+.kf-icon.kf-locate-filled::before {
+  content: $kf-locate-filled;
+}
+
+.kf-icon.kf-locate-outline-large::before {
+  content: $kf-locate-outline-large;
+}
+
+.kf-icon.kf-locate-outline::before {
+  content: $kf-locate-outline;
+}
+
+.kf-icon.kf-location::before {
+  content: $kf-location;
+}
+
+.kf-icon.kf-lock-sm::before {
+  content: $kf-lock-sm;
+}
+
+.kf-icon.kf-lock::before {
+  content: $kf-lock;
+}
+
+.kf-icon.kf-mail-1::before {
+  content: $kf-mail-1;
+}
+
+.kf-icon.kf-mail::before {
+  content: $kf-mail;
+}
+
+.kf-icon.kf-map::before {
+  content: $kf-map;
+}
+
+.kf-icon.kf-menu::before {
+  content: $kf-menu;
+}
+
+.kf-icon.kf-mfa::before {
+  content: $kf-mfa;
+}
+
+.kf-icon.kf-mic::before {
+  content: $kf-mic;
+}
+
+.kf-icon.kf-minus::before {
+  content: $kf-minus;
+}
+
+.kf-icon.kf-money::before {
+  content: $kf-money;
+}
+
+.kf-icon.kf-mouse-hold::before {
+  content: $kf-mouse-hold;
+}
+
+.kf-icon.kf-multi-line::before {
+  content: $kf-multi-line;
+}
+
+.kf-icon.kf-new-app::before {
+  content: $kf-new-app;
+}
+
+.kf-icon.kf-notation-arrow-down-left::before {
+  content: $kf-notation-arrow-down-left;
+}
+
+.kf-icon.kf-notation-arrow-up::before {
+  content: $kf-notation-arrow-up;
+}
+
+.kf-icon.kf-numbered-list::before {
+  content: $kf-numbered-list;
+}
+
+.kf-icon.kf-open::before {
+  content: $kf-open;
+}
+
+.kf-icon.kf-orchestration::before {
+  content: $kf-orchestration;
+}
+
+.kf-icon.kf-paragraph::before {
+  content: $kf-paragraph;
+}
+
+.kf-icon.kf-pause-circle::before {
+  content: $kf-pause-circle;
+}
+
+.kf-icon.kf-pause::before {
+  content: $kf-pause;
+}
+
+.kf-icon.kf-phone::before {
+  content: $kf-phone;
+}
+
+.kf-icon.kf-photo::before {
+  content: $kf-photo;
+}
+
+.kf-icon.kf-pie-chart::before {
+  content: $kf-pie-chart;
+}
+
+.kf-icon.kf-pin::before {
+  content: $kf-pin;
+}
+
+.kf-icon.kf-plane::before {
+  content: $kf-plane;
+}
+
+.kf-icon.kf-play-circle::before {
+  content: $kf-play-circle;
+}
+
+.kf-icon.kf-play::before {
+  content: $kf-play;
+}
+
+.kf-icon.kf-playbook-outline-small::before {
+  content: $kf-playbook-outline-small;
+}
+
+.kf-icon.kf-playbook-outline::before {
+  content: $kf-playbook-outline;
+}
+
+.kf-icon.kf-plugin-outline-small::before {
+  content: $kf-plugin-outline-small;
+}
+
+.kf-icon.kf-plugin-outline::before {
+  content: $kf-plugin-outline;
+}
+
+.kf-icon.kf-plugin::before {
+  content: $kf-plugin;
+}
+
+.kf-icon.kf-plus-bold::before {
+  content: $kf-plus-bold;
+}
+
+.kf-icon.kf-plus::before {
+  content: $kf-plus;
+}
+
+.kf-icon.kf-prev::before {
+  content: $kf-prev;
+}
+
+.kf-icon.kf-printer::before {
+  content: $kf-printer;
+}
+
+.kf-icon.kf-profile-filled::before {
+  content: $kf-profile-filled;
+}
+
+.kf-icon.kf-profile::before {
+  content: $kf-profile;
+}
+
+.kf-icon.kf-promote-horizontal::before {
+  content: $kf-promote-horizontal;
+}
+
+.kf-icon.kf-promote::before {
+  content: $kf-promote;
+}
+
+.kf-icon.kf-question-filled-sm::before {
+  content: $kf-question-filled-sm;
+}
+
+.kf-icon.kf-question-filled::before {
+  content: $kf-question-filled;
+}
+
+.kf-icon.kf-question::before {
+  content: $kf-question;
+}
+
+.kf-icon.kf-radio-button::before {
+  content: $kf-radio-button;
+}
+
+.kf-icon.kf-redo-all::before {
+  content: $kf-redo-all;
+}
+
+.kf-icon.kf-redo::before {
+  content: $kf-redo;
+}
+
+.kf-icon.kf-reference-grid::before {
+  content: $kf-reference-grid;
+}
+
+.kf-icon.kf-reference-multi::before {
+  content: $kf-reference-multi;
+}
+
+.kf-icon.kf-reference-single::before {
+  content: $kf-reference-single;
+}
+
+.kf-icon.kf-reference-tree::before {
+  content: $kf-reference-tree;
+}
+
+.kf-icon.kf-reference::before {
+  content: $kf-reference;
+}
+
+.kf-icon.kf-refresh-circle::before {
+  content: $kf-refresh-circle;
+}
+
+.kf-icon.kf-refresh-small::before {
+  content: $kf-refresh-small;
+}
+
+.kf-icon.kf-refresh::before {
+  content: $kf-refresh;
+}
+
+.kf-icon.kf-remove-edge::before {
+  content: $kf-remove-edge;
+}
+
+.kf-icon.kf-remove-node::before {
+  content: $kf-remove-node;
+}
+
+.kf-icon.kf-remove-users::before {
+  content: $kf-remove-users;
+}
+
+.kf-icon.kf-remove::before {
+  content: $kf-remove;
+}
+
+.kf-icon.kf-repeat::before {
+  content: $kf-repeat;
+}
+
+.kf-icon.kf-replace::before {
+  content: $kf-replace;
+}
+
+.kf-icon.kf-reports-outline::before {
+  content: $kf-reports-outline;
+}
+
+.kf-icon.kf-reports::before {
+  content: $kf-reports;
+}
+
+.kf-icon.kf-resize::before {
+  content: $kf-resize;
+}
+
+.kf-icon.kf-right-align::before {
+  content: $kf-right-align;
+}
+
+.kf-icon.kf-rocket::before {
+  content: $kf-rocket;
+}
+
+.kf-icon.kf-rotate::before {
+  content: $kf-rotate;
+}
+
+.kf-icon.kf-rule-outline::before {
+  content: $kf-rule-outline;
+}
+
+.kf-icon.kf-runner::before {
+  content: $kf-runner;
+}
+
+.kf-icon.kf-runs-outline-small::before {
+  content: $kf-runs-outline-small;
+}
+
+.kf-icon.kf-runs-outline::before {
+  content: $kf-runs-outline;
+}
+
+.kf-icon.kf-save-outline-large::before {
+  content: $kf-save-outline-large;
+}
+
+.kf-icon.kf-save-outline-small::before {
+  content: $kf-save-outline-small;
+}
+
+.kf-icon.kf-save-outline::before {
+  content: $kf-save-outline;
+}
+
+.kf-icon.kf-save::before {
+  content: $kf-save;
+}
+
+.kf-icon.kf-screen-1::before {
+  content: $kf-screen-1;
+}
+
+.kf-icon.kf-screen::before {
+  content: $kf-screen;
+}
+
+.kf-icon.kf-search::before {
+  content: $kf-search;
+}
+
+.kf-icon.kf-section::before {
+  content: $kf-section;
+}
+
+.kf-icon.kf-select-all::before {
+  content: $kf-select-all;
+}
+
+.kf-icon.kf-select-user::before {
+  content: $kf-select-user;
+}
+
+.kf-icon.kf-select-users::before {
+  content: $kf-select-users;
+}
+
+.kf-icon.kf-sensor-outline-small::before {
+  content: $kf-sensor-outline-small;
+}
+
+.kf-icon.kf-sensor-outline::before {
+  content: $kf-sensor-outline;
+}
+
+.kf-icon.kf-server::before {
+  content: $kf-server;
+}
+
+.kf-icon.kf-shield::before {
+  content: $kf-shield;
+}
+
+.kf-icon.kf-shrink::before {
+  content: $kf-shrink;
+}
+
+.kf-icon.kf-skip::before {
+  content: $kf-skip;
+}
+
+.kf-icon.kf-slide-left::before {
+  content: $kf-slide-left;
+}
+
+.kf-icon.kf-slide-right::before {
+  content: $kf-slide-right;
+}
+
+.kf-icon.kf-smartphone::before {
+  content: $kf-smartphone;
+}
+
+.kf-icon.kf-smiley-frown::before {
+  content: $kf-smiley-frown;
+}
+
+.kf-icon.kf-snapshot::before {
+  content: $kf-snapshot;
+}
+
+.kf-icon.kf-spaces-list::before {
+  content: $kf-spaces-list;
+}
+
+.kf-icon.kf-spaces-outline-large::before {
+  content: $kf-spaces-outline-large;
+}
+
+.kf-icon.kf-spaces-outline::before {
+  content: $kf-spaces-outline;
+}
+
+.kf-icon.kf-spaces::before {
+  content: $kf-spaces;
+}
+
+.kf-icon.kf-speedometer::before {
+  content: $kf-speedometer;
+}
+
+.kf-icon.kf-split-handle::before {
+  content: $kf-split-handle;
+}
+
+.kf-icon.kf-square-filled::before {
+  content: $kf-square-filled;
+}
+
+.kf-icon.kf-square::before {
+  content: $kf-square;
+}
+
+.kf-icon.kf-star-filled::before {
+  content: $kf-star-filled;
+}
+
+.kf-icon.kf-star::before {
+  content: $kf-star;
+}
+
+.kf-icon.kf-stars::before {
+  content: $kf-stars;
+}
+
+.kf-icon.kf-stopwatch::before {
+  content: $kf-stopwatch;
+}
+
+.kf-icon.kf-superscript::before {
+  content: $kf-superscript;
+}
+
+.kf-icon.kf-swap::before {
+  content: $kf-swap;
+}
+
+.kf-icon.kf-switch::before {
+  content: $kf-switch;
+}
+
+.kf-icon.kf-system-diagnostics-2::before {
+  content: $kf-system-diagnostics-2;
+}
+
+.kf-icon.kf-system-diagnostics::before {
+  content: $kf-system-diagnostics;
+}
+
+.kf-icon.kf-table::before {
+  content: $kf-table;
+}
+
+.kf-icon.kf-tabs::before {
+  content: $kf-tabs;
+}
+
+.kf-icon.kf-tag-filled::before {
+  content: $kf-tag-filled;
+}
+
+.kf-icon.kf-tags-outline::before {
+  content: $kf-tags-outline;
+}
+
+.kf-icon.kf-target::before {
+  content: $kf-target;
+}
+
+.kf-icon.kf-task-outline::before {
+  content: $kf-task-outline;
+}
+
+.kf-icon.kf-thumb-down-filled::before {
+  content: $kf-thumb-down-filled;
+}
+
+.kf-icon.kf-thumb-down-outline-large::before {
+  content: $kf-thumb-down-outline-large;
+}
+
+.kf-icon.kf-thumb-down-outline::before {
+  content: $kf-thumb-down-outline;
+}
+
+.kf-icon.kf-thumb-up-filled::before {
+  content: $kf-thumb-up-filled;
+}
+
+.kf-icon.kf-thumb-up-outline-large::before {
+  content: $kf-thumb-up-outline-large;
+}
+
+.kf-icon.kf-thumb-up-outline::before {
+  content: $kf-thumb-up-outline;
+}
+
+.kf-icon.kf-tracking-id::before {
+  content: $kf-tracking-id;
+}
+
+.kf-icon.kf-transfer::before {
+  content: $kf-transfer;
+}
+
+.kf-icon.kf-trash::before {
+  content: $kf-trash;
+}
+
+.kf-icon.kf-tree-collapse::before {
+  content: $kf-tree-collapse;
+}
+
+.kf-icon.kf-tree-expand::before {
+  content: $kf-tree-expand;
+}
+
+.kf-icon.kf-tree::before {
+  content: $kf-tree;
+}
+
+.kf-icon.kf-trend-down::before {
+  content: $kf-trend-down;
+}
+
+.kf-icon.kf-trend-level::before {
+  content: $kf-trend-level;
+}
+
+.kf-icon.kf-trend-up::before {
+  content: $kf-trend-up;
+}
+
+.kf-icon.kf-trending::before {
+  content: $kf-trending;
+}
+
+.kf-icon.kf-underline::before {
+  content: $kf-underline;
+}
+
+.kf-icon.kf-undo-all::before {
+  content: $kf-undo-all;
+}
+
+.kf-icon.kf-undo::before {
+  content: $kf-undo;
+}
+
+.kf-icon.kf-unlink::before {
+  content: $kf-unlink;
+}
+
+.kf-icon.kf-upload-outline-large::before {
+  content: $kf-upload-outline-large;
+}
+
+.kf-icon.kf-upload-outline-small::before {
+  content: $kf-upload-outline-small;
+}
+
+.kf-icon.kf-upload-outline::before {
+  content: $kf-upload-outline;
+}
+
+.kf-icon.kf-user-add::before {
+  content: $kf-user-add;
+}
+
+.kf-icon.kf-user-circle::before {
+  content: $kf-user-circle;
+}
+
+.kf-icon.kf-user-groups::before {
+  content: $kf-user-groups;
+}
+
+.kf-icon.kf-user::before {
+  content: $kf-user;
+}
+
+.kf-icon.kf-users::before {
+  content: $kf-users;
+}
+
+.kf-icon.kf-version::before {
+  content: $kf-version;
+}
+
+.kf-icon.kf-vert-bar-graph-grouped::before {
+  content: $kf-vert-bar-graph-grouped;
+}
+
+.kf-icon.kf-vert-full-stack-bar::before {
+  content: $kf-vert-full-stack-bar;
+}
+
+.kf-icon.kf-view-code::before {
+  content: $kf-view-code;
+}
+
+.kf-icon.kf-view-designer::before {
+  content: $kf-view-designer;
+}
+
+.kf-icon.kf-view-split::before {
+  content: $kf-view-split;
+}
+
+.kf-icon.kf-wand::before {
+  content: $kf-wand;
+}
+
+.kf-icon.kf-warning-filled-sm::before {
+  content: $kf-warning-filled-sm;
+}
+
+.kf-icon.kf-warning-filled::before {
+  content: $kf-warning-filled;
+}
+
+.kf-icon.kf-warning-thin::before {
+  content: $kf-warning-thin;
+}
+
+.kf-icon.kf-web-api::before {
+  content: $kf-web-api;
+}
+
+.kf-icon.kf-widget::before {
+  content: $kf-widget;
+}
+
+.kf-icon.kf-worker::before {
+  content: $kf-worker;
+}
+
+.kf-icon.kf-workflow-alternate-large::before {
+  content: $kf-workflow-alternate-large;
+}
+
+.kf-icon.kf-workflow-alternate-small::before {
+  content: $kf-workflow-alternate-small;
+}
+
+.kf-icon.kf-workflow-alternate::before {
+  content: $kf-workflow-alternate;
+}
+
+.kf-icon.kf-workflow::before {
+  content: $kf-workflow;
+}
+
+.kf-icon.kf-workspaces::before {
+  content: $kf-workspaces;
+}
+
+.kf-icon.kf-workstation::before {
+  content: $kf-workstation;
+}
+
+.kf-icon.kf-wrench::before {
+  content: $kf-wrench;
+}
+
+.kf-icon.kf-x-filled::before {
+  content: $kf-x-filled;
+}
+
+.kf-icon.kf-x-small::before {
+  content: $kf-x-small;
+}
+
+.kf-icon.kf-x::before {
+  content: $kf-x;
+}

@@ -1,0 +1,21 @@
+<div class="kf-radio">
+  <!-- <ng-container *ngIf="showName">
+    <ng-container  *ngTemplateOutlet="radioTemplate;context: {}"></ng-container>
+  </ng-container> -->
+  <ng-content></ng-content>
+  <nz-radio-group
+    [name]="name"
+    [(ngModel)]="value"
+    [required]="required"
+    (ngModelChange)="radioChange()">
+    <label nz-radio [nzValue]="radio.value" *ngFor="let radio of options | keyvalue">
+      {{radio.key}}
+    </label>
+  </nz-radio-group>
+
+  <div *ngIf="required && (!value || value.length <= 0) && !firstLoad ">
+    <div class="text-danger">
+      {{title}}不能为空
+    </div>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+@import '../../styles/colors/variables.scss';
+@import '../../styles/components/buttons.scss';
+
+$button-text-color: $color-white;
+
+.kf-button {
+  &,
+  &.btn {
+    transition: background-color 0.25s ease-out;
+    padding: 0;
+  }
+
+  button {
+    padding: 0.35em 0.55em;
+    width: 100%;
+    outline-offset: 0;
+    border-radius: 4px;
+
+    > .content {
+      text-overflow: ellipsis;
+      overflow: clip;
+      width: 100%;
+      display: block;
+      white-space: nowrap;
+    }
+
+    &:active,
+    &:focus,
+    &:focus-within,
+    &:focus-visible {
+      outline: none;
+    }
+
+    &[disabled] {
+      background-color: $color-grey-050;
+      pointer-events: none;
+    }
+  }
+
+
+  &.success {
+    background-color: $color-green;
+    background: $color-green;
+    border: 1px solid $color-green;
+
+    &:hover {
+      background-color: $color-green-600;
+      background: $color-green-600;
+      border: 1px solid $color-green-600;
+    }
+  }
+
+  &.danger {
+    background-color: $color-red;
+    border: 1px solid $color-red;
+
+    &:hover {
+      background-color: $color-red-600;
+      border: 1px solid $color-red-600;
+    }
+  }
+
+  &.primary {
+    background-color: $color-blue;
+    border: 1px solid $color-blue;
+
+    &:hover {
+      background-color: $color-blue-600;
+      border: 1px solid $color-blue-600;
+    }
+  }
+
+  &.warning {
+    background-color: $color-orange;
+    border: 1px solid $color-orange;
+
+    &:hover {
+      background-color: $color-orange-600;
+      border: 1px solid $color-orange-600;
+    }
+
+  }
+}

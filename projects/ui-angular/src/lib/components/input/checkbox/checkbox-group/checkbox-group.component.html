@@ -1,0 +1,17 @@
+<div class="kf-checkbox-group">
+  <ng-content></ng-content>
+
+  <ng-container
+    *ngFor="let o of value; let i = index;trackBy: trackByOption"
+    (ngModelChange)="checkboxChange($event)">
+    <kf-checkbox
+      ngModel
+      [title]="o.name"
+      [ngModelOptions]="{name: i.toString()}"
+      [disabled]="o.disabled || nzDisabled"
+      [(ngModel)]="o.checked!"
+      (checkboxOuter)="onCheckedChange(o, $event)"
+    >
+    </kf-checkbox>
+  </ng-container>
+</div>

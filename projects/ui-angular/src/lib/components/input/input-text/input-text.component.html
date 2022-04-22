@@ -1,0 +1,20 @@
+<div class="kf-text" [ngClass]="{'kf-form-item-with-help': error$ | async}">
+  <!-- <ng-container  *ngTemplateOutlet="textTemplate;context: {}"></ng-container> -->
+  <ng-content></ng-content>
+  <input nz-input
+    [name]="name"
+    [nzSize]="size"
+    [(ngModel)]="value"
+    [placeholder]="placeholder"
+    [required]="required"
+    [maxLength]="maxLength"
+    (ngModelChange)="textChange($event)"
+    (focus)="focus()"/>
+
+  <div class="kf-form-item-explain"
+    *ngIf="error$ | async">
+    <div class="text-danger">
+      {{title}}不能为空
+    </div>
+  </div>
+</div>
