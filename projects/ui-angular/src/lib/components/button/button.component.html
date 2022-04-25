@@ -1,8 +1,9 @@
 
 <button #btn
-  [attr.type]="type"
-  [disabled]="disabled"
-  [style]="style"
-  (click)="btnClick()">
-  <span class="content"><ng-content></ng-content></span>
+[attr.type]="type"
+[disabled]="disabled"
+[style]="style"
+[class]="class"
+(click)="btnClick()">
+<span class="content"><ng-content></ng-content></span>
 </button>

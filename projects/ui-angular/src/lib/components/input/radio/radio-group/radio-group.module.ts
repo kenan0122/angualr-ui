@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RadioGroupComponent } from './radio-group.component';
+import { ErrorModule } from '../../../error/error.module';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { RadioGroupComponent } from './radio-group.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    ErrorModule,
     NzRadioModule
   ]
 })

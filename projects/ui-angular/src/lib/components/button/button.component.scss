@@ -11,10 +11,10 @@ $button-text-color: $color-white;
   }
 
   button {
-    padding: 0.35em 0.55em;
-    width: 100%;
+    //width: 100%;
     outline-offset: 0;
     border-radius: 4px;
+    padding: 0.35em 0.55em;
 
     > .content {
       text-overflow: ellipsis;
@@ -36,48 +36,37 @@ $button-text-color: $color-white;
       pointer-events: none;
     }
   }
+}
 
+.success {
+  background-color: $color-green;
 
-  &.success {
-    background-color: $color-green;
-    background: $color-green;
-    border: 1px solid $color-green;
-
-    &:hover {
-      background-color: $color-green-600;
-      background: $color-green-600;
-      border: 1px solid $color-green-600;
-    }
+  &:hover {
+    background-color: $color-green-600;
   }
+}
 
-  &.danger {
-    background-color: $color-red;
-    border: 1px solid $color-red;
+.danger {
+  background-color: $color-red;
 
-    &:hover {
-      background-color: $color-red-600;
-      border: 1px solid $color-red-600;
-    }
+  &:hover {
+    background-color: $color-red-600;
   }
+}
 
-  &.primary {
-    background-color: $color-blue;
-    border: 1px solid $color-blue;
+.primary {
+  background-color: $color-blue;
+  color: $color-white;
 
-    &:hover {
-      background-color: $color-blue-600;
-      border: 1px solid $color-blue-600;
-    }
+  &:hover {
+    background-color: $color-blue-600;
   }
+}
 
-  &.warning {
-    background-color: $color-orange;
-    border: 1px solid $color-orange;
+.warning {
+  background-color: $color-orange;
 
-    &:hover {
-      background-color: $color-orange-600;
-      border: 1px solid $color-orange-600;
-    }
-
+  &:hover {
+    background-color: $color-orange-600;
   }
 }

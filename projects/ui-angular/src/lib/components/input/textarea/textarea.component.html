@@ -1,18 +1,24 @@
-<div class="kf-textarea">
+<div class="kf-textarea"
+  [ngClass]="{'kf-form-item-with-help': error$ | async}"
+  [class]="flexDirection">
   <ng-content></ng-content>
 
-  <textarea
-    [name]="name"
-    [(ngModel)]="value"
-    [required]="required"
-    [placeholder]="placeholder"
-    [rows]="rows"
-    (focus)="focus()">
-  </textarea>
+  <div>
+    <textarea
+      nz-input
+      [name]="name"
+      [(ngModel)]="value"
+      [required]="required"
+      [placeholder]="placeholder"
+      [rows]="rows"
+      (focus)="focus()"
+      (ngModelChange)="textareaChange($event)">
+    </textarea>
 
-  <div *ngIf="required && (!value || value.length <= 0) && !firstLoad">
-    <div class="text-danger">
-      {{title}}不能为空
+    <div *ngIf="required && (!value || value.length <= 0) && !firstLoad">
+      <div class="text-danger">
+        {{title}}不能为空
+      </div>
     </div>
   </div>
 </div>

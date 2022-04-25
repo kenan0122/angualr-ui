@@ -26,6 +26,7 @@ export class RadioGroupComponent extends AbstractValueAccessor {
   @Input() backProp: string = 'value';
   // 控件名字
   @Input() name: string = 'radio';
+  @Input() flexDirection: string = 'kf-flex-colum';
 
   @Output() radioOuter = new EventEmitter();
 

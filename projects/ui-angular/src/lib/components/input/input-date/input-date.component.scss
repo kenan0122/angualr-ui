@@ -1,0 +1,14 @@
+@import '../../../styles/forms/inputs.scss';
+
+.kf-date {
+  @extend .kf-form-item;
+}
+
+.ant-picker {
+  border-radius: 0.25rem;
+  width: 100%;
+}
+
+.ant-picker-large .ant-picker-input>input {
+  font-size: inherit;
+}

@@ -1,3 +1,4 @@
+import { ButtonModule } from './../../button/button.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormPageComponent } from './form-page.component';
@@ -11,6 +12,7 @@ import { FromModule } from '../from/from.module';
   imports: [
     CommonModule,
     TabsModule,
+    ButtonModule,
     FromModule
   ]
 })

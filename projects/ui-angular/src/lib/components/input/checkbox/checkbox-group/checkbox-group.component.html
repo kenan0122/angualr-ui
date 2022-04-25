@@ -1,24 +1,17 @@
 <div class="kf-checkbox-group">
   <ng-content></ng-content>
 
-  <ng-container
-    *ngFor="let o of options | keyvalue; let i = index;trackBy: trackByOption"
-    (ngModelChange)="checkboxChange($event)">
-    <span
-      nz-checkbox
-      [nzChecked]="setOfCheckedId.has(o.value)"
-      (nzCheckedChange)="onCheckedChange(o.value, $event)">
-      {{o.key}}
-    </span>
-
-    <!-- <kf-checkbox
-      ngModel
-      [title]="o.key"
-      [ngModelOptions]="{name: i.toString()}"
-      [disabled]="nzDisabled"
-      [(ngModel)]="setOfCheckedId.has(o.value)"
-      (checkboxOuter)="onCheckedChange(o.value, $event)"
-    >
-    </kf-checkbox> -->
-  </ng-container>
+  <div>
+    <ng-container
+      *ngFor="let o of options | keyvalue; let i = index;trackBy: trackByOption"
+      (ngModelChange)="checkboxChange($event)">
+      <span
+        nz-checkbox
+        [nzChecked]="setOfCheckedId.has(o.value)"
+        (nzCheckedChange)="onCheckedChange(o.value, $event)">
+        {{o.key}}
+      </span>
+    </ng-container>
+    <kf-error [title]="title" [error$]="error$"></kf-error>
+  </div>
 </div>

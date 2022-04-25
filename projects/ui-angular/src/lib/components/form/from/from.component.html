@@ -1,8 +1,7 @@
 <form #validateForm="ngForm"  appIdentityRevealed
   nzLayout="inline"
   autocomplete="off"
-  class="create-paradigm grid-colum-1"
-  *ngIf="inputDto">
+  class="create-paradigm grid-colum-1">
 
   <ng-container *ngFor="let field of fields">
     <ng-container [ngSwitch]="field.type">
@@ -17,7 +16,8 @@
             [(ngModel)]="inputDto[field.key]"
             [title]="field.label"
             [required]="field.isRequired"
-            [rows]="field.rows">
+            [rows]="field.rows"
+            (textareaOuter)="textareaChange($event)">
             <kf-input-title [title]="field.label"></kf-input-title>
           </kf-textarea>
         </ng-container>
@@ -36,7 +36,8 @@
                 [(ngModel)]="inputDto[field.key]"
                 [maxlength]="field.maxlength"
                 [appAllowableFormat]="orderRex"
-                [required]="field.isRequired">
+                [required]="field.isRequired"
+                (textOuter)="numberChange($event)">
                  <kf-input-title [title]="field.label"></kf-input-title>
               </kf-input-text>
 
@@ -62,7 +63,8 @@
                 [maxlength]="field.maxlength"
                 [size]="size"
                 [title]="field.label"
-                [required]="field.isRequired">
+                [required]="field.isRequired"
+                (textOuter)="textChange($event)">
                   <kf-input-title [title]="field.label"></kf-input-title>
               </kf-input-text>
             </ng-container>
@@ -76,7 +78,8 @@
                 [(ngModel)]="inputDto[field.key]"
                 [size]="size"
                 [title]="field.label"
-                [required]="field.isRequired">
+                [required]="field.isRequired"
+                (dateOuter)="dateChange($event)">
                   <kf-input-title [title]="field.label"></kf-input-title>
               </kf-input-date>
             </ng-container>
@@ -97,6 +100,7 @@
                 [ngModelOptions]="{name: field.key}"
                 [(ngModel)]="inputDto[field.key]"
                 [required]="field.isRequired"
+                (checkboxGroupOuter)="checkGroupChange($event)"
               >
               </kf-checkbox-group>
             </ng-container>
@@ -107,7 +111,8 @@
                 [ngModelOptions]="{name: 'radio'}"
                 [options]="field.options"
                 [(ngModel)]="inputDto[field.key]"
-                [required]="field.isRequired">
+                [required]="field.isRequired"
+                (radioOuter)="radioChange()">
                 <kf-input-title [title]="field.label"></kf-input-title>
               </kf-radio-group>
             </ng-template>
@@ -136,7 +141,10 @@
               [name]="field.key"
               [ngModelOptions]="{name: field.key}"
               [options]="field.options"
-              [(ngModel)]="inputDto[field.key]">
+              [(ngModel)]="inputDto[field.key]"
+              [required]="field.isRequired"
+              (listOuter)="listChange()">
+              <kf-input-title [title]="field.label"></kf-input-title>
             </kf-list>
           </ng-container>
         </ng-container>

@@ -11,6 +11,7 @@ registerLocaleData(zh);
 
 // 配置 ng-zorro-antd 国际化
 import { NZ_I18N, zh_CN  } from 'ng-zorro-antd/i18n';
+import { ErrorModule } from '../../error/error.module';
 
 @NgModule({
   declarations: [InputDateComponent],
@@ -19,6 +20,7 @@ import { NZ_I18N, zh_CN  } from 'ng-zorro-antd/i18n';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    ErrorModule,
     NzDatePickerModule
   ],
   providers: [

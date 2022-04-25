@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { notNullish } from 'projects/ui-angular/src/lib/utils';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { AbstractValueAccessor, MakeProvider } from '../../asbstract-value-accessor';
 
@@ -10,7 +11,8 @@ import { AbstractValueAccessor, MakeProvider } from '../../asbstract-value-acces
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: MakeProvider(CheckboxGroupComponent)
 })
-export class CheckboxGroupComponent extends AbstractValueAccessor implements OnInit {
+export class CheckboxGroupComponent extends AbstractValueAccessor {
+  @Input() title: string = '';
   @Input() options: Object = {};
   @Input() nzDisabled: boolean = false;
   @Output() checkboxGroupOuter = new EventEmitter();
@@ -42,19 +44,15 @@ export class CheckboxGroupComponent extends AbstractValueAccessor implements OnI
     return option.value;
   }
 
-  ngOnInit(): void {
-  }
-
-
   onCheckedChange(id: any, checked: boolean): void {
+    this.firstLoad = false;
     if (checked) {
       this.setOfCheckedId.add(id);
     } else {
       this.setOfCheckedId.delete(id);
     }
 
-    //option.checked = checked;
-    this.textOnChange(this.value);
+    this.value = Array.from(this.setOfCheckedId);
   }
 
   checkboxChange(option: any) {
@@ -67,7 +65,7 @@ export class CheckboxGroupComponent extends AbstractValueAccessor implements OnI
   */
   override validate(control: AbstractControl): ValidationErrors | null {
     if (control.dirty && this._required) {
-      const check = control.value.some((item: any) => item !== null)
+      const check = control.value.some((item: any) => notNullish(item))
       if (check) {
         return null;
       } else {

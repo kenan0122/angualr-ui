@@ -1,4 +1,6 @@
-<div class="kf-text" [ngClass]="{'kf-form-item-with-help': error$ | async}">
+<div class="kf-text"
+  [ngClass]="{'kf-form-item-with-help': error$ | async}"
+  [ngClass]="flexDirection">
   <!-- <ng-container  *ngTemplateOutlet="textTemplate;context: {}"></ng-container> -->
   <ng-content></ng-content>
   <div>
@@ -12,11 +14,12 @@
       (ngModelChange)="textChange($event)"
       (focus)="focus()"/>
 
-    <div class="kf-form-item-explain"
+      <kf-error [title]="title" [error$]="error$"></kf-error>
+    <!-- <div class="kf-form-item-explain"
       *ngIf="error$ | async">
       <div class="text-danger">
         {{title}}不能为空
       </div>
-    </div>
+    </div> -->
   </div>
 </div>

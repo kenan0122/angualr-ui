@@ -46,3 +46,6 @@ export *  from './lib/components/form/from/from.component';
 
 export * from './lib/components/list/list.module';
 export * from './lib/components/list/list.component';
+
+export * from './lib/components/error/error.module';
+export * from './lib/components/error/error.component';

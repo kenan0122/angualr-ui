@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextComponent } from './input-text.component';
+import { ErrorModule } from '../../error/error.module';
 
 @NgModule({
   declarations: [InputTextComponent],
@@ -11,6 +12,7 @@ import { InputTextComponent } from './input-text.component';
     CommonModule,
     NzInputModule,
     FormsModule,
+    ErrorModule,
     ReactiveFormsModule
   ]
 })

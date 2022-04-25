@@ -1,11 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'kf-from',
   templateUrl: './from.component.html',
   styleUrls: ['./from.component.scss']
 })
-export class FromComponent implements OnInit {
+export class FromComponent implements AfterViewInit {
+  @ViewChild('validateForm') form!: NgForm;
+
   /** 表单数据 */
   @Input() fields: any[] = [];
   /** 填充数据的dto */
@@ -24,12 +27,41 @@ export class FromComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngAfterViewInit(): void {
+     this.initOuter.emit(this.form);
+   }
+
 
   selectChange(param: {id: any, name: any}) {
+    this.initOuter.emit(this.form);
     this.selectOuter.emit(param);
   }
 
+  checkGroupChange(param: any) {
+    this.initOuter.emit(this.form);
+  }
 
+  dateChange(param: Date) {
+    this.initOuter.emit(this.form);
+  }
+
+  radioChange() {
+    this.initOuter.emit(this.form);
+  }
+
+  textareaChange(_: string) {
+    this.initOuter.emit(this.form);
+  }
+
+  textChange(_: string) {
+    this.initOuter.emit(this.form);
+  }
+
+  numberChange(_:number) {
+    this.initOuter.emit(this.form);
+  }
+
+  listChange() {
+    this.initOuter.emit(this.form);
+  }
 }

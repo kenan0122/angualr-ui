@@ -30,6 +30,7 @@ export class SelectComponent extends AbstractValueAccessor implements OnInit {
   @Input() options: Object = {};
   // 控件名字
   @Input() name: string = 'select';
+  @Input() flexDirection: string = 'kf-flex-colum';
 
   @Output() selectOuter = new EventEmitter();
 
@@ -58,6 +59,6 @@ export class SelectComponent extends AbstractValueAccessor implements OnInit {
    */
   selectChange(id: any) {
     this.firstLoad = false;
-    //this.selectOuter.emit({id, name: this.name});
+    this.selectOuter.emit({id, name: this.name});
   }
 }

@@ -1,9 +1,23 @@
 <ng-container *ngIf="forms">
-  <kf-tabs
-    [tabs]="forms.tabs"
-    [tabsTemplate]="slotTpl">
-  </kf-tabs>
-  <ng-template #slotTpl  let-tabIndex>
-    <kf-from [fields]="forms.tabs[tabIndex].fields" [inputDto]="inputDto"></kf-from>
+  <kf-tabs [tabs]="forms.tabs" [tabsTemplate]="slotTpl"> </kf-tabs>
+  <ng-template #slotTpl let-tabIndex>
+    <kf-from
+      *ngIf="forms.tabs[tabIndex].fields"
+      #formChild
+      [fields]="forms.tabs[tabIndex].fields"
+      [inputDto]="inputDto"
+      (initOuter)="initFormData($event)"
+    ></kf-from>
   </ng-template>
+
+  <div class="text-center">
+    <kf-button
+      class="primary"
+      style="width: 10%;"
+      [disabled]="!formControllerValid"
+      (btnOuter)="click()"
+    >
+      保存
+    </kf-button>
+  </div>
 </ng-container>

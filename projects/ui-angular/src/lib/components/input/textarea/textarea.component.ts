@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { AbstractValueAccessor, MakeProvider } from '../asbstract-value-accessor';
 
 @Component({
@@ -16,6 +16,9 @@ export class TextareaComponent extends AbstractValueAccessor {
   @Input() name: string = 'textarea';
   @Input() rows: number = 1;
   @Input() placeholder: string = '请输入文本';
+  @Input() flexDirection: string = 'kf-flex-colum';
+
+  @Output() textareaOuter = new EventEmitter();
 
   @Input()
   get required() {
@@ -28,5 +31,9 @@ export class TextareaComponent extends AbstractValueAccessor {
 
   constructor() {
     super();
+  }
+
+  textareaChange(text: string) {
+    this.textareaOuter.emit(text);
   }
 }

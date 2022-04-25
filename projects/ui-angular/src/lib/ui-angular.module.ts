@@ -18,6 +18,7 @@ import { FormPageModule } from './components/form/form-page/form-page.module';
 import { TabsModule } from './components/tabs/tabs.module';
 import { FromModule } from './components/form/from/from.module';
 import { ListModule } from './components/list/list.module';
+import { ErrorModule } from './components/error/error.module';
 
 
 const modules = [
@@ -34,7 +35,8 @@ const modules = [
   FormPageModule,
   FromModule,
   TabsModule,
-  ListModule
+  ListModule,
+  ErrorModule
 
 
   // DirectivesModule

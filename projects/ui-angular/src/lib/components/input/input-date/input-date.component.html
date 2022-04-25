@@ -1,18 +1,20 @@
-<div class="kf-date">
+<div class="kf-date"
+  [ngClass]="{'kf-form-item-with-help': error$ | async}"
+  [ngClass]="flexDirection">
   <ng-content></ng-content>
-  <nz-date-picker
-    [name]="name"
-    [nzSize]="size"
-    [(ngModel)]="value"
-    [nzPlaceHolder]="placeholder"
-    [required]="required"
-    (ngModelChange)="dateChange($event)"
-    (focus)="focus()">
-  </nz-date-picker>
 
-  <div *ngIf="required && (!value || value.length <= 0) && !firstLoad">
-    <div class="text-danger">
-      {{title}}不能为空
-    </div>
+  <div>
+    <nz-date-picker
+      [name]="name"
+      [nzSize]="size"
+      [(ngModel)]="value"
+      [nzPlaceHolder]="placeholder"
+      [required]="required"
+      (ngModelChange)="dateChange($event)"
+      (nzOnOpenChange)="focus()"
+      (focus)="focus()">
+    </nz-date-picker>
+
+    <kf-error [title]="title" [error$]="error$"></kf-error>
   </div>
 </div>

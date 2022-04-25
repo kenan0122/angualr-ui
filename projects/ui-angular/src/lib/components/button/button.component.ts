@@ -34,6 +34,7 @@ export class ButtonComponent {
   /** 需要通过按钮向外传递的数据 */
   @Input() data: any;
   @Input() style: string = '';
+  @Input() class: string = '';
 
   @Input()
   @CoerceBooleanProperty()

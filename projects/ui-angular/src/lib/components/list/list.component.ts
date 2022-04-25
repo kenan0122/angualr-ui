@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { notNullish } from 'projects/ui-angular/src/lib/utils';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { AbstractValueAccessor, MakeProvider } from '../input/asbstract-value-accessor';
 
@@ -11,9 +12,16 @@ import { AbstractValueAccessor, MakeProvider } from '../input/asbstract-value-ac
   providers: MakeProvider(ListComponent)
 })
 export class ListComponent extends AbstractValueAccessor implements OnInit {
+  @Input() title: string = '';
   @Input() options: Object = {};
   // 根据传过来的字段, 判断为false禁用复选框, true可选复选框
   @Input() disabledProp: string = '';
+  @Input() itemSize = 32;
+  @Input() maxItemLength = 8;
+  @Input() flexDirection: string = 'kf-flex-colum';
+
+  @Output() listOuter = new EventEmitter();
+
   @Input()
   get required() {
     return this._required;
@@ -28,6 +36,8 @@ export class ListComponent extends AbstractValueAccessor implements OnInit {
   disabledCheck: boolean = false;
 
   setOfCheckedId = new Set<any>();
+  optionsLength: number = 0;
+
   constructor() {
     super();
   }
@@ -40,21 +50,28 @@ export class ListComponent extends AbstractValueAccessor implements OnInit {
   }
 
   ngOnInit() {
+    this.optionsLength = Object.keys(this.options).length;
   }
 
   /** 全选 */
   onAllChecked(checked: boolean): void {
+    this.firstLoad = false;
     for (const [_, value] of Object.entries(this.options)) {
       this.updateCheckedSet(value, checked);
     }
 
     this.refreshCheckedStatus();
+
+    this.listOuter.emit();
   }
 
   /** 每条数据的选择 */
   onItemChecked(value: any, checked: boolean): void {
+    this.firstLoad = false;
     this.updateCheckedSet(value, checked);
     this.refreshCheckedStatus();
+
+    this.listOuter.emit();
   }
 
   /**
@@ -63,7 +80,7 @@ export class ListComponent extends AbstractValueAccessor implements OnInit {
   */
   override validate(control: AbstractControl): ValidationErrors | null {
     if (control.dirty && this._required) {
-      const check = control.value.some((item: any) => item.checked)
+      const check = control.value.some((item: any) => notNullish(item))
       if (check) {
         return null;
       } else {
@@ -81,6 +98,8 @@ export class ListComponent extends AbstractValueAccessor implements OnInit {
     } else {
       this.setOfCheckedId.delete(id);
     }
+
+    this.value = Array.from(this.setOfCheckedId);
   }
 
   /** 刷新新当前页复选框的状态 */
@@ -89,5 +108,8 @@ export class ListComponent extends AbstractValueAccessor implements OnInit {
 
     this.checked = listOfEnabledData.every((value) => this.setOfCheckedId.has(value));
     this.indeterminate = listOfEnabledData.some((value) => this.setOfCheckedId.has(value)) && !this.checked;
+  }
+
+  onScrolledIndexChange(_: number): void {
   }
 }

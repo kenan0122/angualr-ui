@@ -1,0 +1,13 @@
+@import '../../../styles/forms/inputs.scss';
+
+.kf-select {
+  @extend .kf-form-item;
+}
+
+.ant-select-lg {
+  font-size: inherit;
+}
+
+.ant-select {
+  width: 100%;
+}
