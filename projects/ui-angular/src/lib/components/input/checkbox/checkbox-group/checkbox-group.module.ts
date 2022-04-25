@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CheckboxGroupComponent } from './checkbox-group.component';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { CheckboxModule } from '../checkbox/checkbox.module';
 import { DirectivesModule } from '../../../../directives/directives.module';
 
@@ -13,6 +14,7 @@ import { DirectivesModule } from '../../../../directives/directives.module';
     CheckboxModule,
     FormsModule,
     DirectivesModule,
+    NzCheckboxModule,
     ReactiveFormsModule
   ]
 })

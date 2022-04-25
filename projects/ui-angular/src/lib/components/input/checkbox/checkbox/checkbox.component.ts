@@ -15,7 +15,7 @@ import { AbstractValueAccessor, MakeProvider } from '../../asbstract-value-acces
   providers: MakeProvider(CheckboxComponent),
 })
 export class CheckboxComponent extends AbstractValueAccessor {
-  @Input() title: string = '';
+  @Input() title: any;
   // 控件名字
   @Input() name: string = 'text';
   @Input() disabled: boolean = false;

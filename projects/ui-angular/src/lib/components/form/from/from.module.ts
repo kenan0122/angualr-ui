@@ -28,4 +28,8 @@ import { CheckboxGroupModule } from '../../input/checkbox/checkbox-group/checkbo
     InputDateModule,
     CheckboxGroupModule,
     RadioGroupModule,
- 
+    DirectivesModule,
+    ListModule
+  ]
+})
+export class FromModule { }

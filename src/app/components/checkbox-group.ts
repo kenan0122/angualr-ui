@@ -16,5 +16,11 @@ export let checkboxGroups = [
   }
 ];
 
+export const options = {
+  苹果: 0,
+  香蕉: 1,
+  菠萝: 2
+}
+
 export let checkedIds = [1,2]
 

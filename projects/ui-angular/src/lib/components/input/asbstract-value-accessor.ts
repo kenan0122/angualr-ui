@@ -16,7 +16,7 @@ import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export abstract class  AbstractValueAccessor  implements ControlValueAccessor, Validator {
-  private _value!: any;
+  _value!: any;
   _required!: boolean;
 
   // 首次加载页面, 不进行错误提示
@@ -25,7 +25,7 @@ export abstract class  AbstractValueAccessor  implements ControlValueAccessor, V
   readonly error$ = new BehaviorSubject(false);
 
   constructor() {
-   }
+  }
 
   // 文本发生改变
   textOnChange: (value: any) => void = (_: any) => { };
@@ -37,11 +37,15 @@ export abstract class  AbstractValueAccessor  implements ControlValueAccessor, V
 
   set value(val: any) {
     this._value = val;
-    const error = this._required && (!val || val.length <= 0) && !this.firstLoad;
+    this.setErrorInfo(val);
+    this.textOnChange(this._value);
+  }
+
+  setErrorInfo(val: any) {
+    const invalid = this.verifyValueInvalid(val);
+    const error = this._required && invalid && !this.firstLoad;
     // 显示错误提示消息
     this.error$.next(error);
-
-    this.textOnChange(this._value);
   }
 
   // 验证发生改变时
@@ -78,6 +82,19 @@ export abstract class  AbstractValueAccessor  implements ControlValueAccessor, V
     }
 
     return null;
+  }
+
+
+
+  verifyValueInvalid(value: any) {
+    let error = false;
+    if (typeof value === 'string') {
+      error = value.trim() === '';
+    } else {
+      error = !value || value.length <= 0;
+    }
+
+    return error;
   }
 
   /**

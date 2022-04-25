@@ -15,10 +15,10 @@
             [name]="field.key"
             [ngModelOptions]="{name: field.key}"
             [(ngModel)]="inputDto[field.key]"
-            [title]="inputDto.label"
+            [title]="field.label"
             [required]="field.isRequired"
             [rows]="field.rows">
-            <kf-input-title [title]="inputDto.label"></kf-input-title>
+            <kf-input-title [title]="field.label"></kf-input-title>
           </kf-textarea>
         </ng-container>
 
@@ -30,14 +30,14 @@
               <kf-input-text
                 ngModel
                 [name]="field.key"
-                [title]="inputDto.label"
+                [title]="field.label"
                 [placeholder]="field.placeholder"
                 [ngModelOptions]="{name: field.key}"
                 [(ngModel)]="inputDto[field.key]"
                 [maxlength]="field.maxlength"
                 [appAllowableFormat]="orderRex"
                 [required]="field.isRequired">
-                 <kf-input-title [title]="inputDto.label"></kf-input-title>
+                 <kf-input-title [title]="field.label"></kf-input-title>
               </kf-input-text>
 
               <!-- <div >
@@ -61,9 +61,9 @@
                 [placeholder]="field.placeholder"
                 [maxlength]="field.maxlength"
                 [size]="size"
-                [title]="inputDto.label"
+                [title]="field.label"
                 [required]="field.isRequired">
-                  <kf-input-title [title]="inputDto.label"></kf-input-title>
+                  <kf-input-title [title]="field.label"></kf-input-title>
               </kf-input-text>
             </ng-container>
             <!-- date -->
@@ -75,9 +75,9 @@
                 [ngModelOptions]="{name: field.key}"
                 [(ngModel)]="inputDto[field.key]"
                 [size]="size"
-                [title]="inputDto.label"
+                [title]="field.label"
                 [required]="field.isRequired">
-                  <kf-input-title [title]="inputDto.label"></kf-input-title>
+                  <kf-input-title [title]="field.label"></kf-input-title>
               </kf-input-date>
             </ng-container>
           </ng-container>
@@ -131,6 +131,13 @@
           </ng-container>
           <!-- 带有复选框的下拉框: List-->
           <ng-container *ngSwitchCase="2">
+            <kf-list
+              ngModel
+              [name]="field.key"
+              [ngModelOptions]="{name: field.key}"
+              [options]="field.options"
+              [(ngModel)]="inputDto[field.key]">
+            </kf-list>
           </ng-container>
         </ng-container>
       </ng-container>

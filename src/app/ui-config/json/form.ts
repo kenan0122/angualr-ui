@@ -15,7 +15,7 @@ export const formsJson: FormConfigSchemeDto = {
           placeholder: '请输入....',
           type: 0,
           label: '范式名称',
-          key: 'Title',
+          key: 'title',
           isRequired: true,
         },
         {

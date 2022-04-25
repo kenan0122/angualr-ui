@@ -24,11 +24,10 @@ export class SelectComponent extends AbstractValueAccessor implements OnInit {
   @ViewChild('select') select: any;
 
   @Input() size: NzSelectSizeType = 'large';
-
   // 是否多选
   @Input() isMulti: boolean = false;
   @Input() title: string = '';
-  @Input() options: any[] = [];
+  @Input() options: Object = {};
   // 控件名字
   @Input() name: string = 'select';
 
@@ -58,7 +57,6 @@ export class SelectComponent extends AbstractValueAccessor implements OnInit {
    * @param param 数字 或 字符串数组 或 数字数组 或 字符串
    */
   selectChange(id: any) {
-    console.log(888, id)
     this.firstLoad = false;
     //this.selectOuter.emit({id, name: this.name});
   }

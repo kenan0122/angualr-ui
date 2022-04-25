@@ -2,16 +2,23 @@
   <ng-content></ng-content>
 
   <ng-container
-    *ngFor="let o of value; let i = index;trackBy: trackByOption"
+    *ngFor="let o of options | keyvalue; let i = index;trackBy: trackByOption"
     (ngModelChange)="checkboxChange($event)">
-    <kf-checkbox
+    <span
+      nz-checkbox
+      [nzChecked]="setOfCheckedId.has(o.value)"
+      (nzCheckedChange)="onCheckedChange(o.value, $event)">
+      {{o.key}}
+    </span>
+
+    <!-- <kf-checkbox
       ngModel
-      [title]="o.name"
+      [title]="o.key"
       [ngModelOptions]="{name: i.toString()}"
-      [disabled]="o.disabled || nzDisabled"
-      [(ngModel)]="o.checked!"
-      (checkboxOuter)="onCheckedChange(o, $event)"
+      [disabled]="nzDisabled"
+      [(ngModel)]="setOfCheckedId.has(o.value)"
+      (checkboxOuter)="onCheckedChange(o.value, $event)"
     >
-    </kf-checkbox>
+    </kf-checkbox> -->
   </ng-container>
 </div>

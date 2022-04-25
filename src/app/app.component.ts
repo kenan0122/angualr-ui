@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-import {checkboxGroups, checkedIds} from './components';
+import {options, checkedIds} from './components';
 import { formInputDto } from './ui-config/data/form';
 import { formsJson } from './ui-config/json/form';
 
@@ -12,8 +12,9 @@ import { formsJson } from './ui-config/json/form';
 export class AppComponent implements OnInit {
 
   title = 'my-app';
-  _checkboxGroups = checkboxGroups;
+  _checkboxGroups = options;
   checkedId = 1;
+  ids = [0]//checkedIds;
   textValue = 4;
   dateValue = null;
 

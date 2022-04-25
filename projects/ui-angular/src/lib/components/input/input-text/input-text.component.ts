@@ -19,6 +19,9 @@ import {
   selector: 'kf-input-text',
   templateUrl: './input-text.component.html',
   styleUrls: ['./input-text.component.scss'],
+  host: {
+   // '[class]': `flexDirection`,
+  },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: MakeProvider(InputTextComponent)
@@ -31,6 +34,7 @@ export  class InputTextComponent extends AbstractValueAccessor {
   @Input() name: string = 'text';
   @Input() placeholder: string = '请输入要搜索的文本';
   @Input() maxLength: number = 10;
+  @Input() flexDirection: string = '.kf-flex-colum';
 
   @Input()
   textTemplate!: TemplateRef<any>;

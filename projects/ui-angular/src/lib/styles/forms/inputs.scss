@@ -21,3 +21,17 @@
   min-height: 24px;
   opacity: 1;
 }
+
+.kf-flex-colum {
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kf-flex-row {
+  flex-direction: row;
+  align-items: center;
+}
+
+.kf-w-full {
+  width: 100%;
+}

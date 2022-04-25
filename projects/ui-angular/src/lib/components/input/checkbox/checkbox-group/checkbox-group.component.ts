@@ -11,6 +11,7 @@ import { AbstractValueAccessor, MakeProvider } from '../../asbstract-value-acces
   providers: MakeProvider(CheckboxGroupComponent)
 })
 export class CheckboxGroupComponent extends AbstractValueAccessor implements OnInit {
+  @Input() options: Object = {};
   @Input() nzDisabled: boolean = false;
   @Output() checkboxGroupOuter = new EventEmitter();
 
@@ -23,9 +24,18 @@ export class CheckboxGroupComponent extends AbstractValueAccessor implements OnI
     this._required = v;
   }
 
+  setOfCheckedId = new Set<any>();
+
+  override set value(val: any) {
+    this._value = val;
+    this.setErrorInfo(val);
+    this.setOfCheckedId = new Set(val)
+
+    this.textOnChange(this._value);
+  }
+
   constructor() {
     super();
-    // this._required = this.required;
   }
 
   trackByOption(_: number, option: any): string {
@@ -36,8 +46,14 @@ export class CheckboxGroupComponent extends AbstractValueAccessor implements OnI
   }
 
 
-  onCheckedChange(option: any, checked: boolean): void {
-    option.checked = checked;
+  onCheckedChange(id: any, checked: boolean): void {
+    if (checked) {
+      this.setOfCheckedId.add(id);
+    } else {
+      this.setOfCheckedId.delete(id);
+    }
+
+    //option.checked = checked;
     this.textOnChange(this.value);
   }
 
@@ -51,7 +67,7 @@ export class CheckboxGroupComponent extends AbstractValueAccessor implements OnI
   */
   override validate(control: AbstractControl): ValidationErrors | null {
     if (control.dirty && this._required) {
-      const check = control.value.some((item: any) => item.checked)
+      const check = control.value.some((item: any) => item !== null)
       if (check) {
         return null;
       } else {

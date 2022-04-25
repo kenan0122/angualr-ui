@@ -12,5 +12,6 @@ export const formInputDto = {
   coverImage: 'string',
   description: 'string',
   intro: 'string',
+  blockFormTypes: [12, 30],
   coverContent: null,
 };

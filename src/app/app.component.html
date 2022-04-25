@@ -1,12 +1,13 @@
 <form #validateForm="ngForm"  appIdentityRevealed
   nzLayout="inline"
   autocomplete="off">
-  <kf-button>测试按钮444</kf-button>
+  <!-- <kf-button>测试按钮444</kf-button>
    <kf-checkbox-group
       ngModel
       [name]="'checkGroup'"
       [ngModelOptions]="{name: 'checkGroup'}"
-      [(ngModel)]="_checkboxGroups"
+      [options]="_checkboxGroups"
+      [(ngModel)]="ids"
       [required]="true">
     <kf-input-title title="复选框组: "></kf-input-title>
   </kf-checkbox-group>
@@ -64,10 +65,19 @@
   [name]="'select'"
   [ngModelOptions]="{name: 'select'}"
   [(ngModel)]="checkedId"
-  [options]=" _checkboxGroups "
+  [options]="_checkboxGroups"
   [required]="true"
 >
 </kf-select>
+
+<kf-list
+  ngModel
+  [name]="'list'"
+  [ngModelOptions]="{name: 'list'}"
+  [(ngModel)]="checkedId"
+  [options]=" _checkboxGroups "
+  [required]="true">
+</kf-list> -->
 
 <kf-form-page [forms]="formsJsonData" [inputDto]="formInputData">
 

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { AbstractValueAccessor, MakeProvider } from '../input/asbstract-value-accessor';
 
 @Component({
@@ -11,6 +11,7 @@ import { AbstractValueAccessor, MakeProvider } from '../input/asbstract-value-ac
   providers: MakeProvider(ListComponent)
 })
 export class ListComponent extends AbstractValueAccessor implements OnInit {
+  @Input() options: Object = {};
   // 根据传过来的字段, 判断为false禁用复选框, true可选复选框
   @Input() disabledProp: string = '';
   @Input()
@@ -25,10 +26,17 @@ export class ListComponent extends AbstractValueAccessor implements OnInit {
   checked: boolean = false;
   indeterminate: boolean = false;
   disabledCheck: boolean = false;
-  setOfCheckedId = new Set<any>();
 
+  setOfCheckedId = new Set<any>();
   constructor() {
     super();
+  }
+
+  override set value(val: any) {
+    this._value = val;
+    this.setErrorInfo(val);
+    this.setOfCheckedId = new Set(val)
+    this.textOnChange(this._value);
   }
 
   ngOnInit() {
@@ -36,9 +44,10 @@ export class ListComponent extends AbstractValueAccessor implements OnInit {
 
   /** 全选 */
   onAllChecked(checked: boolean): void {
-    this.value
-      .filter((item:any) => !item[this.disabledProp])
-      .forEach(({ value }) => this.updateCheckedSet(value, checked));
+    for (const [_, value] of Object.entries(this.options)) {
+      this.updateCheckedSet(value, checked);
+    }
+
     this.refreshCheckedStatus();
   }
 
@@ -76,9 +85,9 @@ export class ListComponent extends AbstractValueAccessor implements OnInit {
 
   /** 刷新新当前页复选框的状态 */
   refreshCheckedStatus(): void {
-    const listOfEnabledData = this.value.filter((item: any) => !item[this.disabledProp]);
+    const listOfEnabledData = Object.values(this.options);
 
-    this.checked = listOfEnabledData.every(({ value }) => this.setOfCheckedId.has(value));
-    this.indeterminate = listOfEnabledData.some(({ value }) => this.setOfCheckedId.has(value)) && !this.checked;
+    this.checked = listOfEnabledData.every((value) => this.setOfCheckedId.has(value));
+    this.indeterminate = listOfEnabledData.some((value) => this.setOfCheckedId.has(value)) && !this.checked;
   }
 }

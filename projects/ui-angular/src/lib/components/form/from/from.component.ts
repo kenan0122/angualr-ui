@@ -25,7 +25,6 @@ export class FromComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(666, this.fields, this.inputDto)
   }
 
   selectChange(param: {id: any, name: any}) {
