@@ -1,5 +1,11 @@
 @import '../../styles/forms/inputs.scss';
+@import '../../styles/colors/variables.scss';
 
 .kf-list {
   @extend .kf-form-item;
+}
+
+.ant-list-header {
+  display: flex;
+  justify-content: space-between;
 }

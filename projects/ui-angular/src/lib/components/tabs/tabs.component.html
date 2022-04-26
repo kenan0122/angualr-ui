@@ -1,12 +1,20 @@
-<nz-tabset
-  [nzTabPosition]="nzTabPosition"
-  [(nzSelectedIndex)]="selectedIndex"
-  (nzSelectChange)="selectChange"
->
-<nz-tab
-  *ngFor="let tab of tabs; let i = index"
-  [nzTitle]="tab.displayName"
->
-  <ng-container  *ngTemplateOutlet="tabsTemplate;context: {$implicit: i}"></ng-container>
-</nz-tab>
+
+<ng-container *ngIf="tabs.length > 1; else tabElse">
+  <nz-tabset
+    [nzTabPosition]="nzTabPosition"
+    [(nzSelectedIndex)]="selectedIndex"
+    (nzSelectChange)="selectChange"
+  >
+  <nz-tab
+    *ngFor="let tab of tabs; let i = index"
+    [nzTitle]="tab.displayName"
+  >
+    <ng-container  *ngTemplateOutlet="tabsTemplate;context: {$implicit: i}"></ng-container>
+  </nz-tab>
 </nz-tabset>
+</ng-container>
+<ng-template #tabElse>
+  <ng-container  *ngTemplateOutlet="tabsTemplate;context: {$implicit: 0}"></ng-container>
+</ng-template>
+
+

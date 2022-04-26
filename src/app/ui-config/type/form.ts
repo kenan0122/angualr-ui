@@ -1,3 +1,5 @@
+import { IOptionEntry } from "./base";
+
 export interface FormConfigSchemeDto {
   displayName?: string;
   serviceName?: string;
@@ -34,12 +36,6 @@ export interface TextInputConfigScheme extends FormFieldConfigSchemeBase {
   rows: number;
   placeholder: string;
   type: FormFieldType.TextInput
-}
-
-export interface IOptionEntry<T = any> {
-	name: string;
-	value: T;
-	[prop: string]: any;
 }
 
 // Scheme 方案

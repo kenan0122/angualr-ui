@@ -1,15 +1,14 @@
-
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import { FormConfigSchemeDto } from './ui-config/type/form';
-import { checkedIds, options } from './ui-config/data/form';
+import { checkedIds, options } from 'src/app/ui-config/data/form';
+import { FormConfigSchemeDto } from 'src/app/ui-config/type/form';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'app-form',
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.scss']
 })
-export class AppComponent implements OnInit {
+export class FormComponent implements OnInit {
 
   title = 'my-app';
   _checkboxGroups = options;
@@ -56,4 +55,5 @@ export class AppComponent implements OnInit {
   click(data: any) {
     console.log(666, this._checkboxGroups)
   }
+
 }

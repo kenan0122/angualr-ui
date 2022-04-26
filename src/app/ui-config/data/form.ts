@@ -15,3 +15,12 @@ export const formInputDto = {
   blockFormTypes: [12, 30],
   coverContent: null,
 };
+
+
+export const options = {
+  苹果: 0,
+  香蕉: 1,
+  菠萝: 2
+}
+
+export const checkedIds = [1,2]

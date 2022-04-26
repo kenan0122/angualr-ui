@@ -1,0 +1,91 @@
+<form #validateForm="ngForm"  appIdentityRevealed
+  nzLayout="inline"
+  autocomplete="off">
+<!-- <kf-button>测试按钮444</kf-button>
+   <kf-checkbox-group
+      ngModel
+      [name]="'checkGroup'"
+      [ngModelOptions]="{name: 'checkGroup'}"
+      [options]="_checkboxGroups"
+      [(ngModel)]="ids"
+      [required]="true">
+    <kf-input-title title="复选框组: "></kf-input-title>
+  </kf-checkbox-group>
+
+  <kf-checkbox
+    ngModel
+    [name]="'checkbox'"
+    [title]="'dd'"
+    [ngModelOptions]="{name: 'checkbox'}"
+    [(ngModel)]="checkedId"
+    [required]="false"
+  >
+    <kf-input-title title="复选框: "></kf-input-title>
+  </kf-checkbox>
+  <kf-input-text
+    ngModel
+    [name]="'fruit'"
+    [ngModelOptions]="{name: 'fruit'}"
+    [(ngModel)]="textValue"
+    [required]="true">
+    <kf-input-title title="文本框: "></kf-input-title>
+  </kf-input-text>
+
+  <kf-input-date
+    ngModel
+    [name]="'date'"
+    [ngModelOptions]="{name: 'date'}"
+    [(ngModel)]="dateValue"
+    [required]="true">
+    <kf-input-title title="日期: "></kf-input-title>
+  </kf-input-date>
+
+  <kf-radio-group
+    ngModel
+    [name]="'radio'"
+    [ngModelOptions]="{name: 'radio'}"
+    [options]=" _checkboxGroups "
+    [(ngModel)]="checkedId"
+    [required]="true">
+    <kf-input-title title="单选: "></kf-input-title>
+  </kf-radio-group>
+
+  <kf-select
+    ngModel
+    [name]="'select'"
+    [ngModelOptions]="{name: 'select'}"
+    [(ngModel)]="checkedId"
+    [options]="_checkboxGroups"
+    [required]="true"
+  >
+  </kf-select>
+
+<kf-textarea
+    ngModel
+    [name]="'textarea'"
+    [ngModelOptions]="{name: 'textarea'}"
+    [(ngModel)]="textValue"
+    [rows]="10"
+    [required]="true">
+    <kf-input-title title="文本框: "></kf-input-title>
+  </kf-textarea>
+
+   <kf-list
+  ngModel
+  [name]="'list'"
+  [ngModelOptions]="{name: 'list'}"
+  [(ngModel)]="checkedId"
+  [options]=" _checkboxGroups "
+  [required]="true">
+</kf-list> -->
+
+ <kf-form-page [forms]="formsJsonData" [inputDto]="formInputData">
+</kf-form-page>
+
+  <!-- <kf-button
+    class="btn--danger"
+    [disabled]="!(validateForm.form.valid)"
+    (btnOuter)="click($event)">
+    测试按钮444
+  </kf-button> -->
+</form>

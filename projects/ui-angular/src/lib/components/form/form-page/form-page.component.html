@@ -1,4 +1,4 @@
-<ng-container *ngIf="forms">
+<div class="kf-form-page" *ngIf="forms">
   <kf-tabs [tabs]="forms.tabs" [tabsTemplate]="slotTpl"> </kf-tabs>
   <ng-template #slotTpl let-tabIndex>
     <kf-from
@@ -20,4 +20,4 @@
       保存
     </kf-button>
   </div>
-</ng-container>
+</div>
