@@ -16,6 +16,7 @@ export class FromComponent implements AfterViewInit {
   /** 展示控件名称 */
   @Input() showInputName: boolean = true;
   @Input() size: any;
+  @Input() class: string = '';
 
   @Output() searchOuter = new EventEmitter();
   @Output() selectOuter = new EventEmitter();

@@ -19,11 +19,13 @@ import { TabsModule } from './components/tabs/tabs.module';
 import { FromModule } from './components/form/from/from.module';
 import { ListModule } from './components/list/list.module';
 import { ErrorModule } from './components/error/error.module';
+import { TableModule } from './components/table/table.module';
+import { ModalModule } from './components/modal/modal.module';
 
 
 const modules = [
   ButtonModule,
-  // TableModule,
+  TableModule,
   InputTextModule,
   CheckboxModule,
   CheckboxGroupModule,
@@ -36,7 +38,8 @@ const modules = [
   FromModule,
   TabsModule,
   ListModule,
-  ErrorModule
+  ErrorModule,
+  ModalModule
 
 
   // DirectivesModule

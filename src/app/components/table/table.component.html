@@ -1,3 +1,41 @@
-<p>
-  table works!
-</p>
+<div class="app-table">
+  <kf-table
+    *ngIf="tableJsonData"
+    [api]="baseUrl"
+    [jsonData]="tableJsonData"
+    [reLoad]="reLoad"
+    [customTemplate]="customTpl"
+    (switchOuter)="publish($event)"
+  >
+  <div buttons>
+    <kf-button
+      buttonType="button--danger"
+      buttonClass="ml-10"
+      (btnOuter)="add()">
+      添加
+    </kf-button>
+  </div>
+  </kf-table>
+
+  <ng-template #customTpl  let-model>
+    <kf-button
+      buttonType="button--danger"
+      buttonClass="ml-10"
+      (btnOuter)="delete(model.data)">
+      删除
+    </kf-button>
+    <kf-button
+      buttonType="button--danger"
+      buttonClass="ml-10"
+      (btnOuter)="edit(model.data)">
+      编辑
+    </kf-button>
+  </ng-template>
+</div>
+
+<kf-modal *ngIf="inputDto"
+  [isVisible]="isVisible"
+  [jsonData]="formsJsonData"
+  [inputDto]="inputDto"
+  (modalOuter)="closeModal($event)">
+</kf-modal>

@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { TableComponent } from './components/table/table.component';
 import { FormComponent } from './components/form/form.component';
 
+
 // import { UiAngular } from '@kingfar/ui-angular';
 
 import { UiAngular } from 'projects/ui-angular/src/public-api';

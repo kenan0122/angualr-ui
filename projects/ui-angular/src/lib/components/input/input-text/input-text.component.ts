@@ -34,7 +34,7 @@ export  class InputTextComponent extends AbstractValueAccessor {
   @Input() name: string = 'text';
   @Input() placeholder: string = '请输入要搜索的文本';
   @Input() maxLength: number = 10;
-  @Input() flexDirection: string = 'kf-flex-colum';
+  @Input() flexDirection: string = 'kf-justify-center';
 
   @Input()
   textTemplate!: TemplateRef<any>;

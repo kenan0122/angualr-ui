@@ -17,7 +17,7 @@ export class FormComponent implements OnInit {
   textValue = null;
   dateValue = null;
 
-  formsJsonData!: FormConfigSchemeDto; //= formsJson;
+  formsJsonData!: any; //= formsJson;
   formInputData: any;
 
   ngOnInit(): void {
@@ -35,7 +35,7 @@ export class FormComponent implements OnInit {
     // 领域详情json
     const url="http://192.168.1.229:8077/api/Paradigm/fields/form-config";
 
-    this.http.post<FormConfigSchemeDto>(url, {})
+    this.http.post<any>(url, {})
       .subscribe((response)=>{
         this.formsJsonData = response;
       })

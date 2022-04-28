@@ -1,9 +1,14 @@
-import { IOptionEntry } from "./base";
+import { IOptionEntry, ServiceRequestDto } from "./base";
 
-export interface FormConfigSchemeDto {
-  displayName?: string;
-  serviceName?: string;
-  methodName?: string;
+// export interface FormConfigSchemeDto {
+//   displayName?: string;
+//   serviceName?: string;
+//   methodName?: string;
+//   tabs: FormTabConfigScheme[];
+// }
+
+export interface FormConfigSchemeDto<T> {
+  action: ServiceRequestDto<T>;
   tabs: FormTabConfigScheme[];
 }
 

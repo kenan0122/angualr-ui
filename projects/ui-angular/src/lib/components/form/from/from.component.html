@@ -1,7 +1,7 @@
 <form #validateForm="ngForm"  appIdentityRevealed
   nzLayout="inline"
   autocomplete="off"
-  class="create-paradigm grid-colum-1">
+  [ngClass]="class">
 
   <ng-container *ngFor="let field of fields">
     <ng-container [ngSwitch]="field.type">
@@ -157,4 +157,6 @@
 
     </ng-container>
   </ng-container>
+
+  <ng-content ></ng-content>
 </form>

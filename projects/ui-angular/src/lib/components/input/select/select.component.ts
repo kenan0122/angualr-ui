@@ -30,7 +30,7 @@ export class SelectComponent extends AbstractValueAccessor implements OnInit {
   @Input() options: Object = {};
   // 控件名字
   @Input() name: string = 'select';
-  @Input() flexDirection: string = 'kf-flex-colum';
+  @Input() flexDirection: string = 'kf-justify-center';
 
   @Output() selectOuter = new EventEmitter();
 

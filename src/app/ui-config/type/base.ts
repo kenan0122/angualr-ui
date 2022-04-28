@@ -3,3 +3,10 @@ export interface IOptionEntry<T = any> {
 	value: T;
 	[prop: string]: any;
 }
+
+/** 请求的dto */
+export interface ServiceRequestDto<T> {
+  serviceName: string;
+  methodName: string;
+  dto: T;
+}

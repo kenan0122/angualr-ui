@@ -18,7 +18,7 @@ export class ListComponent extends AbstractValueAccessor implements OnInit {
   @Input() disabledProp: string = '';
   @Input() itemSize = 32;
   @Input() maxItemLength = 8;
-  @Input() flexDirection: string = 'kf-flex-colum';
+  @Input() flexDirection: string = 'kf-justify-center';
 
   @Output() listOuter = new EventEmitter();
 

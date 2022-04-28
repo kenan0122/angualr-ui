@@ -16,7 +16,7 @@ export class InputDateComponent extends AbstractValueAccessor {
   // 控件名字
   @Input() name: string = 'date';
   @Input() placeholder: string = '请输入要日期';
-  @Input() flexDirection: string = 'kf-flex-colum';
+  @Input() flexDirection: string = 'kf-justify-center';
 
   @Input()
   dateTemplate!: TemplateRef<any>;

@@ -1,20 +1,15 @@
-import { IOptionEntry } from './base';
+import { IOptionEntry, ServiceRequestDto } from './base';
 
 export interface TableConfigScheme<T> {
   /** 页面名称 */
   displayName: string;
   search?: Search;
-  serviceName: string;
-  serviceMethodName: string
+  /** 是否显示分页, 没有分页的话, dto不需要定义相关页面参数 */
+  enablePagination: boolean;
+  /** 是否多选(true: 第一列为checkbox) */
+  multiSelect: boolean;
   columns: Array<ColumnBase>;
   action: ServiceRequestDto<T>;
-}
-
-/** 请求的dto */
-export interface ServiceRequestDto<T> {
-  serviceName: string;
-  methodName: string;
-  dto: T;
 }
 
 export interface Search {

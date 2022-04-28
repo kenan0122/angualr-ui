@@ -16,7 +16,7 @@ export class TextareaComponent extends AbstractValueAccessor {
   @Input() name: string = 'textarea';
   @Input() rows: number = 1;
   @Input() placeholder: string = '请输入文本';
-  @Input() flexDirection: string = 'kf-flex-colum';
+  @Input() flexDirection: string = 'kf-justify-center';
 
   @Output() textareaOuter = new EventEmitter();
 

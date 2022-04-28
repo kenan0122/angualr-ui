@@ -12,6 +12,16 @@
 
   <div class="text-center">
     <kf-button
+      *ngIf="visibleBtn.cancel"
+      class="primary"
+      style="width: 10%;"
+      (btnOuter)="cancel()"
+    >
+      取消
+    </kf-button>
+
+    <kf-button
+      *ngIf="visibleBtn.promise"
       class="primary"
       style="width: 10%;"
       [disabled]="!formControllerValid"
@@ -19,5 +29,6 @@
     >
       保存
     </kf-button>
+
   </div>
 </div>
