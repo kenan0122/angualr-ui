@@ -14,11 +14,13 @@ import { FormComponent } from './components/form/form.component';
 // import { UiAngular } from '@kingfar/ui-angular';
 
 import { UiAngular } from 'projects/ui-angular/src/public-api';
+import { FieldComponent } from './components/field/field.component';
 @NgModule({
   declarations: [
     AppComponent,
     FormComponent,
-    TableComponent
+    TableComponent,
+    FieldComponent
   ],
   imports: [
     CommonModule,

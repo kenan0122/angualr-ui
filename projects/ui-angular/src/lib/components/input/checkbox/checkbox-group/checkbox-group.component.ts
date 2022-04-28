@@ -15,6 +15,7 @@ export class CheckboxGroupComponent extends AbstractValueAccessor {
   @Input() title: string = '';
   @Input() options: Object = {};
   @Input() nzDisabled: boolean = false;
+  @Input() flexDirection: string = 'kf-justify-center';
   @Output() checkboxGroupOuter = new EventEmitter();
 
   @Input()

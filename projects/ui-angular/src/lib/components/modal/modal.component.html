@@ -10,12 +10,15 @@
   </kf-from> -->
   <kf-form-page
     [forms]="jsonData"
-    [inputDto]="inputDto" [visibleBtn]="{'cancel': false, 'promise': false}">
+    [inputDto]="inputDto"
+    (formPageOuter)="saveForm($event)">
   </kf-form-page>
   </div>
   <div *nzModalFooter>
-    <span>Modal Footer:</span>
-    <button nz-button nzType="default" (click)="handleCancel()">取消</button>
-    <button nz-button nzType="primary" (click)="handleOk()">确定</button>
+    <ng-container *ngIf="displayFooter">
+      <span>Modal Footer:</span>
+      <button nz-button nzType="default" (click)="handleCancel()">取消</button>
+      <button nz-button nzType="primary" (click)="handleOk()">确定</button>
+    </ng-container>
   </div>
 </nz-modal>

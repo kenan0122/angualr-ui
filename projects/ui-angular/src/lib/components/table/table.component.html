@@ -1,83 +1,94 @@
-<!-- 搜索 -->
-<kf-from
-  *ngIf="jsonData.search.fields"
-  #formChild
-  class="kf-items-start"
-  [fields]="jsonData.search.fields"
-  [inputDto]="jsonData.action.dto"
->
-  <kf-button style="width: 100px" (btnOuter)="search()">查询</kf-button>
-</kf-from>
+<div class="kf-table">
+  <!-- 搜索 -->
+  <kf-from
+    *ngIf="jsonData.search.fields"
+    #formChild
+    class="kf-items-start"
+    [fields]="jsonData.search.fields"
+    [inputDto]="jsonData.action.dto"
+  >
+    <kf-button style="width: 100px" (btnOuter)="search()">查询</kf-button>
+  </kf-from>
 
-<!-- 按钮数组 -->
-<ng-content select="[buttons]"></ng-content>
+  <!-- 按钮数组 -->
+  <!-- <ng-content select="[buttons]" ></ng-content> -->
+  <ng-container *ngTemplateOutlet="btnTemplate; context: {$implicit: setOfCheckedId}"></ng-container>
 
-<nz-table
-  *ngIf="data"
-  #basicTable
-  nzBordered
-  [nzData]="data.items"
-  [nzTotal]="data.totalCount"
-  [nzPageSize]="pageSize"
-  [(nzPageIndex)]="pageNumber"
-  [nzFrontPagination]="false"
-  [nzHideOnSinglePage]="true"
-  [nzShowPagination]="jsonData.enablePagination"
-  (nzPageIndexChange)="pageNumberChange()">
-  <thead>
-    <tr>
-      <th *ngIf="jsonData.multiSelect"
-        [nzChecked]="checked"
-        [nzDisabled]="disabledCheck"
-        [nzIndeterminate]="indeterminate"
-        (nzCheckedChange)="onAllChecked($event)">
-      </th>
+  <nz-table
+    *ngIf="data"
+    #basicTable
+    nzBordered
+    [nzData]="data.items"
+    [nzTotal]="data.totalCount"
+    [nzPageSize]="pageSize"
+    [(nzPageIndex)]="pageNumber"
+    [nzFrontPagination]="false"
+    [nzHideOnSinglePage]="true"
+    [nzShowPagination]="jsonData.enablePagination"
+    (nzPageIndexChange)="pageNumberChange()"
+    (nzQueryParams)="onQueryParamsChange($event)"
+  >
 
-      <ng-container *ngFor="let column of jsonData.columns" >
-        <th [nzShowSort]="column.isSort" *ngIf="column.isShow">
-          {{column.label}}
+    <thead>
+      <tr>
+        <th *ngIf="jsonData.multiSelect"
+          [nzChecked]="checked"
+          [nzDisabled]="disabledCheck"
+          [nzIndeterminate]="indeterminate"
+          (nzCheckedChange)="onAllChecked($event)">
         </th>
-      </ng-container>
 
-      <th nzAlign="center">操作</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let data of basicTable.data; let i = index">
-      <td *ngIf="jsonData.multiSelect"
-        [nzChecked]="setOfCheckedId.has(data.id)"
-        [nzDisabled]="data[disabledProp]"
-        (nzCheckedChange)="onItemChecked(data.id, $event)"
-      ></td>
-
-      <td *ngFor="let column of jsonData.columns; let fi = index">
-        <ng-container [ngSwitch]="column.columnType">
-          <!-- 纯文本-->
-          <ng-container *ngSwitchCase="0">
-            {{ data[column.key] }}
-          </ng-container>
-          <!-- 下拉/枚举进行值转换 -->
-          <ng-container *ngSwitchCase="1">
-            {{ lg(data[column.key], column.options)}}
-          </ng-container>
-          <!-- Switch -->
-          <ng-container *ngSwitchCase="2">
-            <nz-switch
-              [nzCheckedChildren]="checkedTemplate"
-              [nzUnCheckedChildren]="unCheckedTemplate"
-              [(ngModel)]="data[column.key]"
-              [nzControl]="true"
-              (click)="switchClick(data, column.action, column.key)">
-            </nz-switch>
-            <ng-template #checkedTemplate>{{lg(true, column.options)}}</ng-template>
-            <ng-template #unCheckedTemplate>{{lg(false, column.options)}}</ng-template>
-          </ng-container>
+        <ng-container *ngFor="let column of jsonData.columns" >
+          <th  *ngIf="column.isShow"
+            [nzColumnKey]="column.key"
+            [nzSortFn]="true"
+            [nzShowSort]="column.isSort"
+          >
+            {{column.label}}
+          </th>
         </ng-container>
-      </td>
-      <td class="text-center">
-        <!--插槽/占位 -->
-        <ng-container *ngTemplateOutlet="customTemplate; context: {$implicit: {data, i}}"></ng-container>
-      </td>
-    </tr>
-  </tbody>
-</nz-table>
+
+        <th nzAlign="center">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data; let i = index">
+        <td *ngIf="jsonData.multiSelect"
+          [nzChecked]="setOfCheckedId.has(data.id)"
+          [nzDisabled]="data[disabledProp]"
+          (nzCheckedChange)="onItemChecked(data.id, $event)"
+        ></td>
+
+        <td *ngFor="let column of jsonData.columns; let fi = index">
+          <ng-container [ngSwitch]="column.columnType">
+            <!-- 纯文本-->
+            <ng-container *ngSwitchCase="0">
+              {{ data[column.key] }}
+            </ng-container>
+            <!-- 下拉/枚举进行值转换 -->
+            <ng-container *ngSwitchCase="1">
+              {{ lg(data[column.key], column.options)}}
+            </ng-container>
+            <!-- Switch -->
+            <ng-container *ngSwitchCase="2">
+              <nz-switch
+                [nzCheckedChildren]="checkedTemplate"
+                [nzUnCheckedChildren]="unCheckedTemplate"
+                [(ngModel)]="data[column.key]"
+                [nzControl]="true"
+                (click)="switchClick(data, column.action, column.key)">
+              </nz-switch>
+              <ng-template #checkedTemplate>{{lg(true, column.options)}}</ng-template>
+              <ng-template #unCheckedTemplate>{{lg(false, column.options)}}</ng-template>
+            </ng-container>
+          </ng-container>
+        </td>
+        <td class="text-center">
+          <!--插槽/占位 -->
+          <ng-container *ngTemplateOutlet="customTemplate; context: {$implicit: {data, i}}"></ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
+

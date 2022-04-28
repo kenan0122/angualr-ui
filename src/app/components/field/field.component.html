@@ -1,4 +1,4 @@
-<div class="app-table">
+<div class="app-field">
   <kf-table
     *ngIf="tableJsonData"
     [api]="baseUrl"
@@ -6,16 +6,20 @@
     [reLoad]="reLoad"
     [customTemplate]="customTpl"
     [btnTemplate]="btnTpl"
-    (switchOuter)="publish($event)"
   >
   </kf-table>
 
-  <ng-template #btnTpl>
-    <div class="grid-column-start">
+  <ng-template #btnTpl let-ids>
+    <div buttons class="grid-column-start">
       <kf-button
         style="width: 100px;"
         (btnOuter)="add()">
         添加
+      </kf-button>
+      <kf-button
+        style="width: 100px;"
+        (btnOuter)="deleteBatch(ids)">
+        批量删除
       </kf-button>
     </div>
   </ng-template>

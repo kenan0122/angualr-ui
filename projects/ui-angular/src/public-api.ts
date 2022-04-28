@@ -55,3 +55,7 @@ export *  from './lib/components/table/table.component';
 
 export *  from './lib/components/modal/modal.module';
 export *  from './lib/components/modal/modal.component';
+
+export * from './/lib/components/input/input-number/input-number.module';
+export * from './/lib/components/input/input-number/input-number.component';
+

@@ -27,7 +27,7 @@
           <ng-container [ngSwitch]="field.valueType">
             <!-- number -->
             <ng-container *ngSwitchCase="0">
-              <kf-input-text
+              <kf-input-number
                 ngModel
                 [name]="field.key"
                 [title]="field.label"
@@ -35,11 +35,10 @@
                 [ngModelOptions]="{name: field.key}"
                 [(ngModel)]="inputDto[field.key]"
                 [maxlength]="field.maxlength"
-                [appAllowableFormat]="orderRex"
                 [required]="field.isRequired"
-                (textOuter)="numberChange($event)">
+                (numberOuter)="numberChange($event)">
                  <kf-input-title [title]="field.label"></kf-input-title>
-              </kf-input-text>
+              </kf-input-number>
 
               <!-- <div >
                 <div class="text-danger"

@@ -35,10 +35,10 @@ export class FormPageComponent implements OnInit {
   // 提交数据
   click() {
     // /console.log('form-page', this.inputDto);
-    this.formPageOuter.emit();
+    this.formPageOuter.emit({modal: true});
   }
 
   cancel() {
-    this.formPageOuter.emit();
+    this.formPageOuter.emit({modal: false});
   }
 }

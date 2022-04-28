@@ -1,4 +1,6 @@
-<div class="kf-checkbox-group">
+<div class="kf-checkbox-group"
+  [ngClass]="{'kf-form-item-with-help': error$ | async}"
+  [ngClass]="flexDirection">
   <ng-content></ng-content>
 
   <div>

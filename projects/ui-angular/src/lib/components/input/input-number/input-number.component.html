@@ -1,0 +1,20 @@
+<div class="kf-number"
+  [ngClass]="{'kf-form-item-with-help': error$ | async}"
+  [ngClass]="flexDirection">
+  <!-- <ng-container  *ngTemplateOutlet="textTemplate;context: {}"></ng-container> -->
+  <ng-content></ng-content>
+  <div>
+    <input nz-input
+      [name]="name"
+      [nzSize]="size"
+      [(ngModel)]="value"
+      [placeholder]="placeholder"
+      [required]="required"
+      [maxLength]="maxLength"
+      [appAllowableFormat]="rex"
+      (ngModelChange)="numberChange($event)"
+      (focus)="focus()"/>
+
+      <kf-error [title]="errorTip" info="" [error$]="error$"></kf-error>
+  </div>
+</div>

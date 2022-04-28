@@ -13,6 +13,7 @@ import {
   SimpleChanges,
   TemplateRef,
 } from '@angular/core';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { isUndefinedOrEmptyString } from '../../utils';
 
 interface PagedResult<T> {
@@ -38,9 +39,11 @@ export class TableComponent implements OnInit, OnChanges {
   @Input() pageSize: number = 2;
   // 根据传过来的字段, 判断为false禁用复选框, true可选复选框
   @Input() disabledProp: string = '';
-  @Input() customTemplate!: TemplateRef<any>;
   // 发送空数据
   @Input() sendNullsAsQueryParam: boolean = false;
+
+  @Input() customTemplate!: TemplateRef<any>;
+  @Input() btnTemplate!: TemplateRef<any>;
 
   @Output() tableOuter = new EventEmitter();
   @Output() switchOuter = new EventEmitter();
@@ -194,5 +197,23 @@ export class TableComponent implements OnInit, OnChanges {
   search() {
     this.pageNumber = 1;
     this.getData(this.jsonData.action.dto);
+  }
+
+  // 排序查询参数
+  onQueryParamsChange(params: NzTableQueryParams) {
+    const { pageSize, pageIndex, sort } = params;
+    const currentSort = sort.find(item => item.value !== null);
+    const sortField = (currentSort && currentSort.key) || null;
+    const sortOrder = (currentSort && currentSort.value) || null;
+
+    const index = sortOrder?.lastIndexOf('end');
+    const order = sortOrder?.substring(0, index);
+
+    const dto = Object.assign(this.jsonData.action.dto, {
+      sorting: `${sortField} ${order}`,
+      skipCount: 0
+    });
+
+   this.getData(dto)
   }
 }

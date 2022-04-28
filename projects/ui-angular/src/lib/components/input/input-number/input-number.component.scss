@@ -1,0 +1,13 @@
+@import '../../../styles/forms/inputs.scss';
+
+.kf-number {
+  @extend .kf-form-item;
+}
+
+.ant-input-lg {
+  font-size: inherit;
+}
+
+.ant-input {
+  border-radius: 0.25rem;
+}

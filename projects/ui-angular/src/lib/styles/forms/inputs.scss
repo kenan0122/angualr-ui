@@ -52,11 +52,26 @@
   flex-wrap: wrap;
 }
 
-.kf-
-
 .kf-auto-cols-auto {
   display: grid;
   // grid-auto-flow: column;
+}
+.grid-column-center {
+  @extend .grid-column-base;
+
+  justify-content: center;
+}
+
+.grid-column-base {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 0.5rem;
+}
+
+.grid-row-base {
+  display: grid;
+  grid-auto-flow: row;
+  gap: 0.5rem;
 }
 
 .kf-w-full {

@@ -21,7 +21,7 @@ import { ListModule } from './components/list/list.module';
 import { ErrorModule } from './components/error/error.module';
 import { TableModule } from './components/table/table.module';
 import { ModalModule } from './components/modal/modal.module';
-
+import { InputNumberModule } from './components/input/input-number/input-number.module';
 
 const modules = [
   ButtonModule,
@@ -39,9 +39,8 @@ const modules = [
   TabsModule,
   ListModule,
   ErrorModule,
-  ModalModule
-
-
+  ModalModule,
+  InputNumberModule
   // DirectivesModule
 ]
 @NgModule({

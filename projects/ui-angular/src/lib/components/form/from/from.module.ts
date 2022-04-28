@@ -1,3 +1,4 @@
+import { InputNumberModule } from './../../input/input-number/input-number.module';
 import { ListModule } from './../../list/list.module';
 import { RadioGroupModule } from './../../input/radio/radio-group/radio-group.module';
 import { DirectivesModule } from '../../../directives/directives.module';
@@ -29,7 +30,8 @@ import { CheckboxGroupModule } from '../../input/checkbox/checkbox-group/checkbo
     CheckboxGroupModule,
     RadioGroupModule,
     DirectivesModule,
-    ListModule
+    ListModule,
+    InputNumberModule
   ]
 })
 export class FromModule { }

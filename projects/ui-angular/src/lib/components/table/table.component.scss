@@ -1,2 +1,9 @@
 @import '../../styles/forms/inputs.scss';
 
+.kf-table {
+  @extend .grid-row-base;
+}
+
+nz-table {
+  margin-top: 0.5rem;
+}

@@ -4,10 +4,10 @@
 $button-text-color: $color-white;
 
 .kf-button {
-  &,
-  &.btn {
+  & {
     transition: background-color 0.25s ease-out;
     padding: 0;
+    border-radius: 4px;
   }
 
   button {

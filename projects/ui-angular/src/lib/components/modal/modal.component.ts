@@ -9,6 +9,7 @@ export class ModalComponent implements OnInit {
   @Input() isVisible: boolean = false;
   @Input() jsonData: any;
   @Input() inputDto: any;
+  @Input() displayFooter: boolean = false;
 
   @Output() modalOuter = new EventEmitter();
 
@@ -25,5 +26,11 @@ export class ModalComponent implements OnInit {
     this.modalOuter.emit({modal: true});
   }
 
-
+  saveForm(param: any) {
+    if(param.modal) {
+      this.handleOk();
+    } else {
+      this.handleCancel();
+    }
+  }
 }

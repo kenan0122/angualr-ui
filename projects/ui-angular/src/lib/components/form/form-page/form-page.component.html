@@ -10,11 +10,11 @@
     ></kf-from>
   </ng-template>
 
-  <div class="text-center">
+  <div class="grid-column-center">
     <kf-button
       *ngIf="visibleBtn.cancel"
       class="primary"
-      style="width: 10%;"
+      style="width: 100px;"
       (btnOuter)="cancel()"
     >
       取消
@@ -23,7 +23,7 @@
     <kf-button
       *ngIf="visibleBtn.promise"
       class="primary"
-      style="width: 10%;"
+      style="width: 100px;"
       [disabled]="!formControllerValid"
       (btnOuter)="click()"
     >
