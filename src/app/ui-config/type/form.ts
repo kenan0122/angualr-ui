@@ -40,7 +40,7 @@ export interface TextInputConfigScheme extends FormFieldConfigSchemeBase {
   /** 大于1是文本域 */
   rows: number;
   placeholder: string;
-  type: FormFieldType.TextInput
+  type: FormFieldType.TextInput;
 }
 
 // Scheme 方案
@@ -50,7 +50,8 @@ export interface SelectConfigScheme extends FormFieldConfigSchemeBase {
   valueType: ValueType;
   isMulti: boolean;
   style: SelectInputStyle;
-  type: FormFieldType.Select
+  type: FormFieldType.Select;
+  placeholder: string;
 }
 
 export interface FileUploadConfigScheme extends FormFieldConfigSchemeBase {

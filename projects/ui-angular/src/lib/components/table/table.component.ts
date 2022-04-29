@@ -146,7 +146,8 @@ export class TableComponent implements OnChanges {
     const index = sortOrder?.lastIndexOf('end');
     const order = sortOrder?.substring(0, index);
 
-    this.jsonData.action.dto.sorting = `${sortField} ${order}`;
+    this.jsonData.action.dto.sortingKey = sortField;
+    this.jsonData.action.dto.sortingType = order;
     this.search();
   }
 }
