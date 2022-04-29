@@ -25,8 +25,7 @@
     [nzFrontPagination]="false"
     [nzHideOnSinglePage]="true"
     [nzShowPagination]="jsonData.enablePagination"
-    (nzPageIndexChange)="pageNumberChange()"
-    (nzQueryParams)="onQueryParamsChange($event)"
+    (nzPageIndexChange)="pageNumberChange($event)"
   >
 
     <thead>
@@ -43,6 +42,7 @@
             [nzColumnKey]="column.key"
             [nzSortFn]="true"
             [nzShowSort]="column.isSort"
+            (nzSortOrderChange)="sortOderChange(column.key, $event)"
           >
             {{column.label}}
           </th>

@@ -1,50 +1,21 @@
-<div class="app-field">
-  <kf-table
-    *ngIf="tableJsonData"
-    [api]="baseUrl"
-    [jsonData]="tableJsonData"
-    [reLoad]="reLoad"
-    [customTemplate]="customTpl"
-    [btnTemplate]="btnTpl"
+<app-table
+  [reLoad]="reLoad"
+  [tableJsonUrl]="jsonUrl"
+  [tableUrl]="url"
+  [deleteUrl]="deleteUrl"
+  [formJsonUrl]="formJsonUrl"
+  [formUrl]="formUrl"
+  [saveUrl]="saveUrl"
+  [checkIdLen]="checkIdLen"
+  [tableTopTemplate]="topTpl"
   >
-  </kf-table>
+</app-table>
 
-  <ng-template #btnTpl let-ids>
-    <div buttons class="grid-column-start">
-      <kf-button
-        style="width: 100px;"
-        (btnOuter)="add()">
-        添加
-      </kf-button>
-      <kf-button
-        style="width: 100px;"
-        (btnOuter)="deleteBatch(ids)">
-        批量删除
-      </kf-button>
-    </div>
-  </ng-template>
+<ng-template #topTpl  let-ids>
+  <kf-button
+    style="width: 100px;"
+    (btnOuter)="deleteBatch(ids)">
+    批量删除
+  </kf-button>
+</ng-template>
 
-  <ng-template #customTpl  let-model>
-    <div class="grid-column-center ">
-      <kf-button
-        buttonType="button--danger"
-        buttonClass="ml-10"
-        (btnOuter)="delete(model.data)">
-        删除
-      </kf-button>
-      <kf-button
-        buttonType="button--danger"
-        buttonClass="ml-10"
-        (btnOuter)="edit(model.data)">
-        编辑
-      </kf-button>
-    </div>
-  </ng-template>
-</div>
-
-<kf-modal *ngIf="inputDto"
-  [isVisible]="isVisible"
-  [jsonData]="formsJsonData"
-  [inputDto]="inputDto"
-  (modalOuter)="closeModal($event)">
-</kf-modal>

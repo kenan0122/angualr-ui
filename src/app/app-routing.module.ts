@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TableComponent } from './components/table/table.component';
 import { FormComponent } from './components/form/form.component';
 import { FieldComponent } from './components/field/field.component';
+import { ParadigmComponent } from './components/paradigm/paradigm.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,9 @@ const routes: Routes = [
       },{
         path: 'field',
         component: FieldComponent
+      },{
+        path: 'paradigm',
+        component: ParadigmComponent
       }
     ]
   }

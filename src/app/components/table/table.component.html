@@ -1,22 +1,26 @@
 <div class="app-table">
   <kf-table
     *ngIf="tableJsonData"
+    [data]="tableData"
     [api]="baseUrl"
     [jsonData]="tableJsonData"
     [reLoad]="reLoad"
     [customTemplate]="customTpl"
     [btnTemplate]="btnTpl"
     (switchOuter)="publish($event)"
+    (tableOuter)="tableChange($event)"
   >
   </kf-table>
 
-  <ng-template #btnTpl>
+  <ng-template #btnTpl let-ids>
     <div class="grid-column-start">
       <kf-button
         style="width: 100px;"
-        (btnOuter)="add()">
+        (btnOuter)="editOrAdd()">
         添加
       </kf-button>
+      <ng-container *ngTemplateOutlet="tableTopTemplate; context: {$implicit: ids}"></ng-container>
+
     </div>
   </ng-template>
 
@@ -31,9 +35,10 @@
       <kf-button
         buttonType="button--danger"
         buttonClass="ml-10"
-        (btnOuter)="edit(model.data)">
+        (btnOuter)="editOrAdd(model.data)">
         编辑
       </kf-button>
+      <ng-container *ngTemplateOutlet="extraBtnTemplate; context: {$implicit: model.data}"></ng-container>
     </div>
   </ng-template>
 </div>

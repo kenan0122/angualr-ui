@@ -28,10 +28,13 @@ type Params = HttpParams | { [param: string]: any };
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
-export class TableComponent implements OnInit, OnChanges {
+export class TableComponent implements OnChanges {
   @Input() api: string = '';
   @Input() reLoad!: object;
+  /** 表格json数据 */
   @Input() jsonData: any;
+  /** 表格数据 */
+  @Input() data: any;
 
   /** 当前页数 */
   @Input() pageNumber: number = 1;
@@ -53,25 +56,15 @@ export class TableComponent implements OnInit, OnChanges {
   disabledCheck: boolean = false;
   setOfCheckedId = new Set<string>();
 
-  /** 数据项列表 */
-  data!: any;
-
   constructor(public http: HttpClient) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     // 如果重新加载, 重新渲染列表
     if (changes['reLoad']) {
       if (this.jsonData.multiSelect) {
-        this.skipPageNumber(this.setOfCheckedId.size);
         this.resetData();
-      } else {
-        this.skipPageNumber(1);
       }
     }
-  }
-
-  ngOnInit() {
-    //this.getData(this.jsonData.action.dto)
   }
 
   onAllChecked(checked: boolean) {
@@ -131,43 +124,9 @@ export class TableComponent implements OnInit, OnChanges {
     this.switchOuter.emit({ column });
   }
 
-  private getParams(params: Params, encoder?: HttpParameterCodec): HttpParams {
-    const filteredParams = Object.keys(params).reduce((acc, key) => {
-      const value = params[key];
-      if (isUndefinedOrEmptyString(value)) return acc;
-      if (value === null && !this.sendNullsAsQueryParam) return acc;
-      acc[key] = value;
-      return acc;
-    }, {});
-    return encoder
-      ? new HttpParams({ encoder, fromObject: filteredParams })
-      : new HttpParams({ fromObject: filteredParams });
-  }
-
-  // 进行api请求
-  private getRequest(url: string, dto: any, method: string) {
-    this.http
-      .request<any>(method, url, {
-        ...({ params: dto } && { params: this.getParams(dto) }),
-      } as any)
-      .subscribe((response) => {
-        this.data = response;
-      });
-  }
-
-  // 获取表格数据
-  private getData(dto: any) {
-    dto = Object.assign(dto, {
-      maxResultCount: this.pageSize,
-      skipCount: (this.pageNumber - 1) * this.pageSize
-    })
-    const url = `${this.api}/${this.jsonData.action.methodName}`;
-    this.getRequest(url, dto, 'GET');
-  }
-
   // 分页
-  pageNumberChange() {
-    this.getData(this.jsonData.action.dto);
+  pageNumberChange(param: number) {
+    this.tableOuter.emit(param);
   }
 
   // 重置选中的数据
@@ -177,43 +136,17 @@ export class TableComponent implements OnInit, OnChanges {
     this.indeterminate = false;
   }
 
-  // 跳转页数
-  skipPageNumber(delItemLength: number) {
-    // 判断是不是第一页
-    if (this.pageNumber > 1) {
-      // 判断当前页的数据是否 等于 删除项的个数
-      if (this.data.items.length <= delItemLength) {
-        // 如果当前页就一项, 直接跳转到前一页
-        this.pageNumber = this.pageNumber - 1;
-        this.pageNumberChange()
-      } else {
-        this.pageNumberChange();
-      }
-    } else {
-      this.pageNumberChange();
-    }
-  }
-
   search() {
     this.pageNumber = 1;
-    this.getData(this.jsonData.action.dto);
+    this.pageNumberChange(this.pageNumber);
   }
 
-  // 排序查询参数
-  onQueryParamsChange(params: NzTableQueryParams) {
-    const { pageSize, pageIndex, sort } = params;
-    const currentSort = sort.find(item => item.value !== null);
-    const sortField = (currentSort && currentSort.key) || null;
-    const sortOrder = (currentSort && currentSort.value) || null;
 
+  sortOderChange(sortField: string, sortOrder: string | null) {
     const index = sortOrder?.lastIndexOf('end');
     const order = sortOrder?.substring(0, index);
 
-    const dto = Object.assign(this.jsonData.action.dto, {
-      sorting: `${sortField} ${order}`,
-      skipCount: 0
-    });
-
-   this.getData(dto)
+    this.jsonData.action.dto.sorting = `${sortField} ${order}`;
+    this.search();
   }
 }
