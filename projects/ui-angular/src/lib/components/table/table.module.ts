@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FromModule } from '../form/from/from.module';
+import { FormModule } from '../form/form/form.module';
 import { ModalModule } from '../modal/modal.module';
 
 @NgModule({
@@ -22,7 +22,7 @@ import { ModalModule } from '../modal/modal.module';
     NzCheckboxModule,
     ButtonModule,
     ModalModule,
-    FromModule
+    FormModule
   ]
 })
 

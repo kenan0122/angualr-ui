@@ -1,11 +1,11 @@
-import { InputNumberModule } from './../../input/input-number/input-number.module';
-import { ListModule } from './../../list/list.module';
-import { RadioGroupModule } from './../../input/radio/radio-group/radio-group.module';
+import { InputNumberModule } from '../../input/input-number/input-number.module';
+import { ListModule } from '../../list/list.module';
+import { RadioGroupModule } from '../../input/radio/radio-group/radio-group.module';
 import { DirectivesModule } from '../../../directives/directives.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FromComponent } from './from.component';
+import { FormComponent } from './form.component';
 import { InputTitleModule } from '../../input/input-title/input-title.module';
 import { SelectModule } from '../../input/select/select.module';
 import { TextareaModule } from '../../input/textarea/textarea.module';
@@ -16,8 +16,8 @@ import { CheckboxGroupModule } from '../../input/checkbox/checkbox-group/checkbo
 
 
 @NgModule({
-  declarations: [FromComponent],
-  exports: [FromComponent],
+  declarations: [FormComponent],
+  exports: [FormComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -34,4 +34,4 @@ import { CheckboxGroupModule } from '../../input/checkbox/checkbox-group/checkbo
     InputNumberModule
   ]
 })
-export class FromModule { }
+export class FormModule { }

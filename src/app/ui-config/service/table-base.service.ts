@@ -10,7 +10,7 @@ export abstract class TableBaseService {
   baseUrl: string = environment.apis.default.url;
 
   // 表格json的数据
-  tableJsonData!: TableConfigScheme<any>;
+  tableJsonData!: any;//TableConfigScheme<any>;
   // 表格的数据结构
   tableData: any;
   pageNumber: number = 1;
@@ -29,14 +29,16 @@ export abstract class TableBaseService {
 
   /** 获取表格的json数据结构 */
   getTableJsonData(tableJsonUrl: string, tableUrl: string) {
-    //const url=`${this.baseUrl}/api/Paradigm/paradigms/table-config-scheme`;
     const url=`${this.baseUrl}/${tableJsonUrl}`;
 
-    this.http.post<TableConfigScheme<any>>(url, {})
-    .subscribe((response)=>{
+    this.http
+    .get<any>(url, {
+      ...({ params: {} } && { params: this.getParams({}) }),
+    } as any)
+    .subscribe((response) => {
       this.tableJsonData = response;
       this.getTableStructData(this.tableJsonData.action.dto, tableUrl);
-    })
+    });
   }
 
   /**

@@ -1,4 +1,3 @@
-
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { UiAngularComponent } from './ui-angular.component';
 
@@ -16,12 +15,14 @@ import { TextareaModule } from './components/input/textarea/textarea.module';
 import { SelectModule } from './components/input/select/select.module';
 import { FormPageModule } from './components/form/form-page/form-page.module';
 import { TabsModule } from './components/tabs/tabs.module';
-import { FromModule } from './components/form/from/from.module';
+import { FormModule } from './components/form/form/form.module';
 import { ListModule } from './components/list/list.module';
 import { ErrorModule } from './components/error/error.module';
 import { TableModule } from './components/table/table.module';
 import { ModalModule } from './components/modal/modal.module';
 import { InputNumberModule } from './components/input/input-number/input-number.module';
+import { UploadModule } from './components/upload/upload.module';
+import { DrawerModule } from './components/drawer/drawer.module';
 
 const modules = [
   ButtonModule,
@@ -35,12 +36,14 @@ const modules = [
   TextareaModule,
   SelectModule,
   FormPageModule,
-  FromModule,
+  FormModule,
   TabsModule,
   ListModule,
   ErrorModule,
   ModalModule,
-  InputNumberModule
+  InputNumberModule,
+  UploadModule,
+  DrawerModule
   // DirectivesModule
 ]
 @NgModule({

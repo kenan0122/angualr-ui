@@ -3,6 +3,7 @@ import { Component, EventEmitter, Injector, Input, OnChanges, OnInit, Output, Si
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { template } from 'projects/ui-angular/src/lib/utils';
 import { TableBaseService } from 'src/app/ui-config/service/table-base.service';
+import { ErrorInfo } from 'src/app/ui-config/type/errror';
 
 
 @Component({
@@ -36,6 +37,7 @@ export  class TableComponent extends TableBaseService implements OnChanges {
   formsJsonData!: any;
   // 表单数据结构
   inputDto: any;
+  errorList: ErrorInfo[] = [];
 
   constructor(injector: Injector, private message: NzMessageService) {
     super(injector);
@@ -103,15 +105,22 @@ export  class TableComponent extends TableBaseService implements OnChanges {
 
 
   closeModal(param: any) {
-    this.isVisible = false;
     // 点击确定, 进行数据请求
     if (param.modal) {
       const url=`${this.baseUrl}/${this.saveUrl}`;
       this.http.post<any>(url, {...this.inputDto})
       .subscribe((response)=>{
-        // 重新加载列表数据
-        this.getTableStructData(this.tableJsonData.action.dto, this.tableUrl)
+        if (response.errorList.length > 0) {
+          this.errorList = response.errorList;
+        } else {
+          this.isVisible = false;
+          this.errorList = [];
+          // 重新加载列表数据
+          this.getTableStructData(this.tableJsonData.action.dto, this.tableUrl)
+        }
       })
+    } else {
+      this.isVisible = false;
     }
   }
 

@@ -39,17 +39,6 @@
                 (numberOuter)="numberChange($event)">
                  <kf-input-title [title]="field.label"></kf-input-title>
               </kf-input-number>
-
-              <!-- <div >
-                <div class="text-danger"
-                  *ngIf="validateForm.controls['order']?.invalid &&
-                  (validateForm.controls['order']?.dirty || validateForm.controls['order']?.touched)">
-                  <ng-container *ngIf="
-                  validateForm.controls['order']?.errors.allowableFormat">
-                    请输入正数
-                  </ng-container>
-                </div>
-              </div> -->
             </ng-container>
             <!-- string -->
             <ng-container *ngSwitchCase="1">
@@ -153,6 +142,16 @@
       <ng-container *ngSwitchCase="2">
 
       </ng-container>
+
+      <!-- 表单组: Group -->
+      <ng-container *ngSwitchCase="3">
+        <kf-form [fields]="field.fields" [inputDto]="inputDto"></kf-form>
+      </ng-container>
+
+      <!-- 编辑器: MarkDown -->
+      <ng-container *ngSwitchCase="4">
+      </ng-container>
+
 
     </ng-container>
   </ng-container>

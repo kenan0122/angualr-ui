@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ErrorComponent implements OnInit {
   @Input() title: string = '';
-  @Input() info: string = '不能为空'
+  @Input() info: string = '不能为空';
   @Input() error$!: BehaviorSubject<boolean>;
   constructor() { }
 

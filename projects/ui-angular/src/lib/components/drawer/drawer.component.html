@@ -1,0 +1,19 @@
+<div class="kf-drawer">
+  <nz-drawer
+    nzWrapClassName="vertical-right-drawer"
+    [nzBodyStyle]="{padding: 0,overflow: 'auto'}"
+    [nzWidth]="860"
+    [nzClosable]="false"
+    [nzVisible]="visible"
+    nzPlacement="right"
+    [nzTitle]="nzDrawerTitle"
+    (nzOnClose)="close()">
+    <ng-template #nzDrawerTitle>
+      <!-- 标题 -->
+    </ng-template>
+    <ng-container *nzDrawerContent>
+      <!--插槽/占位 -->
+      <ng-container *ngTemplateOutlet="drawerTemplate; context: {}"></ng-container>
+    </ng-container>
+  </nz-drawer>
+</div>

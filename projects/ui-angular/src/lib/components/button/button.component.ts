@@ -29,7 +29,6 @@ import { CoerceBooleanProperty } from '../../utils/coerce/coerce-boolean';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
-  @Input() promise?: Promise<any>;
   @Input() type: string = 'button';
   /** 需要通过按钮向外传递的数据 */
   @Input() data: any;
@@ -38,7 +37,7 @@ export class ButtonComponent {
 
   @Input()
   @CoerceBooleanProperty()
-  disabled = false;
+  disabled: boolean = false;
 
   @ViewChild('btn')
   btn!: ElementRef;

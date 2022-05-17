@@ -2,7 +2,6 @@
   <kf-table
     *ngIf="tableJsonData"
     [data]="tableData"
-    [api]="baseUrl"
     [jsonData]="tableJsonData"
     [reLoad]="reLoad"
     [customTemplate]="customTpl"
@@ -47,5 +46,6 @@
   [isVisible]="isVisible"
   [jsonData]="formsJsonData"
   [inputDto]="inputDto"
+  [infoList]="errorList"
   (modalOuter)="closeModal($event)">
 </kf-modal>

@@ -15,7 +15,7 @@ export class FieldComponent {
   baseUrl: string = environment.apis.default.url;
   reLoad: any = {};
 
-  jsonUrl: string = 'api/Paradigm/fields/table-config-scheme';
+  jsonUrl: string = 'api/Paradigm/fields/table-config';
   url: string = 'api/Paradigm/fields/page';
   deleteUrl: string = 'api/Paradigm/fields/{0}';
   // 编辑/添加表单json
@@ -24,7 +24,7 @@ export class FieldComponent {
   saveUrl: string = 'api/Paradigm/fields/save-field';
 
   checkIdLen:number = 0;
-
+  visible: boolean = false;
 
   constructor(public http:HttpClient, private message: NzMessageService) { }
 
@@ -37,6 +37,14 @@ export class FieldComponent {
       this.message.success('删除成功');
       this.reLoad = {};
     })
+  }
+
+  grantBtn(param: any) {
+    this.visible = true;
+  }
+
+  close() {
+    this.visible = false;
   }
 
 }

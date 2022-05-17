@@ -1,1 +1,8 @@
+<kf-upload
+  [required]="true"
+  ngModel
+  [name]="'file'"
+  [ngModelOptions]="{name: 'file'}"
+  [(ngModel)]="fileArray"
+  (fileOuter)="uploadFile($event)"></kf-upload>
 <router-outlet ></router-outlet>

@@ -2,26 +2,22 @@ import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'kf-from',
-  templateUrl: './from.component.html',
-  styleUrls: ['./from.component.scss']
+  selector: 'kf-form',
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.scss']
 })
-export class FromComponent implements AfterViewInit {
+export class FormComponent implements AfterViewInit {
   @ViewChild('validateForm') form!: NgForm;
 
   /** 表单数据 */
   @Input() fields: any[] = [];
   /** 填充数据的dto */
   @Input() inputDto: any;
-  /** 展示控件名称 */
-  @Input() showInputName: boolean = true;
   @Input() size: any;
   @Input() class: string = '';
 
-  @Output() searchOuter = new EventEmitter();
   @Output() selectOuter = new EventEmitter();
   @Output() initOuter = new EventEmitter();
-  @Output() radioOuter = new EventEmitter();
 
   // 正则表达式
   orderRex = '^[0-9]*$';

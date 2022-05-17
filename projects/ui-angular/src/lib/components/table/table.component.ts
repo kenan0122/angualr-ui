@@ -8,20 +8,10 @@ import {
   EventEmitter,
   Input,
   OnChanges,
-  OnInit,
   Output,
   SimpleChanges,
   TemplateRef,
 } from '@angular/core';
-import { NzTableQueryParams } from 'ng-zorro-antd/table';
-import { isUndefinedOrEmptyString } from '../../utils';
-
-interface PagedResult<T> {
-  totalCount: number;
-  items: T[];
-}
-
-type Params = HttpParams | { [param: string]: any };
 
 @Component({
   selector: 'kf-table',
@@ -29,7 +19,6 @@ type Params = HttpParams | { [param: string]: any };
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent implements OnChanges {
-  @Input() api: string = '';
   @Input() reLoad!: object;
   /** 表格json数据 */
   @Input() jsonData: any;
@@ -42,8 +31,6 @@ export class TableComponent implements OnChanges {
   @Input() pageSize: number = 2;
   // 根据传过来的字段, 判断为false禁用复选框, true可选复选框
   @Input() disabledProp: string = '';
-  // 发送空数据
-  @Input() sendNullsAsQueryParam: boolean = false;
 
   @Input() customTemplate!: TemplateRef<any>;
   @Input() btnTemplate!: TemplateRef<any>;

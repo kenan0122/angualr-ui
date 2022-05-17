@@ -13,7 +13,7 @@ export class ParadigmComponent implements OnInit {
   baseUrl: string = environment.apis.default.url;
   reLoad: any = null;
 
-  jsonUrl: string = 'api/Paradigm/paradigms/table-config-scheme';
+  jsonUrl: string = 'api/Paradigm/paradigms/table-config';
   url: string = 'api/Paradigm/paradigms/page';
   deleteUrl: string = 'api/Paradigm/paradigms/{0}';
   // 编辑/添加表单json

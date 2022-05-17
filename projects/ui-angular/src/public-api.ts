@@ -41,8 +41,8 @@ export * from './lib/components/form/form-page/form-page.component';
 export * from './lib/components/tabs/tabs.module';
 export * from './lib/components/tabs/tabs.component';
 
-export *  from './lib/components/form/from/from.module';
-export *  from './lib/components/form/from/from.component';
+export *  from './lib/components/form/form/form.module';
+export *  from './lib/components/form/form/form.component';
 
 export * from './lib/components/list/list.module';
 export * from './lib/components/list/list.component';
@@ -56,6 +56,12 @@ export *  from './lib/components/table/table.component';
 export *  from './lib/components/modal/modal.module';
 export *  from './lib/components/modal/modal.component';
 
-export * from './/lib/components/input/input-number/input-number.module';
-export * from './/lib/components/input/input-number/input-number.component';
+export * from './lib/components/input/input-number/input-number.module';
+export * from './lib/components/input/input-number/input-number.component';
+
+export * from './lib/components/upload/upload.module';
+export * from './lib/components/upload/upload.component';
+
+export * from './lib/components/drawer/drawer.module';
+export * from './lib/components/drawer/drawer.component';
 

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'kf-modal',
@@ -10,8 +11,11 @@ export class ModalComponent implements OnInit {
   @Input() jsonData: any;
   @Input() inputDto: any;
   @Input() displayFooter: boolean = false;
+  @Input() infoList: any[] = [];
 
   @Output() modalOuter = new EventEmitter();
+
+  readonly error$ = new BehaviorSubject(true);
 
   constructor() { }
 

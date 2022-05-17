@@ -1,6 +1,6 @@
 <div class="kf-table">
   <!-- 搜索 -->
-  <kf-from
+  <kf-form
     *ngIf="jsonData.search.fields"
     #formChild
     class="kf-items-start"
@@ -8,7 +8,7 @@
     [inputDto]="jsonData.action.dto"
   >
     <kf-button style="width: 100px" (btnOuter)="search()">查询</kf-button>
-  </kf-from>
+  </kf-form>
 
   <!-- 按钮数组 -->
   <!-- <ng-content select="[buttons]" ></ng-content> -->

@@ -1,3 +1,4 @@
+import { ErrorModule } from './../error/error.module';
 import { FormPageModule } from './../form/form-page/form-page.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,8 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     FormPageModule,
-    NzModalModule
-
+    NzModalModule,
+    ErrorModule
   ]
 })
 export class ModalModule { }

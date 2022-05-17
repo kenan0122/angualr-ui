@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormPageComponent } from './form-page.component';
 import { TabsModule } from '../../tabs/tabs.module';
-import { FromModule } from '../from/from.module';
+import { FormModule } from '../form/form.module';
 
 
 @NgModule({
@@ -13,7 +13,7 @@ import { FromModule } from '../from/from.module';
     CommonModule,
     TabsModule,
     ButtonModule,
-    FromModule
+    FormModule
   ]
 })
 export class FormPageModule { }

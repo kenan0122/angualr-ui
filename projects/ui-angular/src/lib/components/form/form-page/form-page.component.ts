@@ -1,6 +1,11 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
+export interface FormBtn {
+  cancel: boolean;
+  promise: boolean;
+}
+
 @Component({
   selector: 'kf-form-page',
   templateUrl: './form-page.component.html',
@@ -13,7 +18,7 @@ export class FormPageComponent implements OnInit {
   @Input() inputDto: any;
   /** 按钮的隐藏/显示 */
   @Input()
-  visibleBtn = {
+  visibleBtn: FormBtn = {
     cancel: true,
     promise: true
   }
@@ -34,7 +39,6 @@ export class FormPageComponent implements OnInit {
 
   // 提交数据
   click() {
-    // /console.log('form-page', this.inputDto);
     this.formPageOuter.emit({modal: true});
   }
 

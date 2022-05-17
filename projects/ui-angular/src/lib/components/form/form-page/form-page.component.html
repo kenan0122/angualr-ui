@@ -1,14 +1,16 @@
 <div class="kf-form-page" *ngIf="forms">
   <kf-tabs [tabs]="forms.tabs" [tabsTemplate]="slotTpl"> </kf-tabs>
   <ng-template #slotTpl let-tabIndex>
-    <kf-from
+    <kf-form
       *ngIf="forms.tabs[tabIndex].fields"
       #formChild
       [fields]="forms.tabs[tabIndex].fields"
       [inputDto]="inputDto"
       (initOuter)="initFormData($event)"
-    ></kf-from>
+    ></kf-form>
   </ng-template>
+
+  <ng-content></ng-content>
 
   <div class="grid-column-center">
     <kf-button

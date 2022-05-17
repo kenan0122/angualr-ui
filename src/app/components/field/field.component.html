@@ -8,6 +8,7 @@
   [saveUrl]="saveUrl"
   [checkIdLen]="checkIdLen"
   [tableTopTemplate]="topTpl"
+  [extraBtnTemplate]="operationTpl"
   >
 </app-table>
 
@@ -18,4 +19,25 @@
     批量删除
   </kf-button>
 </ng-template>
+
+<ng-template #operationTpl  let-model>
+  <kf-button
+    style="width: 100px;"
+    (btnOuter)="grantBtn(model)">
+    授权
+  </kf-button>
+</ng-template>
+
+
+<kf-drawer
+[drawerTemplate]="drawerTpl"
+[visible]="visible"
+(closeOuter)="close()">
+  <ng-template #drawerTpl >
+    <ng-container *ngIf="visible">
+      授权列表
+      <!-- <app-grant-paradigm [id]="currentGrantId"></app-grant-paradigm> -->
+    </ng-container>
+  </ng-template>
+</kf-drawer>
 
