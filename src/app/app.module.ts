@@ -9,20 +9,22 @@ import { HttpClientModule } from '@angular/common/http'
 import { AppComponent } from './app.component';
 import { TableComponent } from './components/table/table.component';
 import { FormComponent } from './components/form/form.component';
-
-
 // import { UiAngular } from '@kingfar/ui-angular';
 
 import { UiAngular } from 'projects/ui-angular/src/public-api';
+
 import { FieldComponent } from './components/field/field.component';
 import { ParadigmComponent } from './components/paradigm/paradigm.component';
+import { EditExperimentComponent } from './components/paradigm/edit-experiment/edit-experiment.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     FormComponent,
     TableComponent,
     FieldComponent,
-    ParadigmComponent
+    ParadigmComponent,
+    EditExperimentComponent
   ],
   imports: [
     CommonModule,

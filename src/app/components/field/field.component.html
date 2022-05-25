@@ -1,11 +1,6 @@
 <app-table
   [reLoad]="reLoad"
-  [tableJsonUrl]="jsonUrl"
-  [tableUrl]="url"
-  [deleteUrl]="deleteUrl"
-  [formJsonUrl]="formJsonUrl"
-  [formUrl]="formUrl"
-  [saveUrl]="saveUrl"
+  [jsonUrlObj]="jsonUrlObj"
   [checkIdLen]="checkIdLen"
   [tableTopTemplate]="topTpl"
   [extraBtnTemplate]="operationTpl"
@@ -22,7 +17,6 @@
 
 <ng-template #operationTpl  let-model>
   <kf-button
-    style="width: 100px;"
     (btnOuter)="grantBtn(model)">
     授权
   </kf-button>

@@ -1,4 +1,4 @@
-import { HttpClient} from '@angular/common/http';
+import { JsonUrlDto } from './../../ui-config/type/base';
 import { Component, EventEmitter, Injector, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { template } from 'projects/ui-angular/src/lib/utils';
@@ -18,18 +18,19 @@ export  class TableComponent extends TableBaseService implements OnChanges {
 
   @Input() checkIdLen: number = 0;
   @Input() reLoad!: object;
+  @Input() jsonUrlObj!: JsonUrlDto;
 
-  // 每个表格json的url
-  @Input() tableJsonUrl: string = '';
-  // 请求表格数据的url
-  @Input() tableUrl: string = '';
-  // 请求删除的url
-  @Input() deleteUrl: string = '';
-  // 每个表单json的url
-  @Input() formJsonUrl: string = '';
-  // 请求表单数据的url
-  @Input() formUrl: string = '';
-  @Input() saveUrl: string = '';
+  // // 每个表格json的url
+  // @Input() tableJsonUrl: string = '';
+  // // 请求表格数据的url
+  // @Input() tableUrl: string = '';
+  // // 请求删除的url
+  // @Input() deleteUrl: string = '';
+  // // 每个表单json的url
+  // @Input() formJsonUrl: string = '';
+  // // 请求表单数据的url
+  // @Input() formUrl: string = '';
+  // @Input() saveUrl: string = '';
 
   @Output() switchOuter = new EventEmitter();
 
@@ -56,15 +57,19 @@ export  class TableComponent extends TableBaseService implements OnChanges {
         }
       } else {
         // 没有json数据之前, 请求数据
-        this.getTableJsonData(this.tableJsonUrl, this.tableUrl);
+        this.getTableJsonData(this.jsonUrlObj.tableJsonUrl,this.jsonUrlObj.tableDataUrl);
       }
 
     }
   }
 
+  reLoadData(){
+    this.getTableStructData(this.tableJsonData.action.dto, this.jsonUrlObj.tableDataUrl)
+  }
+
   // 删除
   delete(param:any) {
-    const urlStr = template(this.deleteUrl, param.id)
+    const urlStr = template(this.jsonUrlObj.deleteJsonUrl, param.id)
     const url = `${this.baseUrl}/${urlStr}`;
     this.http.delete<any>(url)
     .subscribe((response)=>{
@@ -78,24 +83,31 @@ export  class TableComponent extends TableBaseService implements OnChanges {
     this.switchOuter.emit(param)
   }
 
-  editOrAdd(param?: any) {
-    const url=`${this.baseUrl}/${this.formJsonUrl}`;
-    this.http.post<any>(url, {})
-    .subscribe((response)=>{
-      if (param) {
-        // 编辑
-        this.getEditData(param.id);
-      } else {
-        // 添加
-        this.inputDto = response.action.dto;
-      }
+  add() {
+    this.requestFormJson().subscribe((response) => {
+      this.inputDto = response.action.dto;
       this.formsJsonData = response;
-      this.isVisible = true;
+      this.isVisibleModal = true;
     })
   }
 
+  edit(param: any) {
+    this.requestFormJson().subscribe((response) => {
+      this.getEditData(param.id);
+      this.formsJsonData = response;
+      this.isVisibleModal = true;
+    })
+  }
+
+  requestFormJson() {
+    const url=`${this.baseUrl}/${this.jsonUrlObj.formJsonUrl}`;
+    const api = this.http.post<any>(url, {});
+
+    return api;
+  }
+
   getEditData(id: any) {
-    const urlStr = template(this.formUrl, id)
+    const urlStr = template(this.jsonUrlObj.formDataUrl, id)
     const url = `${this.baseUrl}/${urlStr}`;
 
     this.http.get<object>(url).subscribe (response =>{
@@ -107,20 +119,19 @@ export  class TableComponent extends TableBaseService implements OnChanges {
   closeModal(param: any) {
     // 点击确定, 进行数据请求
     if (param.modal) {
-      const url=`${this.baseUrl}/${this.saveUrl}`;
+      const url=`${this.baseUrl}/${this.jsonUrlObj.saveUrl}`;
       this.http.post<any>(url, {...this.inputDto})
       .subscribe((response)=>{
-        if (response.errorList.length > 0) {
+        if (response.errorList && response.errorList.length > 0) {
           this.errorList = response.errorList;
         } else {
-          this.isVisible = false;
+          this.isVisibleModal = false;
           this.errorList = [];
-          // 重新加载列表数据
-          this.getTableStructData(this.tableJsonData.action.dto, this.tableUrl)
+          this.reLoadData();
         }
       })
     } else {
-      this.isVisible = false;
+      this.isVisibleModal = false;
     }
   }
 
@@ -128,7 +139,7 @@ export  class TableComponent extends TableBaseService implements OnChanges {
   tableChange(pageNumber: number) {
     // 重新存储当前页数
     this.pageNumber = pageNumber;
-    this.getTableStructData(this.tableJsonData.action.dto, this.tableUrl)
+    this.reLoadData();
   }
 
   // 跳转页数

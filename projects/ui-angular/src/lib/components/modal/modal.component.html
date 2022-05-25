@@ -7,7 +7,7 @@
       <div  *ngIf="infoList.length > 0">
         <kf-error *ngFor="let item of infoList"
           [error$]="error$"
-          [title]="item.lable+':'"
+          [title]="item.label+':'"
           [info]="item.msg">
         </kf-error>
       </div>

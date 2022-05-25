@@ -44,7 +44,6 @@ const modules = [
   InputNumberModule,
   UploadModule,
   DrawerModule
-  // DirectivesModule
 ]
 @NgModule({
   imports: [

@@ -15,7 +15,7 @@
     <div class="grid-column-start">
       <kf-button
         style="width: 100px;"
-        (btnOuter)="editOrAdd()">
+        (btnOuter)="add()">
         添加
       </kf-button>
       <ng-container *ngTemplateOutlet="tableTopTemplate; context: {$implicit: ids}"></ng-container>
@@ -34,7 +34,7 @@
       <kf-button
         buttonType="button--danger"
         buttonClass="ml-10"
-        (btnOuter)="editOrAdd(model.data)">
+        (btnOuter)="edit(model.data)">
         编辑
       </kf-button>
       <ng-container *ngTemplateOutlet="extraBtnTemplate; context: {$implicit: model.data}"></ng-container>
@@ -43,7 +43,7 @@
 </div>
 
 <kf-modal *ngIf="inputDto"
-  [isVisible]="isVisible"
+  [isVisible]="isVisibleModal"
   [jsonData]="formsJsonData"
   [inputDto]="inputDto"
   [infoList]="errorList"

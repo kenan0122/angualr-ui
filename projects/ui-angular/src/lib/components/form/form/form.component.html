@@ -3,7 +3,7 @@
   autocomplete="off"
   [ngClass]="class">
 
-  <ng-container *ngFor="let field of fields">
+  <ng-container *ngFor="let field of fields;let i = index">
     <ng-container [ngSwitch]="field.type">
       <!-- 文本: number, string, date;  文本域: textarea-->
       <ng-container *ngSwitchCase="0">
@@ -11,7 +11,7 @@
         <ng-container *ngIf="field.rows > 1;else textBlock">
           <kf-textarea
             ngModel
-            [name]="field.key"
+            [name]="field.key + i"
             [ngModelOptions]="{name: field.key}"
             [(ngModel)]="inputDto[field.key]"
             [title]="field.label"
@@ -29,7 +29,7 @@
             <ng-container *ngSwitchCase="0">
               <kf-input-number
                 ngModel
-                [name]="field.key"
+                [name]="field.key + i"
                 [title]="field.label"
                 [placeholder]="field.placeholder"
                 [ngModelOptions]="{name: field.key}"
@@ -44,7 +44,7 @@
             <ng-container *ngSwitchCase="1">
               <kf-input-text
                 ngModel
-                [name]="field.key"
+                [name]="field.key + i"
                 [ngModelOptions]="{name: field.key}"
                 [(ngModel)]="inputDto[field.key]"
                 [placeholder]="field.placeholder"
@@ -60,7 +60,7 @@
             <ng-container *ngSwitchCase="2">
               <kf-input-date
                 ngModel
-                [name]="field.key"
+                [name]="field.key + i"
                 [placeholder]="field.placeholder"
                 [ngModelOptions]="{name: field.key}"
                 [(ngModel)]="inputDto[field.key]"
@@ -84,7 +84,7 @@
             <ng-container *ngIf="field.isMulti; else checkBlock">
               <kf-checkbox-group
                 ngModel
-                [name]="field.key"
+                [name]="field.key + i"
                 [ngModelOptions]="{name: field.key}"
                 [(ngModel)]="inputDto[field.key]"
                 [required]="field.isRequired"
@@ -109,7 +109,7 @@
           <ng-container *ngSwitchCase="1">
             <kf-select
               ngModel
-              [name]="field.key"
+              [name]="field.key + i"
               [ngModelOptions]="{name: field.key}"
               [(ngModel)]="inputDto[field.key]"
               [size]="size"
@@ -126,7 +126,7 @@
           <ng-container *ngSwitchCase="2">
             <kf-list
               ngModel
-              [name]="field.key"
+              [name]="field.key + i"
               [ngModelOptions]="{name: field.key}"
               [options]="field.options"
               [(ngModel)]="inputDto[field.key]"
@@ -145,14 +145,19 @@
 
       <!-- 表单组: Group -->
       <ng-container *ngSwitchCase="3">
-        <kf-form [fields]="field.fields" [inputDto]="inputDto"></kf-form>
+          <kf-form
+            [fields]="field.fields"
+            [inputDto]="inputDto[field.key]">
+          </kf-form>
       </ng-container>
 
       <!-- 编辑器: MarkDown -->
       <ng-container *ngSwitchCase="4">
       </ng-container>
 
-
+      <!-- 编辑器: 封面内容 -->
+      <ng-container *ngSwitchCase="5">
+      </ng-container>
     </ng-container>
   </ng-container>
 

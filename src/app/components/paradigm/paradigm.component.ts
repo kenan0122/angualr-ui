@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { JsonUrlDto } from 'src/app/ui-config/type/base';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -13,15 +15,19 @@ export class ParadigmComponent implements OnInit {
   baseUrl: string = environment.apis.default.url;
   reLoad: any = null;
 
-  jsonUrl: string = 'api/Paradigm/paradigms/table-config';
-  url: string = 'api/Paradigm/paradigms/page';
-  deleteUrl: string = 'api/Paradigm/paradigms/{0}';
-  // 编辑/添加表单json
-  formJsonUrl: string = 'api/Paradigm/paradigms/form-config';
-  formUrl: string = 'api/Paradigm/paradigms/{0}/for-edit';
-  saveUrl: string = 'api/Paradigm/paradigms/save-paradigm';
+  jsonUrlObj:JsonUrlDto = {
+    tableJsonUrl: 'api/Paradigm/paradigms/table-config',
+    tableDataUrl: 'api/Paradigm/paradigms/page',
+    deleteJsonUrl: 'api/Paradigm/paradigms/{0}',
+    formJsonUrl: 'api/Paradigm/paradigms/form-config',
+    formDataUrl: 'api/Paradigm/paradigms/{0}/for-edit',
+    saveUrl: 'api/Paradigm/paradigms/save-paradigm'
+  };
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private route: Router
+  ) { }
 
   ngOnInit() {
   }
@@ -34,6 +40,10 @@ export class ParadigmComponent implements OnInit {
     .subscribe((response)=>{
       this.reLoad = {};
     })
+  }
+
+  editParam(param: any) {
+    this.route.navigate(['/app/paradigm/experiment/' + param.id]);
   }
 
 }

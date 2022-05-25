@@ -12,6 +12,7 @@ import { TextareaModule } from '../../input/textarea/textarea.module';
 import { InputTextModule } from '../../input/input-text/input-text.module';
 import { InputDateModule } from '../../input/input-date/input-date.module';
 import { CheckboxGroupModule } from '../../input/checkbox/checkbox-group/checkbox-group.module';
+import { PipeModule } from '../../../pipe/pipe.module';
 
 
 
@@ -31,7 +32,8 @@ import { CheckboxGroupModule } from '../../input/checkbox/checkbox-group/checkbo
     RadioGroupModule,
     DirectivesModule,
     ListModule,
-    InputNumberModule
+    InputNumberModule,
+    PipeModule
   ]
 })
 export class FormModule { }

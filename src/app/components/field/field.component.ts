@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { TableConfigScheme } from 'src/app/ui-config/type/table';
+import { JsonUrlDto } from 'src/app/ui-config/type/base';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -15,13 +15,14 @@ export class FieldComponent {
   baseUrl: string = environment.apis.default.url;
   reLoad: any = {};
 
-  jsonUrl: string = 'api/Paradigm/fields/table-config';
-  url: string = 'api/Paradigm/fields/page';
-  deleteUrl: string = 'api/Paradigm/fields/{0}';
-  // 编辑/添加表单json
-  formJsonUrl: string = 'api/Paradigm/fields/form-config';
-  formUrl: string = 'api/Paradigm/fields/{0}/for-edit';
-  saveUrl: string = 'api/Paradigm/fields/save-field';
+  jsonUrlObj:JsonUrlDto = {
+    tableJsonUrl: 'api/Paradigm/fields/table-config',
+    tableDataUrl: 'api/Paradigm/fields/page',
+    deleteJsonUrl: 'api/Paradigm/fields/{0}',
+    formJsonUrl: 'api/Paradigm/fields/form-config',
+    formDataUrl: 'api/Paradigm/fields/{0}/for-edit',
+    saveUrl: 'api/Paradigm/fields/save-field'
+  };
 
   checkIdLen:number = 0;
   visible: boolean = false;

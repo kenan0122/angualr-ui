@@ -5,6 +5,7 @@ import { TableComponent } from './components/table/table.component';
 import { FormComponent } from './components/form/form.component';
 import { FieldComponent } from './components/field/field.component';
 import { ParadigmComponent } from './components/paradigm/paradigm.component';
+import { EditExperimentComponent } from './components/paradigm/edit-experiment/edit-experiment.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,9 @@ const routes: Routes = [
       },{
         path: 'paradigm',
         component: ParadigmComponent
+      },{
+        path: 'paradigm/experiment/:id',
+        component: EditExperimentComponent
       }
     ]
   }

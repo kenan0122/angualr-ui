@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { NgForm } from '@angular/forms';
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
-export class FormComponent implements AfterViewInit {
+export class FormComponent implements AfterViewInit, OnInit {
   @ViewChild('validateForm') form!: NgForm;
 
   /** 表单数据 */
@@ -23,6 +23,10 @@ export class FormComponent implements AfterViewInit {
   orderRex = '^[0-9]*$';
 
   constructor() { }
+
+  ngOnInit(): void {
+    console.log(777, this.fields,this.inputDto)
+  }
 
   ngAfterViewInit(): void {
      this.initOuter.emit(this.form);

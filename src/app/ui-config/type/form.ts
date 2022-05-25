@@ -60,6 +60,10 @@ export interface FileUploadConfigScheme extends FormFieldConfigSchemeBase {
   type: FormFieldType.FileUpload;
 }
 
+export interface QuestionCoverConfigScheme extends FormFieldConfigSchemeBase {
+
+}
+
 // 表单类型枚举
 export enum FormFieldType
 {
@@ -67,7 +71,8 @@ export enum FormFieldType
     Select,
     FileUpload,
     Group,
-    MarkDown
+    MarkDown,
+    QuestionCover
 }
 
 /** 文件类型 */

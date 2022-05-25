@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   apis: {
     default: {
-      url: 'http://192.168.1.229:8077',
+      url: 'http://192.168.1.229:8077',//'http://47.92.118.26:9098'
       rootNamespace: 'Kingfar.Square',
     }
   }

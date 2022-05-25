@@ -19,7 +19,7 @@ export abstract class TableBaseService {
   // 发送空数据
   sendNullsAsQueryParam: boolean = false;
   // 是否显示模态框
-  isVisible: boolean = false;
+  isVisibleModal: boolean = false;
 
   http!: HttpClient;
 

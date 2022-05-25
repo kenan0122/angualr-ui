@@ -36,6 +36,7 @@
             ],
             "styles": [
               "node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+              "@psylab/experiments/dist/assets/style.7cb73cad.css",
               "src/styles.scss"
             ],
             "scripts": []
