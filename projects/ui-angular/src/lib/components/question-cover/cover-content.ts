@@ -17,9 +17,13 @@ interface ICoverQuestionContent {
 }
 
 interface ICoverSingleContent {
-  options: string[];
+  options: OptionText[];
   // 选中项
   index: number;
+}
+
+interface OptionText {
+  text: string;
 }
 
 interface ICoverScaleContent {
@@ -28,22 +32,23 @@ interface ICoverScaleContent {
 }
 
 enum CoverQuestionType {
+  // 单选
   SingleChoice,
+  // 量表
   Scale
 }
 
 export function createDefaultCoverContent(version:number = 1): ICoverContent {
   const question:ICoverQuestionContent  = {
-    type: CoverQuestionType.SingleChoice,
+    type: CoverQuestionType.Scale,
     stem: '',
     scale: {
       value: -1
     },
     singleChoice: {
-      options: [],
+      options: [{text: ''},{text: ''}],
       index: -1
     }
-
   };
 
   return {

@@ -1,3 +1,5 @@
+import { TemplateCardModule } from './../../card/template-card/template-card.module';
+import { QuestionCoverModule } from './../../question-cover/question-cover.module';
 import { InputNumberModule } from '../../input/input-number/input-number.module';
 import { ListModule } from '../../list/list.module';
 import { RadioGroupModule } from '../../input/radio/radio-group/radio-group.module';
@@ -33,7 +35,9 @@ import { PipeModule } from '../../../pipe/pipe.module';
     DirectivesModule,
     ListModule,
     InputNumberModule,
-    PipeModule
+    PipeModule,
+    QuestionCoverModule,
+    TemplateCardModule
   ]
 })
 export class FormModule { }

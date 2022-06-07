@@ -7,3 +7,13 @@
 nz-table {
   margin-top: 0.5rem;
 }
+:host ::ng-deep {
+  .ant-switch {
+    background-color: rgba(0,0,0,.25);
+
+    &-checked {
+      background-color: #1890ff;
+    }
+  }
+}
+

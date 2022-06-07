@@ -3,18 +3,21 @@ import { ActivatedRoute } from '@angular/router';
 import {
   ConfigEditor,
   setPrimary,
-  setDefaultBackground
+  setDefaultBackground,
+  createEglServerApi
 } from '@psylab/experiments';
-import {range, randomColor, template } from "@psylab/utils";
-import { TableBaseService } from 'src/app/ui-config/service/table-base.service';
 
+import {range, randomColor, template } from "@psylab/utils";
+import { RequestService } from 'src/app/ui-config/service/request.service';
+import { IConfigPostDto, IDownloadFileInfo, IUploadFileInfo } from './experiment';
 
 @Component({
   selector: 'app-edit-param',
   templateUrl: './edit-experiment.component.html',
   styleUrls: ['./edit-experiment.component.less']
 })
-export class EditExperimentComponent extends TableBaseService implements OnInit {
+export class EditExperimentComponent extends RequestService implements OnInit {
+  private readonly _request = this.request.bind(this);
   paradigmId!: string;
   paradigmEditDto: any;
 
@@ -42,13 +45,16 @@ export class EditExperimentComponent extends TableBaseService implements OnInit 
   }
 
   getEditData(id: any) {
-    const urlStr = template('api/Paradigm/paradigms/{0}/for-edit', id)
-    const url = `${this.baseUrl}/${urlStr}`;
+    const url = template('/api/Paradigm/paradigms/{0}/exp-config', id)
 
-    this.http.get<object>(url).subscribe (response =>{
+    this.request({
+      method: 'GET',
+      url,
+    }).subscribe (response =>{
       this.paradigmEditDto = response;
       this.createModel();
-    })
+    });
+
   }
 
   createModel() {
@@ -58,33 +64,70 @@ export class EditExperimentComponent extends TableBaseService implements OnInit 
       isEmpty: true,
       isPublished: false,
       isReadonly: false,
-      name: this.paradigmEditDto.title,
+      name: this.paradigmEditDto.name,
       // 范式广场的模板id
       templateId: undefined,
       // 模板类型
-      type: this.paradigmEditDto.moduleType,
+      type: this.paradigmEditDto.type,
       // 试次类型
       blockFormTypes: this.paradigmEditDto.blockFormTypes || blockFormTypes,
     };
 
-	    //const api = createEglServerApi(this.paradigmId);
-
+	  const api = {
+      upload: this.upload,
+      download: this.download,
+      postConfigDto: this.postConfigDto,
+      that: this
+    }
 
     this.configEditor = new ConfigEditor({
       target: document.getElementById('experiment'),
       props: {
-        viewModel: {expDto:expDto1, api: null}
+        viewModel: {expDto:expDto1, api}
       }
     });
-    // app.$on('save',this.onSave);
-    // app.$on('preview', this.onPreview);
   }
 
-  onSave(e:any) {
-   this.configEditor.preview()
+  save(e:any) {
+    this.configEditor.save();
   }
 
   preview(e:any) {
-    this.configEditor.preview()
+    this.configEditor.preview();
   }
+
+  async upload(file: IUploadFileInfo): Promise<boolean> {
+    this['that']._request({
+      method: 'POST',
+      url: '/api/blob-storing/paradigm/upload',
+      body: file
+    }).subscribe((res: any) => {
+      console.log(999, res)
+    });
+
+    return true;
+  }
+
+  async download(fileName: string, folder: string): Promise<IDownloadFileInfo> {
+    return {
+      name: fileName,
+      mimeType: '',
+      content: ''
+    };
+  }
+
+  async postConfigDto(configDto: IConfigPostDto): Promise<boolean> {
+    console.log('保存', configDto)
+    // await this.request({
+    //   method: 'PUT',
+    //   url: '/api/Paradigm/paradigms/config',
+    //   body: configDto
+    // }).subscribe(res => {
+    //   console.log('保存', res)
+    // });
+
+    return false;
+  }
+
+
 }

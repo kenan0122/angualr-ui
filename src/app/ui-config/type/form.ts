@@ -61,7 +61,7 @@ export interface FileUploadConfigScheme extends FormFieldConfigSchemeBase {
 }
 
 export interface QuestionCoverConfigScheme extends FormFieldConfigSchemeBase {
-
+  type: FormFieldType.QuestionCover;
 }
 
 // 表单类型枚举

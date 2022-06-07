@@ -1,0 +1,17 @@
+@import '../../styles/forms/inputs.scss';
+
+.kf-cover {
+  @extend .kf-form-item;
+}
+
+.ant-radio-group {
+  display: block;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
+.mr-8 {
+  margin-right: 2rem;
+}

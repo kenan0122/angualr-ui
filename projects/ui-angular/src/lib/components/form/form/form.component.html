@@ -155,8 +155,29 @@
       <ng-container *ngSwitchCase="4">
       </ng-container>
 
-      <!-- 编辑器: 封面内容 -->
+      <!-- 封面内容: QuestionCover -->
       <ng-container *ngSwitchCase="5">
+        <kf-question-cover
+          ngModel
+          [name]="field.key + i"
+          [ngModelOptions]="{name: field.key}"
+          [(ngModel)]="inputDto[field.key]"
+          (coverOuter)="coverChange()">
+        </kf-question-cover>
+      </ng-container>
+
+      <!-- 空模板: EmptyTemplate -->
+      <ng-container *ngSwitchCase="6">
+        <kf-template-card
+          ngModel
+          [name]="field.key + i"
+          [options]="field.options"
+          [ngModelOptions]="{name: field.key}"
+          [required]="field.isRequired"
+          [(ngModel)]="inputDto[field.key]"
+          (cardOuter)="templateCardChange()">
+          <kf-input-title [title]="field.label"></kf-input-title>
+        </kf-template-card>
       </ng-container>
     </ng-container>
   </ng-container>

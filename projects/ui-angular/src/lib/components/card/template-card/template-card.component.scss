@@ -1,0 +1,15 @@
+@import '../../../styles/forms/inputs.scss';
+@import '../../../styles/colors/variables.scss';
+
+.kf-template-card {
+  @extend .kf-form-item;
+}
+
+nz-card{
+  cursor: pointer;
+  border: 1px solid $color-light-grey-050;
+
+  &:hover {
+    border-color: $color-blue;
+  }
+}

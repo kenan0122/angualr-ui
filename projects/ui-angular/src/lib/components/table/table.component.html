@@ -7,12 +7,18 @@
     [fields]="jsonData.search.fields"
     [inputDto]="jsonData.action.dto"
   >
-    <kf-button style="width: 100px" (btnOuter)="search()">查询</kf-button>
+    <kf-button
+      style="width: 6.25rem; height: 2.5rem"
+      (btnOuter)="search()">
+      查询
+    </kf-button>
   </kf-form>
 
   <!-- 按钮数组 -->
   <!-- <ng-content select="[buttons]" ></ng-content> -->
-  <ng-container *ngTemplateOutlet="btnTemplate; context: {$implicit: setOfCheckedId}"></ng-container>
+  <ng-container
+    *ngTemplateOutlet="btnTemplate; context: { $implicit: setOfCheckedId }"
+  ></ng-container>
 
   <nz-table
     *ngIf="data"
@@ -27,24 +33,25 @@
     [nzShowPagination]="jsonData.enablePagination"
     (nzPageIndexChange)="pageNumberChange($event)"
   >
-
     <thead>
       <tr>
-        <th *ngIf="jsonData.multiSelect"
+        <th
+          *ngIf="jsonData.multiSelect"
           [nzChecked]="checked"
           [nzDisabled]="disabledCheck"
           [nzIndeterminate]="indeterminate"
-          (nzCheckedChange)="onAllChecked($event)">
-        </th>
+          (nzCheckedChange)="onAllChecked($event)"
+        ></th>
 
-        <ng-container *ngFor="let column of jsonData.columns" >
-          <th  *ngIf="column.isShow"
+        <ng-container *ngFor="let column of jsonData.columns">
+          <th
+            *ngIf="column.isShow"
             [nzColumnKey]="column.key"
             [nzSortFn]="true"
             [nzShowSort]="column.isSort"
             (nzSortOrderChange)="sortOderChange(column.key, $event)"
           >
-            {{column.label}}
+            {{ column.label }}
           </th>
         </ng-container>
 
@@ -53,7 +60,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let data of basicTable.data; let i = index">
-        <td *ngIf="jsonData.multiSelect"
+        <td
+          *ngIf="jsonData.multiSelect"
           [nzChecked]="setOfCheckedId.has(data.id)"
           [nzDisabled]="data[disabledProp]"
           (nzCheckedChange)="onItemChecked(data.id, $event)"
@@ -67,7 +75,7 @@
             </ng-container>
             <!-- 下拉/枚举进行值转换 -->
             <ng-container *ngSwitchCase="1">
-              {{ lg(data[column.key], column.options)}}
+              {{ lg(data[column.key], column.options) }}
             </ng-container>
             <!-- Switch -->
             <ng-container *ngSwitchCase="2">
@@ -76,19 +84,28 @@
                 [nzUnCheckedChildren]="unCheckedTemplate"
                 [(ngModel)]="data[column.key]"
                 [nzControl]="true"
-                (click)="switchClick(data, column.action, column.key)">
+                (click)="switchClick(data, column.action, column.key)"
+              >
               </nz-switch>
-              <ng-template #checkedTemplate>{{lg(true, column.options)}}</ng-template>
-              <ng-template #unCheckedTemplate>{{lg(false, column.options)}}</ng-template>
+              <ng-template #checkedTemplate>{{
+                lg(true, column.options)
+              }}</ng-template>
+              <ng-template #unCheckedTemplate>{{
+                lg(false, column.options)
+              }}</ng-template>
             </ng-container>
           </ng-container>
         </td>
         <td class="text-center">
           <!--插槽/占位 -->
-          <ng-container *ngTemplateOutlet="customTemplate; context: {$implicit: {data, i}}"></ng-container>
+          <ng-container
+            *ngTemplateOutlet="
+              customTemplate;
+              context: { $implicit: { data: this.data, i: this.i } }
+            "
+          ></ng-container>
         </td>
       </tr>
     </tbody>
   </nz-table>
 </div>
-

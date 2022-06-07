@@ -1,0 +1,17 @@
+<app-table
+  [reLoad]="reLoad"
+  [jsonUrlObj]="jsonUrlObj"
+  [checkIdLen]="checkIdLen"
+  [tableTopTemplate]="topTpl"
+  >
+</app-table>
+
+<ng-template #topTpl  let-ids>
+  <kf-button
+    style="width: 6.25rem;height: 2.5rem;"
+    (btnOuter)="deleteBatch(ids)">
+    批量删除
+  </kf-button>
+</ng-template>
+
+

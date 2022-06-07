@@ -16,6 +16,10 @@ import { UiAngular } from 'projects/ui-angular/src/public-api';
 import { FieldComponent } from './components/field/field.component';
 import { ParadigmComponent } from './components/paradigm/paradigm.component';
 import { EditExperimentComponent } from './components/paradigm/edit-experiment/edit-experiment.component';
+import { EditParadigmComponent } from './components/paradigm/edit-paradigm/edit-paradigm.component';
+import { DimensionComponent } from './components/dimension/dimension.component';
+import { PackageComponent } from './components/package/package.component';
+import { BlockFromTypeComponent } from './components/block-from-type/block-from-type.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,11 @@ import { EditExperimentComponent } from './components/paradigm/edit-experiment/e
     TableComponent,
     FieldComponent,
     ParadigmComponent,
-    EditExperimentComponent
+    EditExperimentComponent,
+    EditParadigmComponent,
+    DimensionComponent,
+    PackageComponent,
+    BlockFromTypeComponent
   ],
   imports: [
     CommonModule,

@@ -16,12 +16,12 @@ export class FieldComponent {
   reLoad: any = {};
 
   jsonUrlObj:JsonUrlDto = {
-    tableJsonUrl: 'api/Paradigm/fields/table-config',
-    tableDataUrl: 'api/Paradigm/fields/page',
-    deleteJsonUrl: 'api/Paradigm/fields/{0}',
-    formJsonUrl: 'api/Paradigm/fields/form-config',
-    formDataUrl: 'api/Paradigm/fields/{0}/for-edit',
-    saveUrl: 'api/Paradigm/fields/save-field'
+    tableJsonUrl: '/api/Paradigm/fields/table-config',
+    tableDataUrl: '/api/Paradigm/fields/page',
+    deleteJsonUrl: '/api/Paradigm/fields/{0}',
+    formJsonUrl: '/api/Paradigm/fields/form-config',
+    formDataUrl: '/api/Paradigm/fields/{0}/for-edit',
+    saveUrl: '/api/Paradigm/fields/save-field'
   };
 
   checkIdLen:number = 0;

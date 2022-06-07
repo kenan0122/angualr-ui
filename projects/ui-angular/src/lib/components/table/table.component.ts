@@ -28,7 +28,7 @@ export class TableComponent implements OnChanges {
   /** 当前页数 */
   @Input() pageNumber: number = 1;
   /** 每页展示的数据条数 */
-  @Input() pageSize: number = 2;
+  @Input() pageSize: number = 10;
   // 根据传过来的字段, 判断为false禁用复选框, true可选复选框
   @Input() disabledProp: string = '';
 

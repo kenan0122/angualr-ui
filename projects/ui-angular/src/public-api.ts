@@ -65,3 +65,14 @@ export * from './lib/components/upload/upload.component';
 export * from './lib/components/drawer/drawer.module';
 export * from './lib/components/drawer/drawer.component';
 
+export * from './lib/components/question-cover/question-cover.module';
+export * from './lib/components/question-cover/question-cover.component';
+
+export * from './lib/components/icon-button/icon-button.module';
+export * from './lib/components/icon-button/icon-button.component';
+
+export *  from './lib/components/icon/icon.module';
+export *  from './lib/components/icon/icon.component';
+
+export * from './lib/components/card/template-card/template-card.module';
+export * from './lib/components/card/template-card/template-card.component';

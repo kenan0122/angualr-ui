@@ -13,7 +13,7 @@ export class FormComponent implements AfterViewInit, OnInit {
   @Input() fields: any[] = [];
   /** 填充数据的dto */
   @Input() inputDto: any;
-  @Input() size: any;
+  @Input() size: any = 'large';
   @Input() class: string = '';
 
   @Output() selectOuter = new EventEmitter();
@@ -25,7 +25,6 @@ export class FormComponent implements AfterViewInit, OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(777, this.fields,this.inputDto)
   }
 
   ngAfterViewInit(): void {
@@ -63,6 +62,14 @@ export class FormComponent implements AfterViewInit, OnInit {
   }
 
   listChange() {
+    this.initOuter.emit(this.form);
+  }
+
+  coverChange() {
+    this.initOuter.emit(this.form);
+  }
+
+  templateCardChange() {
     this.initOuter.emit(this.form);
   }
 }

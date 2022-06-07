@@ -1,0 +1,7 @@
+@import '../../../styles/forms/inputs.scss';
+
+.kf-star {
+  @extend .kf-form-item;
+
+  display: flex;
+}

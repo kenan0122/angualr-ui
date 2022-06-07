@@ -29,7 +29,8 @@ export class FormPageComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   initFormData(param: NgForm) {
     setTimeout(() => {

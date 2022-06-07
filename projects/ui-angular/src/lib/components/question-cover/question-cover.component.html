@@ -1,7 +1,66 @@
 <div class="kf-cover" [ngClass]="flexDirection">
   <ng-content></ng-content>
 
-  <div>
+  <div *ngIf="coverContentDto.version === 1">
+    <kf-textarea
+      ngModel
+      name="instruction"
+      title="指导语"
+      [rows]="10"
+      [ngModelOptions]="{name: 'instruction'}"
+      [(ngModel)]="coverContentDto.instruction"
+      (textareaOuter)="textChange()">
+      <kf-input-title title="指导语"></kf-input-title>
+    </kf-textarea>
+    <ng-container *ngFor="let question of coverContentDto.questions; let i = index">
+      <div>
+        <kf-input-text
+          ngModel
+          title="题干"
+          placeholder="请输入题干"
+          [maxlength]="100"
+          [name]="'stem' + i"
+          [ngModelOptions]="{name: 'stem' + i}"
+          [(ngModel)]="question.stem"
+          (textOuter)="textChange()">
+            <kf-input-title title="题干"></kf-input-title>
+        </kf-input-text>
+
+        <!-- 单选 -->
+        <ng-container *ngIf="question.type === 0; else elseBlock">
+          <ng-container *ngFor="let option of question.singleChoice.options; let o = index">
+            <nz-radio-group [(ngModel)]="question.singleChoice.index">
+              <kf-input-text
+                ngModel
+                placeholder="请输入选项"
+                flexDirection="kf-justify-reverse-start"
+                [maxlength]="100"
+                [name]="'option' + i + o"
+                [ngModelOptions]="{name: 'option' + i + o}"
+                [(ngModel)]="option.text"
+                (textOuter)="textChange()">
+                <div class="kf-items-center mr-8">
+                  <kf-input-title title="正确答案"></kf-input-title>
+                  <label class="mr-2" nz-radio [nzValue]="o"></label>
+                </div>
+              </kf-input-text>
+            </nz-radio-group>
+          </ng-container>
+        </ng-container>
+
+        <!-- 量表 -->
+        <ng-template #elseBlock>
+          <kf-star
+            [name]="'start' + i"
+            [ngModelOptions]="{name: 'start' + i}"
+            [(ngModel)]="question.scale.value"
+            (starOuter)="textChange()"></kf-star>
+        </ng-template>
+
+      </div>
+
+    </ng-container>
+
   </div>
 </div>
 

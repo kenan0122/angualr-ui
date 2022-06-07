@@ -13,13 +13,12 @@
 
   <ng-template #btnTpl let-ids>
     <div class="grid-column-start">
-      <kf-button
-        style="width: 100px;"
+      <kf-button *ngIf="isEnableAddBtn"
+        style="width: 6.25rem;height: 2.5rem;"
         (btnOuter)="add()">
         添加
       </kf-button>
       <ng-container *ngTemplateOutlet="tableTopTemplate; context: {$implicit: ids}"></ng-container>
-
     </div>
   </ng-template>
 
@@ -31,7 +30,7 @@
         (btnOuter)="delete(model.data)">
         删除
       </kf-button>
-      <kf-button
+      <kf-button *ngIf="isEnableEditBtn"
         buttonType="button--danger"
         buttonClass="ml-10"
         (btnOuter)="edit(model.data)">

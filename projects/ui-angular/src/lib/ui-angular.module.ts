@@ -1,3 +1,4 @@
+import { TemplateCardModule } from './components/card/template-card/template-card.module';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { UiAngularComponent } from './ui-angular.component';
 
@@ -23,6 +24,9 @@ import { ModalModule } from './components/modal/modal.module';
 import { InputNumberModule } from './components/input/input-number/input-number.module';
 import { UploadModule } from './components/upload/upload.module';
 import { DrawerModule } from './components/drawer/drawer.module';
+import { QuestionCoverModule } from './components/question-cover/question-cover.module';
+import { IconButtonModule } from './components/icon-button/icon-button.module';
+import { IconModule } from './components/icon/icon.module';
 
 const modules = [
   ButtonModule,
@@ -43,7 +47,11 @@ const modules = [
   ModalModule,
   InputNumberModule,
   UploadModule,
-  DrawerModule
+  DrawerModule,
+  QuestionCoverModule,
+  IconModule,
+  IconButtonModule,
+  TemplateCardModule
 ]
 @NgModule({
   imports: [

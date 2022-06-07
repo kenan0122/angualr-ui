@@ -16,21 +16,11 @@ export  class TableComponent extends TableBaseService implements OnChanges {
   @Input() extraBtnTemplate!: TemplateRef<any>;
   @Input() tableTopTemplate!: TemplateRef<any>;
 
+  @Input() isEnableAddBtn: boolean = true;
+  @Input() isEnableEditBtn: boolean = true;
   @Input() checkIdLen: number = 0;
   @Input() reLoad!: object;
   @Input() jsonUrlObj!: JsonUrlDto;
-
-  // // 每个表格json的url
-  // @Input() tableJsonUrl: string = '';
-  // // 请求表格数据的url
-  // @Input() tableUrl: string = '';
-  // // 请求删除的url
-  // @Input() deleteUrl: string = '';
-  // // 每个表单json的url
-  // @Input() formJsonUrl: string = '';
-  // // 请求表单数据的url
-  // @Input() formUrl: string = '';
-  // @Input() saveUrl: string = '';
 
   @Output() switchOuter = new EventEmitter();
 
@@ -70,7 +60,7 @@ export  class TableComponent extends TableBaseService implements OnChanges {
   // 删除
   delete(param:any) {
     const urlStr = template(this.jsonUrlObj.deleteJsonUrl, param.id)
-    const url = `${this.baseUrl}/${urlStr}`;
+    const url = `${this.baseUrl}${urlStr}`;
     this.http.delete<any>(url)
     .subscribe((response)=>{
       this.message.success('删除成功');
@@ -100,7 +90,7 @@ export  class TableComponent extends TableBaseService implements OnChanges {
   }
 
   requestFormJson() {
-    const url=`${this.baseUrl}/${this.jsonUrlObj.formJsonUrl}`;
+    const url=`${this.baseUrl}${this.jsonUrlObj.formJsonUrl}`;
     const api = this.http.post<any>(url, {});
 
     return api;
@@ -108,9 +98,9 @@ export  class TableComponent extends TableBaseService implements OnChanges {
 
   getEditData(id: any) {
     const urlStr = template(this.jsonUrlObj.formDataUrl, id)
-    const url = `${this.baseUrl}/${urlStr}`;
+    const url = `${this.baseUrl}${urlStr}`;
 
-    this.http.get<object>(url).subscribe (response =>{
+    this.http.get<object>(url).subscribe(response =>{
       this.inputDto = response;
     })
   }
@@ -119,15 +109,15 @@ export  class TableComponent extends TableBaseService implements OnChanges {
   closeModal(param: any) {
     // 点击确定, 进行数据请求
     if (param.modal) {
-      const url=`${this.baseUrl}/${this.jsonUrlObj.saveUrl}`;
+      const url=`${this.baseUrl}${this.jsonUrlObj.saveUrl}`;
       this.http.post<any>(url, {...this.inputDto})
       .subscribe((response)=>{
-        if (response.errorList && response.errorList.length > 0) {
-          this.errorList = response.errorList;
-        } else {
+        if (response.success) {
           this.isVisibleModal = false;
           this.errorList = [];
           this.reLoadData();
+        } else {
+          this.errorList = response.error ? response.error.errorMessage : [];
         }
       })
     } else {

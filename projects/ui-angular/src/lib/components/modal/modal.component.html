@@ -1,4 +1,8 @@
-<nz-modal [(nzVisible)]="isVisible" nzTitle="Custom Modal Title" (nzOnCancel)="handleCancel()">
+<nz-modal
+  [nzWidth]="width"
+  [(nzVisible)]="isVisible"
+  nzTitle="Custom Modal Title"
+  (nzOnCancel)="handleCancel()">
   <div *nzModalContent>
     <kf-form-page
       [forms]="jsonData"

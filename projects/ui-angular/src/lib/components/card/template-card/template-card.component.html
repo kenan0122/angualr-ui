@@ -1,0 +1,19 @@
+<div
+  class="kf-template-card"
+  [class]="flexDirection">
+  <ng-content></ng-content>
+
+  <div class="kf-grid-cols-2">
+    <ng-container *ngFor="let option of options | keyvalue; let i = index">
+        <nz-card
+          style="width: 300px"
+          [style.border-color]="value === option.value['key'] ? '#22befb' : '#e9e9e9'"
+          [nzBorderless]="true"
+          [nzTitle]="option.key"
+          (click)="cardClick(option.value['key'])"
+        >
+          <p>{{ option.value["desc"] }}</p>
+        </nz-card>
+    </ng-container>
+  </div>
+</div>

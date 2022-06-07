@@ -1,0 +1,41 @@
+<app-table
+  [reLoad]="reLoad"
+  [jsonUrlObj]="jsonUrlObj"
+  [checkIdLen]="checkIdLen"
+  [extraBtnTemplate]="operationTpl"
+  >
+</app-table>
+
+<ng-template #operationTpl  let-model>
+  <kf-button
+    (btnOuter)="grantBtn(model)">
+    授权
+  </kf-button>
+  <kf-button
+    (btnOuter)="copy(model)">
+    复制
+  </kf-button>
+</ng-template>
+
+<kf-modal *ngIf="inputDto"
+  width="700px"
+  [isVisible]="isVisibleModal"
+  [jsonData]="formsJsonData"
+  [inputDto]="inputDto"
+  [saveType]="saveType"
+  (modalOuter)="closeModal($event)">
+</kf-modal>
+
+
+<kf-drawer
+[drawerTemplate]="drawerTpl"
+[visible]="isVisibleDrawer"
+(closeOuter)="close()">
+  <ng-template #drawerTpl >
+    <ng-container *ngIf="isVisibleDrawer">
+      授权列表
+      <!-- <app-grant-paradigm [id]="currentGrantId"></app-grant-paradigm> -->
+    </ng-container>
+  </ng-template>
+</kf-drawer>
+

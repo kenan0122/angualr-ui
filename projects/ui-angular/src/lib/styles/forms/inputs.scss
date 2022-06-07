@@ -40,6 +40,15 @@
   justify-content: center;
 }
 
+.kf-justify-end {
+  @extend .kf-flex-colum;
+  justify-content: flex-end;
+}
+
+.kf-justify-reverse-start {
+  @extend .kf-reverse-row;
+}
+
 .kf-flex-colum {
   display: flex;
   flex-direction: column;
@@ -52,9 +61,16 @@
   flex-wrap: wrap;
 }
 
-.kf-auto-cols-auto {
+.kf-reverse-row {
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+}
+
+.kf-grid-cols-2 {
   display: grid;
-  // grid-auto-flow: column;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1rem;
 }
 .grid-column-center {
   @extend .grid-column-base;
