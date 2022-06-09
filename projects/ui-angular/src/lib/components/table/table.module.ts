@@ -9,6 +9,7 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormModule } from '../form/form/form.module';
 import { ModalModule } from '../modal/modal.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [TableComponent],
@@ -22,7 +23,8 @@ import { ModalModule } from '../modal/modal.module';
     NzCheckboxModule,
     ButtonModule,
     ModalModule,
-    FormModule
+    FormModule,
+    RouterModule
   ]
 })
 

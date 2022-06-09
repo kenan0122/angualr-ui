@@ -10,8 +10,6 @@ import { EditParadigmComponent } from './components/paradigm/edit-paradigm/edit-
 import { DimensionComponent } from './components/dimension/dimension.component';
 import { PackageComponent } from './components/package/package.component';
 import { BlockFromTypeComponent } from './components/block-from-type/block-from-type.component';
-import { ArticleComponent } from './components/article/article.component';
-import { PreviewComponent } from './components/article/preview/preview.component';
 
 const routes: Routes = [
   {
@@ -33,16 +31,22 @@ const routes: Routes = [
         component: ParadigmComponent,
         data: {
           breadcrumb: '范式管理'
-        }
-      },{
-        path: 'paradigm/param/:id',
-        component: EditExperimentComponent,
-        data: {
-          breadcrumb: '参数详情'
-        }
-      },{
-        path: 'paradigm/info/:id',
-        component: EditParadigmComponent
+        },
+        children: [
+          {
+            path: 'param/:id',
+            component: EditExperimentComponent,
+            data: {
+              breadcrumb: '参数编辑'
+            }
+          },{
+            path: 'info/:id',
+            component: EditParadigmComponent,
+            data: {
+              breadcrumb: '详情编辑'
+            }
+          },
+        ]
       },{
         path: 'dimension',
         component: DimensionComponent
@@ -52,18 +56,7 @@ const routes: Routes = [
       },{
         path:'block-form-type',
         component: BlockFromTypeComponent
-      },{
-        path: 'article',
-        component: ArticleComponent
-      },{
-        path: 'article/all/:id',
-        component: ArticleComponent
-      },
-      {
-        path: 'article/all/preview/:id',
-        component: PreviewComponent
       }
-
     ]
   }
 ]

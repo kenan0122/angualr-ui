@@ -12,6 +12,7 @@ import { FormComponent } from './components/form/form.component';
 // import { UiAngular } from '@kingfar/ui-angular';
 
 import { UiAngular } from 'projects/ui-angular/src/public-api';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
 
 import { FieldComponent } from './components/field/field.component';
 import { ParadigmComponent } from './components/paradigm/paradigm.component';
@@ -20,6 +21,10 @@ import { EditParadigmComponent } from './components/paradigm/edit-paradigm/edit-
 import { DimensionComponent } from './components/dimension/dimension.component';
 import { PackageComponent } from './components/package/package.component';
 import { BlockFromTypeComponent } from './components/block-from-type/block-from-type.component';
+
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { ArticleComponent } from './components/article/article.component';
+import { PreviewComponent } from './components/article/preview/preview.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +37,9 @@ import { BlockFromTypeComponent } from './components/block-from-type/block-from-
     EditParadigmComponent,
     DimensionComponent,
     PackageComponent,
-    BlockFromTypeComponent
+    BlockFromTypeComponent,
+    ArticleComponent,
+    PreviewComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +49,9 @@ import { BlockFromTypeComponent } from './components/block-from-type/block-from-
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NzBreadCrumbModule,
+    NzSwitchModule
   ],
   providers: [
   ],

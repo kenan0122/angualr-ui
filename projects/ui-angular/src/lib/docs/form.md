@@ -33,7 +33,7 @@
 作用: 根据传过来的字段, 判断为false禁用复选框, true可选复选框
 默认: ''
 
-#### customTemplate
+#### operateTemplate
 类型: TemplateRef<any>
 作用: 定义操作类的模板引用变量
 默认: null
@@ -61,7 +61,7 @@
     [data]="tableData"
     [jsonData]="tableJsonData"
     [reLoad]="reLoad"
-    [customTemplate]="customTpl"
+    [operateTemplate]="customTpl"
     [btnTemplate]="btnTpl"
     (switchOuter)="publish($event)"
     (tableOuter)="tableChange($event)"

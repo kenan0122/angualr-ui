@@ -1,5 +1,5 @@
 @import '../../styles/colors/variables.scss';
-@import '../../styles/components/buttons.scss';
+
 
 $button-text-color: $color-white;
 
@@ -13,8 +13,8 @@ $button-text-color: $color-white;
   button {
     //width: 100%;
     outline-offset: 0;
-    border-radius: 4px;
-    padding: 0.35em 0.55em;
+    border-radius: 0.25rem;
+    padding: 0.25em 1em;
 
     > .content {
       text-overflow: ellipsis;
@@ -36,6 +36,22 @@ $button-text-color: $color-white;
       pointer-events: none;
     }
   }
+}
+
+.no-border-btn {
+  @extend .m-2;
+
+  background-color: transparent;
+  background-image: none;
+  color: rgba(33,150,243);
+
+  &:hover {
+    background-color: #00000014;
+  }
+}
+
+.m-2 {
+  margin: 0.5rem;
 }
 
 .success {

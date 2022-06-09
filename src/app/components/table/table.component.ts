@@ -1,18 +1,27 @@
 import { JsonUrlDto } from './../../ui-config/type/base';
-import { Component, EventEmitter, Injector, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Injector,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  TemplateRef,
+} from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { template } from 'projects/ui-angular/src/lib/utils';
 import { TableBaseService } from 'src/app/ui-config/service/table-base.service';
 import { ErrorInfo } from 'src/app/ui-config/type/errror';
 
-
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
-  providers: [NzMessageService]
+  providers: [NzMessageService],
 })
-export  class TableComponent extends TableBaseService implements OnChanges {
+export class TableComponent extends TableBaseService implements OnChanges {
   @Input() extraBtnTemplate!: TemplateRef<any>;
   @Input() tableTopTemplate!: TemplateRef<any>;
 
@@ -47,30 +56,34 @@ export  class TableComponent extends TableBaseService implements OnChanges {
         }
       } else {
         // 没有json数据之前, 请求数据
-        this.getTableJsonData(this.jsonUrlObj.tableJsonUrl,this.jsonUrlObj.tableDataUrl);
+        this.getTableJsonData(
+          this.jsonUrlObj.tableJsonUrl,
+          this.jsonUrlObj.tableDataUrl
+        );
       }
-
     }
   }
 
-  reLoadData(){
-    this.getTableStructData(this.tableJsonData.action.dto, this.jsonUrlObj.tableDataUrl)
+  reLoadData() {
+    this.getTableStructData(
+      this.tableJsonData.action.dto,
+      this.jsonUrlObj.tableDataUrl
+    );
   }
 
   // 删除
-  delete(param:any) {
-    const urlStr = template(this.jsonUrlObj.deleteJsonUrl, param.id)
+  delete(param: any) {
+    const urlStr = template(this.jsonUrlObj.deleteJsonUrl, param.id);
     const url = `${this.baseUrl}${urlStr}`;
-    this.http.delete<any>(url)
-    .subscribe((response)=>{
+    this.http.delete<any>(url).subscribe((response) => {
       this.message.success('删除成功');
       this.skipPageNumber(1);
-    })
+    });
   }
 
   // 发布
   publish(param: any) {
-    this.switchOuter.emit(param)
+    this.switchOuter.emit(param);
   }
 
   add() {
@@ -78,7 +91,7 @@ export  class TableComponent extends TableBaseService implements OnChanges {
       this.inputDto = response.action.dto;
       this.formsJsonData = response;
       this.isVisibleModal = true;
-    })
+    });
   }
 
   edit(param: any) {
@@ -86,32 +99,30 @@ export  class TableComponent extends TableBaseService implements OnChanges {
       this.getEditData(param.id);
       this.formsJsonData = response;
       this.isVisibleModal = true;
-    })
+    });
   }
 
   requestFormJson() {
-    const url=`${this.baseUrl}${this.jsonUrlObj.formJsonUrl}`;
+    const url = `${this.baseUrl}${this.jsonUrlObj.formJsonUrl}`;
     const api = this.http.post<any>(url, {});
 
     return api;
   }
 
   getEditData(id: any) {
-    const urlStr = template(this.jsonUrlObj.formDataUrl, id)
+    const urlStr = template(this.jsonUrlObj.formDataUrl, id);
     const url = `${this.baseUrl}${urlStr}`;
 
-    this.http.get<object>(url).subscribe(response =>{
+    this.http.get<object>(url).subscribe((response) => {
       this.inputDto = response;
-    })
+    });
   }
-
 
   closeModal(param: any) {
     // 点击确定, 进行数据请求
     if (param.modal) {
-      const url=`${this.baseUrl}${this.jsonUrlObj.saveUrl}`;
-      this.http.post<any>(url, {...this.inputDto})
-      .subscribe((response)=>{
+      const url = `${this.baseUrl}${this.jsonUrlObj.saveUrl}`;
+      this.http.post<any>(url, { ...this.inputDto }).subscribe((response) => {
         if (response.success) {
           this.isVisibleModal = false;
           this.errorList = [];
@@ -119,7 +130,7 @@ export  class TableComponent extends TableBaseService implements OnChanges {
         } else {
           this.errorList = response.error ? response.error.errorMessage : [];
         }
-      })
+      });
     } else {
       this.isVisibleModal = false;
     }
@@ -140,7 +151,7 @@ export  class TableComponent extends TableBaseService implements OnChanges {
       if (this.tableData.items.length <= delItemLength) {
         // 如果当前页就一项, 直接跳转到前一页
         this.pageNumber = this.pageNumber - 1;
-       this.tableChange(this.pageNumber)
+        this.tableChange(this.pageNumber);
       } else {
         this.tableChange(this.pageNumber);
       }
@@ -148,5 +159,4 @@ export  class TableComponent extends TableBaseService implements OnChanges {
       this.tableChange(this.pageNumber);
     }
   }
-
 }

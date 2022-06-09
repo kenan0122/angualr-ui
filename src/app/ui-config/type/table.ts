@@ -34,6 +34,13 @@ export interface ColumnBase {
   columnType: ColumnType;
   /** 值的类型 */
   valueType: ValueType;
+
+
+  // 新增属性
+    /** 当前列是否可以点击 */
+  isClick?: boolean;
+  /** image图片的路径 */
+  url?: string;
 }
 
 export interface SelectColumn extends ColumnBase {
@@ -59,7 +66,7 @@ export enum ColumnType
   Select,
   // Switch控件
   Switch,
-  // 最后一列: 操作列
+  // 自定义
   Custom
 }
 

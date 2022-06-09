@@ -32,7 +32,7 @@ export class TableComponent implements OnChanges {
   // 根据传过来的字段, 判断为false禁用复选框, true可选复选框
   @Input() disabledProp: string = '';
 
-  @Input() customTemplate!: TemplateRef<any>;
+  @Input() operateTemplate!: TemplateRef<any>;
   @Input() btnTemplate!: TemplateRef<any>;
 
   @Output() tableOuter = new EventEmitter();

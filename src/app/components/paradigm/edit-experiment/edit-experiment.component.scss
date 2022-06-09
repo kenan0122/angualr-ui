@@ -1,0 +1,30 @@
+:host ::ng-deep {
+  .edit-experiment {
+    width: 100%;
+    height: 100vh;
+
+    &-btn {
+      display: flex;
+      justify-content: center;
+      height: 45px;
+      width: 100%;
+      border-bottom: solid 1px #d9d9d9;
+    }
+
+    #experiment {
+      height: calc(100% - 45px);
+    }
+  }
+
+  nz-switch {
+    margin: auto 0.5rem;
+  }
+
+  .ant-switch {
+    background-color: rgba(0,0,0,.25);
+
+    &-checked {
+      background-color: #1890ff;
+    }
+  }
+}

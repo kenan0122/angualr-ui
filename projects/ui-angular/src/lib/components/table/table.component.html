@@ -7,9 +7,7 @@
     [fields]="jsonData.search.fields"
     [inputDto]="jsonData.action.dto"
   >
-    <kf-button
-      style="width: 6.25rem; height: 2.5rem"
-      (btnOuter)="search()">
+    <kf-button style="width: 6.25rem; height: 2.5rem" (btnOuter)="search()">
       查询
     </kf-button>
   </kf-form>
@@ -59,53 +57,73 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let data of basicTable.data; let i = index">
-        <td
-          *ngIf="jsonData.multiSelect"
-          [nzChecked]="setOfCheckedId.has(data.id)"
-          [nzDisabled]="data[disabledProp]"
-          (nzCheckedChange)="onItemChecked(data.id, $event)"
-        ></td>
+      <ng-container *ngFor="let data of basicTable.data; let i = index">
+        <!-- 有的数据不需要tr点击事件-->
+        <tr>
+          <td
+            *ngIf="jsonData.multiSelect"
+            [nzChecked]="setOfCheckedId.has(data.id)"
+            [nzDisabled]="data[disabledProp]"
+            (nzCheckedChange)="onItemChecked(data.id, $event)"
+          ></td>
 
-        <td *ngFor="let column of jsonData.columns; let fi = index">
-          <ng-container [ngSwitch]="column.columnType">
-            <!-- 纯文本-->
-            <ng-container *ngSwitchCase="0">
-              {{ data[column.key] }}
+          <td *ngFor="let column of jsonData.columns; let fi = index">
+            <ng-container [ngSwitch]="column.columnType">
+              <!-- 纯文本-->
+              <ng-container *ngSwitchCase="0">
+                <span class="kf-items-center" >
+                  <ng-container *ngIf="column.url">
+                    <img
+                      [src]="column.url"
+                      style="width: 24px; height: 24px"
+                      class="mr-2"
+                    />
+                  </ng-container>
+                  <ng-container *ngIf="column.isClick; else elseBlock">
+                    <a [routerLink]="data.path">{{ data[column.key] }}</a>
+                  </ng-container>
+                  <ng-template #elseBlock>
+                    {{ data[column.key] }}
+                  </ng-template>
+
+                </span>
+              </ng-container>
+              <!-- 下拉/枚举进行值转换 -->
+              <ng-container *ngSwitchCase="1">
+                {{ lg(data[column.key], column.options) }}
+              </ng-container>
+              <!-- Switch -->
+              <ng-container *ngSwitchCase="2">
+                <nz-switch
+                  [nzCheckedChildren]="checkedTemplate"
+                  [nzUnCheckedChildren]="unCheckedTemplate"
+                  [(ngModel)]="data[column.key]"
+                  [nzControl]="true"
+                  (click)="switchClick(data, column.action, column.key)"
+                >
+                </nz-switch>
+                <ng-template #checkedTemplate>{{
+                  lg(true, column.options)
+                }}</ng-template>
+                <ng-template #unCheckedTemplate>{{
+                  lg(false, column.options)
+                }}</ng-template>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="3"> </ng-container>
             </ng-container>
-            <!-- 下拉/枚举进行值转换 -->
-            <ng-container *ngSwitchCase="1">
-              {{ lg(data[column.key], column.options) }}
-            </ng-container>
-            <!-- Switch -->
-            <ng-container *ngSwitchCase="2">
-              <nz-switch
-                [nzCheckedChildren]="checkedTemplate"
-                [nzUnCheckedChildren]="unCheckedTemplate"
-                [(ngModel)]="data[column.key]"
-                [nzControl]="true"
-                (click)="switchClick(data, column.action, column.key)"
-              >
-              </nz-switch>
-              <ng-template #checkedTemplate>{{
-                lg(true, column.options)
-              }}</ng-template>
-              <ng-template #unCheckedTemplate>{{
-                lg(false, column.options)
-              }}</ng-template>
-            </ng-container>
-          </ng-container>
-        </td>
-        <td class="text-center">
-          <!--插槽/占位 -->
-          <ng-container
-            *ngTemplateOutlet="
-              customTemplate;
-              context: { $implicit: { data: this.data, i: this.i } }
-            "
-          ></ng-container>
-        </td>
-      </tr>
+          </td>
+          <td class="text-center">
+            <!--插槽/占位 -->
+            <ng-container
+              *ngTemplateOutlet="
+                operateTemplate;
+                context: { $implicit: { data: this.data, i: this.i } }
+              "
+            ></ng-container>
+          </td>
+        </tr>
+      </ng-container>
     </tbody>
   </nz-table>
 </div>

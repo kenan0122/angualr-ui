@@ -1,20 +1,20 @@
 import { Component, Input, OnInit, Injector } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   ConfigEditor,
   setPrimary,
-  setDefaultBackground,
-  createEglServerApi
+  KnownColor,
+  ServerApi,
+  setDefaultBackground
 } from '@psylab/experiments';
 
 import {range, randomColor, template } from "@psylab/utils";
 import { RequestService } from 'src/app/ui-config/service/request.service';
-import { IConfigPostDto, IDownloadFileInfo, IUploadFileInfo } from './experiment';
 
 @Component({
   selector: 'app-edit-param',
   templateUrl: './edit-experiment.component.html',
-  styleUrls: ['./edit-experiment.component.less']
+  styleUrls: ['./edit-experiment.component.scss']
 })
 export class EditExperimentComponent extends RequestService implements OnInit {
   private readonly _request = this.request.bind(this);
@@ -22,18 +22,19 @@ export class EditExperimentComponent extends RequestService implements OnInit {
   paradigmEditDto: any;
 
   configEditor: any;
+  isDark: boolean = false;
 
   constructor(
     private injector: Injector,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private route: Router
   ) {
     super(injector)
    }
 
   ngOnInit() {
     this.getRouteParam();
-    setPrimary(randomColor());
-    setDefaultBackground(true);
+    setPrimary(KnownColor.Blue);
   }
 
 
@@ -54,7 +55,6 @@ export class EditExperimentComponent extends RequestService implements OnInit {
       this.paradigmEditDto = response;
       this.createModel();
     });
-
   }
 
   createModel() {
@@ -73,12 +73,23 @@ export class EditExperimentComponent extends RequestService implements OnInit {
       blockFormTypes: this.paradigmEditDto.blockFormTypes || blockFormTypes,
     };
 
-	  const api = {
-      upload: this.upload,
-      download: this.download,
-      postConfigDto: this.postConfigDto,
-      that: this
-    }
+    const uploadUrl = this.baseUrl + '/api/file/paradigm/config/'
+    const configUrl = this.baseUrl + '/api/Paradigm/paradigms/'
+    const api = new ServerApi({
+      expId: this.paradigmId,
+      configDtoUrl: `${configUrl}config`,
+      // reportDtoUrl: `${apiBaseUrl}report`,
+      // expDownloadBaseUrl: `${apiBaseUrl}download`,
+      uploadUrl: `${uploadUrl}upload`,
+      // templateDownloadBaseUrl: `${serviceBaseUrl}/api/paradigm/egl`,
+    });
+
+	  // const api = {
+    //   upload: this.upload,
+    //   download: this.download,
+    //   postConfigDto: this.postConfigDto,
+    //   that: this
+    // }
 
     this.configEditor = new ConfigEditor({
       target: document.getElementById('experiment'),
@@ -88,46 +99,21 @@ export class EditExperimentComponent extends RequestService implements OnInit {
     });
   }
 
-  save(e:any) {
+  save() {
     this.configEditor.save();
   }
 
-  preview(e:any) {
+  preview() {
     this.configEditor.preview();
   }
 
-  async upload(file: IUploadFileInfo): Promise<boolean> {
-    this['that']._request({
-      method: 'POST',
-      url: '/api/blob-storing/paradigm/upload',
-      body: file
-    }).subscribe((res: any) => {
-      console.log(999, res)
-    });
-
-    return true;
+  back() {
+    this.route.navigate(['/app/paradigm']);
   }
 
-  async download(fileName: string, folder: string): Promise<IDownloadFileInfo> {
-    return {
-      name: fileName,
-      mimeType: '',
-      content: ''
-    };
+  themeSwitch() {
+    this.isDark = !this.isDark;
+    setDefaultBackground(this.isDark);
   }
-
-  async postConfigDto(configDto: IConfigPostDto): Promise<boolean> {
-    console.log('保存', configDto)
-    // await this.request({
-    //   method: 'PUT',
-    //   url: '/api/Paradigm/paradigms/config',
-    //   body: configDto
-    // }).subscribe(res => {
-    //   console.log('保存', res)
-    // });
-
-    return false;
-  }
-
 
 }
