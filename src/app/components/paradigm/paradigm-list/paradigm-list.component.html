@@ -1,0 +1,43 @@
+<app-table
+  [reLoad]="reLoad"
+  [jsonUrlObj]="jsonUrlObj"
+  [extraBtnTemplate]="operationTpl"
+  [tableTopTemplate]="topTpl"
+  [isEnableAddBtn]="false"
+  [isEnableEditBtn]="false"
+  (switchOuter)="publish($event)">
+</app-table>
+<ng-template #topTpl>
+  <kf-button
+    style="width: 6.25rem;height: 2.5rem;"
+    (btnOuter)="addParadigm()">
+    添加
+  </kf-button>
+</ng-template>
+<ng-template #operationTpl  let-model>
+  <kf-button
+    (btnOuter)="rename(model)">
+    重复名
+  </kf-button>
+  <kf-button
+    (btnOuter)="copy(model)">
+    复制
+  </kf-button>
+  <kf-button
+    (btnOuter)="editInfo(model)">
+    编辑详情
+  </kf-button>
+  <kf-button
+  (btnOuter)="editParam(model)">
+  编辑参数
+</kf-button>
+</ng-template>
+
+<kf-modal *ngIf="inputDto"
+  width="700px"
+  [isVisible]="isVisibleModal"
+  [jsonData]="formsJsonData"
+  [inputDto]="inputDto"
+  [saveType]="saveType"
+  (modalOuter)="closeModal($event)">
+</kf-modal>

@@ -6,19 +6,22 @@ import {
 import {
   Component,
   EventEmitter,
+  Injector,
   Input,
   OnChanges,
+  OnInit,
   Output,
   SimpleChanges,
   TemplateRef,
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'kf-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
-export class TableComponent implements OnChanges {
+export class TableComponent implements OnChanges, OnInit {
   @Input() reLoad!: object;
   /** 表格json数据 */
   @Input() jsonData: any;
@@ -43,7 +46,10 @@ export class TableComponent implements OnChanges {
   disabledCheck: boolean = false;
   setOfCheckedId = new Set<string>();
 
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient, private injector: Injector) {}
+  ngOnInit(): void {
+    console.log('init', this.data)
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     // 如果重新加载, 重新渲染列表
@@ -136,5 +142,10 @@ export class TableComponent implements OnChanges {
     this.jsonData.action.dto.sortingKey = sortField;
     this.jsonData.action.dto.sortingType = order;
     this.search();
+  }
+
+  navigate(url: string, e: MouseEvent): void {
+    e.preventDefault();
+    this.injector.get(Router).navigateByUrl(url);
   }
 }

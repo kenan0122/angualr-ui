@@ -1,3 +1,5 @@
+import { template } from "projects/ui-angular/src/lib/utils";
+
 export const articleTableJson = {
   displayName: '文章列表',
   search: {
@@ -62,17 +64,17 @@ export const articleTableStructure = {
   items: [
     {
       id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-      title: '文件夹1',
+      title: '文件夹100',
       creator: 'admin',
       creationTime: '2021-12-21 13:50:59',
-      path: '/app/article/all/DF1',
+      path: '/app/article/all/100',
     },
     {
       id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-      title: '文章2',
+      title: '文章100',
       creator: 'admin',
       creationTime: '2021-12-21 13:50:59',
-      path: '/app/article/all/preview/2278',
+      path: '/app/article/all/preview/100'//template('/app/article/all/preview/{0}', Math.ceil(Math.random()*10)),
     },
   ],
   totalCount: 2,

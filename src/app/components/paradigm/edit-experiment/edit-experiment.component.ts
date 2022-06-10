@@ -73,23 +73,18 @@ export class EditExperimentComponent extends RequestService implements OnInit {
       blockFormTypes: this.paradigmEditDto.blockFormTypes || blockFormTypes,
     };
 
-    const uploadUrl = this.baseUrl + '/api/file/paradigm/config/'
-    const configUrl = this.baseUrl + '/api/Paradigm/paradigms/'
+    const uploadUrl = this.baseUrl + '/api/file/paradigm/config/';
+    const configUrl = this.baseUrl + '/api/Paradigm/paradigms/';
+    const downUrl = this.baseUrl + '/api/paradigm/config/';
+
     const api = new ServerApi({
       expId: this.paradigmId,
-      configDtoUrl: `${configUrl}config`,
+      configDtoUrl: `${configUrl}save-config`,
       // reportDtoUrl: `${apiBaseUrl}report`,
-      // expDownloadBaseUrl: `${apiBaseUrl}download`,
+      expDownloadBaseUrl: `${configUrl}download`,
       uploadUrl: `${uploadUrl}upload`,
       // templateDownloadBaseUrl: `${serviceBaseUrl}/api/paradigm/egl`,
     });
-
-	  // const api = {
-    //   upload: this.upload,
-    //   download: this.download,
-    //   postConfigDto: this.postConfigDto,
-    //   that: this
-    // }
 
     this.configEditor = new ConfigEditor({
       target: document.getElementById('experiment'),
@@ -101,6 +96,7 @@ export class EditExperimentComponent extends RequestService implements OnInit {
 
   save() {
     this.configEditor.save();
+    this.route.navigate(['/app/paradigm']);
   }
 
   preview() {

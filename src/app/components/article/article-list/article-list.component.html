@@ -1,0 +1,41 @@
+<div class="app-article">
+  <kf-table
+    *ngIf="tableJsonData"
+    [data]="tableData"
+    [jsonData]="tableJsonData"
+    [reLoad]="reLoad"
+    [operateTemplate]="customTpl"
+    [btnTemplate]="btnTpl"
+  >
+  </kf-table>
+
+  <ng-template #btnTpl let-ids>
+    <div class="grid-column-start">
+      <kf-button
+        style="width: 6.25rem;height: 2.5rem;"
+        (btnOuter)="add()">
+        添加
+      </kf-button>
+    </div>
+  </ng-template>
+</div>
+
+<ng-template #customTpl  let-model>
+  <div class="grid-column-center ">
+    <!-- <kf-button
+      buttonType="button--danger"
+      buttonClass="ml-10"
+      (btnOuter)="delete(model.data)">
+      删除
+    </kf-button>
+    <kf-button
+      buttonType="button--danger"
+      buttonClass="ml-10"
+      (btnOuter)="edit(model.data)">
+      编辑
+    </kf-button> -->
+  </div>
+</ng-template>
+
+
+

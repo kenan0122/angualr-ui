@@ -25,6 +25,9 @@ import { BlockFromTypeComponent } from './components/block-from-type/block-from-
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { ArticleComponent } from './components/article/article.component';
 import { PreviewComponent } from './components/article/preview/preview.component';
+import { CustomComponent } from './components/custom/custom.component';
+import { ParadigmListComponent } from './components/paradigm/paradigm-list/paradigm-list.component';
+import { ArticleListComponent } from './components/article/article-list/article-list.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import { PreviewComponent } from './components/article/preview/preview.component
     PackageComponent,
     BlockFromTypeComponent,
     ArticleComponent,
-    PreviewComponent
+    PreviewComponent,
+    CustomComponent,
+    ParadigmListComponent,
+    ArticleListComponent
   ],
   imports: [
     CommonModule,

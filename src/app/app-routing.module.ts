@@ -12,6 +12,9 @@ import { PackageComponent } from './components/package/package.component';
 import { BlockFromTypeComponent } from './components/block-from-type/block-from-type.component';
 import { ArticleComponent } from './components/article/article.component';
 import { PreviewComponent } from './components/article/preview/preview.component';
+import { CustomComponent } from './components/custom/custom.component';
+import { ParadigmListComponent } from './components/paradigm/paradigm-list/paradigm-list.component';
+import { ArticleListComponent } from './components/article/article-list/article-list.component';
 
 const routes: Routes = [
   {
@@ -20,56 +23,110 @@ const routes: Routes = [
     children: [
       {
         path: 'table',
-        component: TableComponent
+        component: TableComponent,
       },
       {
         path: 'form',
-        component: FormComponent
-      },{
+        component: FormComponent,
+      },
+      {
         path: 'field',
-        component: FieldComponent
-      },{
+        component: FieldComponent,
+      },
+      {
         path: 'paradigm',
         component: ParadigmComponent,
         data: {
-          breadcrumb: '范式管理'
-        }
-      },{
-        path: 'paradigm/param/:id',
-        component: EditExperimentComponent,
-        data: {
-          breadcrumb: '参数详情'
-        }
-      },{
-        path: 'paradigm/info/:id',
-        component: EditParadigmComponent
-      },{
+          breadcrumb: '范式管理',
+        },
+
+        children: [
+          {
+            path: '',
+            component: ParadigmListComponent,
+          },
+          {
+            path: 'param/:id',
+            component: EditExperimentComponent,
+            data: {
+              breadcrumb: '参数编辑',
+            },
+          },
+          {
+            path: 'info/:id',
+            component: EditParadigmComponent,
+            data: {
+              breadcrumb: '详情编辑',
+            },
+          },
+        ],
+      },
+      // {
+      //   path: 'paradigm',
+      //   component: ParadigmComponent,
+      //   data: {
+      //     breadcrumb: '范式管理'
+      //   }
+      // },{
+      //   path: 'paradigm/param/:id',
+      //   component: EditExperimentComponent,
+      //   data: {
+      //     breadcrumb: '参数详情'
+      //   }
+      // },{
+      //   path: 'paradigm/info/:id',
+      //   component: EditParadigmComponent
+      // },
+      {
         path: 'dimension',
-        component: DimensionComponent
-      },{
-        path: 'package',
-        component: PackageComponent
-      },{
-        path:'block-form-type',
-        component: BlockFromTypeComponent
-      },{
-        path: 'article',
-        component: ArticleComponent
-      },{
-        path: 'article/all/:id',
-        component: ArticleComponent
+        component: DimensionComponent,
       },
       {
-        path: 'article/all/preview/:id',
-        component: PreviewComponent
-      }
-
-    ]
-  }
-]
+        path: 'package',
+        component: PackageComponent,
+      },
+      {
+        path: 'block-form-type',
+        component: BlockFromTypeComponent,
+      },
+      {
+        path: 'article',
+        component: ArticleComponent,
+        children: [
+          {
+            path: 'all',
+            data: {
+              breadcrumb: '文章管理',
+            },
+            children: [
+              {
+                path: '',
+                component: ArticleListComponent
+              },{
+                path: ':id',
+                component: ArticleListComponent,
+                data: {
+                  breadcrumb: 'id',
+                },
+              },
+              {
+                path: 'preview/:id',
+                component: PreviewComponent
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: 'custom',
+        component: CustomComponent,
+      },
+    ],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

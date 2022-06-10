@@ -1,0 +1,52 @@
+<div style="display: flex; padding: 2rem; flex-direction: column">
+  <span>生成的界面类型</span>
+  <kf-select
+    ngModel
+    name="select"
+    [ngModelOptions]="{ name: 'select' }"
+    [(ngModel)]="selectIndex"
+    [options]="selectOptions"
+    (selectOuter)="selectChange($event)"
+  >
+  </kf-select>
+
+  <span>json</span>
+  <kf-textarea
+    ngModel
+    name="textarea"
+    [ngModelOptions]="{ name: 'textarea' }"
+    [(ngModel)]="jsonStr"
+    [rows]="10"
+  >
+  </kf-textarea>
+  <span>data</span>
+  <kf-textarea
+    ngModel
+    name="textarea"
+    [ngModelOptions]="{ name: 'textarea' }"
+    [(ngModel)]="data"
+    [rows]="10"
+  >
+  </kf-textarea>
+  <kf-button (btnOuter)="click()">保存</kf-button>
+
+  <span style="padding-top: 2rem">界面</span>
+  <div style="border: solid 1px gray; min-height: 400px">
+    <ng-container *ngIf="selectIndex === 0;else elseBlock">
+      <kf-table
+        *ngIf="viewJson"
+        [data]="viewData"
+        [jsonData]="viewJson"
+        [reLoad]="reLoad"
+      >
+      </kf-table>
+    </ng-container>
+    <ng-template #elseBlock>
+      <kf-form-page
+      [forms]="viewJson"
+      [inputDto]="viewData">
+    </kf-form-page>
+    </ng-template>
+
+  </div>
+</div>

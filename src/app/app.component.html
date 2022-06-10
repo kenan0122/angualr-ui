@@ -5,5 +5,6 @@
   [ngModelOptions]="{name: 'file'}"
   [(ngModel)]="fileArray"
   (fileOuter)="uploadFile($event)"></kf-upload> -->
-  <!-- <nz-breadcrumb [nzAutoGenerate]="true" ></nz-breadcrumb> -->
+  <nz-breadcrumb [nzAutoGenerate]="true" [nzRouteLabelFn]="translateFn"></nz-breadcrumb>
+
 <router-outlet ></router-outlet>

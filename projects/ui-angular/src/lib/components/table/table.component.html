@@ -80,7 +80,7 @@
                     />
                   </ng-container>
                   <ng-container *ngIf="column.isClick; else elseBlock">
-                    <a [routerLink]="data.path">{{ data[column.key] }}</a>
+                    <a [attr.href]="data.path" (click)="navigate(data.path, $event)">{{ data[column.key] }}</a>
                   </ng-container>
                   <ng-template #elseBlock>
                     {{ data[column.key] }}
