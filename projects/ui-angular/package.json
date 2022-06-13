@@ -8,7 +8,11 @@
     "@angular/forms": "~13.3.0",
     "@angular/router": "~13.3.0",
     "rxjs": "~7.5.0",
-    "ng-zorro-antd": "^13.1.1"
+    "ng-zorro-antd": "^13.1.1",
+    "ace-builds": "^1.5.3",
+    "highlightjs": "^9.16.2",
+    "marked": "^4.0.16",
+    "font-awesome": "^4.7.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

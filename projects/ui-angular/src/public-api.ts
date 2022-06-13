@@ -76,3 +76,7 @@ export *  from './lib/components/icon/icon.component';
 
 export * from './lib/components/card/template-card/template-card.module';
 export * from './lib/components/card/template-card/template-card.component';
+
+export * from './lib/components/markdown/markdown.module';
+export * from './lib/components/markdown/markdown.component';
+

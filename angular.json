@@ -37,9 +37,13 @@
             "styles": [
               "node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "@psylab/experiments/dist/assets/style.7cb73cad.css",
+              "node_modules/font-awesome/css/font-awesome.min.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/highlightjs/highlight.pack.min.js",
+              "node_modules/marked/marked.min.js"
+            ]
           },
           "configurations": {
             "production": {

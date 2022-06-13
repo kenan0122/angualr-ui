@@ -27,6 +27,7 @@ import { DrawerModule } from './components/drawer/drawer.module';
 import { QuestionCoverModule } from './components/question-cover/question-cover.module';
 import { IconButtonModule } from './components/icon-button/icon-button.module';
 import { IconModule } from './components/icon/icon.module';
+import { MarkdownModule } from './components/markdown/markdown.module';
 
 const modules = [
   ButtonModule,
@@ -51,7 +52,8 @@ const modules = [
   QuestionCoverModule,
   IconModule,
   IconButtonModule,
-  TemplateCardModule
+  TemplateCardModule,
+  MarkdownModule
 ]
 @NgModule({
   imports: [
