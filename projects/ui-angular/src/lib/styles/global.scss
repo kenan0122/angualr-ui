@@ -28,11 +28,11 @@ html {
   box-sizing: border-box;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-}
+// *,
+// *::before,
+// *::after {
+//   box-sizing: inherit;
+// }
 
 /**
  * Suppress the focus outline on elements that cannot be accessed via keyboard.
@@ -61,3 +61,4 @@ html {
 .absolute {
   position: absolute;
 }
+

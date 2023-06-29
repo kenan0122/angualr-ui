@@ -1,0 +1,26 @@
+<!--代码仅供测试 正式需要删除-->
+<div class="container center">
+  <h1 class="align-center">Markdown-editor</h1>
+  <div
+    class="markdown-priview1"
+    style="
+      margin-top: 100px;
+      position: realtive;
+      bottom: 100px;
+      margin-bottom: 200px;
+    "
+  >
+    <kf-markdown-editor *ngIf="mockSetting2"
+      [setting]="mockSetting2"
+      (settingOuter)="onSettingChange($event)"
+      [articleInfo]="navParams2"
+      #markdownEditor
+    ></kf-markdown-editor>
+
+    <kf-button #markdows (click)="expression()">点击</kf-button>
+  </div>
+  <div class="markdown-priview">
+    <kf-markdown-editor [setting]="mockSetting" [navParams]="navParams1">
+    </kf-markdown-editor>
+  </div>
+</div>

@@ -1,50 +1,78 @@
 <div class="app-table">
-  <kf-table
-    *ngIf="tableJsonData"
-    [data]="tableData"
+  <kf-table-list
+    *ngIf="tableJsonData && tableData"
+    #tableList
+    [items]="tableData.items"
+    [totalCount]="tableData.totalCount"
     [jsonData]="tableJsonData"
-    [reLoad]="reLoad"
+    [reload]="reload"
+    [tableType]="tableType"
+    [hasUpdateAuth]="hasUpdateAuth"
     [operateTemplate]="customTpl"
+    [tdFirstTemplate]="tdFirstTemplate"
     [btnTemplate]="btnTpl"
     (switchOuter)="publish($event)"
     (tableOuter)="tableChange($event)"
+    (trClick)="itemClick($event);"
   >
-  </kf-table>
+  </kf-table-list>
+
+
 
   <ng-template #btnTpl let-ids>
     <div class="grid-column-start">
-      <kf-button *ngIf="isEnableAddBtn"
-        style="width: 6.25rem;height: 2.5rem;"
-        (btnOuter)="add()">
+      <div class="table-name">{{ tableJsonData.displayName }}</div>
+      <kf-button
+        *ngIf="isEnableAddBtn"
+        [class]="'white'"
+        style="width: 6.25rem; height: 2.5rem"
+        (click)="add()"
+      >
         添加
       </kf-button>
-      <ng-container *ngTemplateOutlet="tableTopTemplate; context: {$implicit: ids}"></ng-container>
+      <ng-container
+        *ngTemplateOutlet="tableTopTemplate; context: { $implicit: ids }"
+      ></ng-container>
     </div>
   </ng-template>
 
-  <ng-template #customTpl  let-model>
-    <div class="grid-column-center ">
-      <kf-button
-        buttonType="button--danger"
-        buttonClass="ml-10"
-        (btnOuter)="delete(model.data)">
-        删除
-      </kf-button>
-      <kf-button *ngIf="isEnableEditBtn"
-        buttonType="button--danger"
-        buttonClass="ml-10"
-        (btnOuter)="edit(model.data)">
-        编辑
-      </kf-button>
-      <ng-container *ngTemplateOutlet="extraBtnTemplate; context: {$implicit: model.data}"></ng-container>
-    </div>
+  <ng-template #customTpl let-model>
+    <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" (click)="$event.stopPropagation()">
+      ...
+    </a>
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <div nz-menu>
+        <div  nz-menu-item
+          (click)="delete(model.data)"
+          *ngIf="
+          isEnableDelBtn
+          "
+        >
+          删除
+        </div>
+        <div  nz-menu-item
+          *ngIf="
+            isEnableEditBtn
+          "
+          (click)="edit(model.data)"
+        >
+          编辑
+        </div>
+        <div nz-menu-item class="operate-drop" style="flex-direction: column;">
+          <ng-container *ngTemplateOutlet="extraBtnTemplate; context: { $implicit: model.data }">
+          </ng-container>
+        </div>
+      </div>
+    </nz-dropdown-menu>
   </ng-template>
 </div>
 
-<kf-modal *ngIf="inputDto"
+<kf-modal
+  *ngIf="inputDto"
   [isVisible]="isVisibleModal"
   [jsonData]="formsJsonData"
   [inputDto]="inputDto"
   [infoList]="errorList"
-  (modalOuter)="closeModal($event)">
+  (modalOuter)="closeModal($event)"
+>
 </kf-modal>

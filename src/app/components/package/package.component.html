@@ -1,5 +1,5 @@
 <app-table
-  [reLoad]="reLoad"
+  [reload]="reload"
   [jsonUrlObj]="jsonUrlObj"
   [checkIdLen]="checkIdLen"
   [extraBtnTemplate]="operationTpl"
@@ -8,11 +8,11 @@
 
 <ng-template #operationTpl  let-model>
   <kf-button
-    (btnOuter)="grantBtn(model)">
+    (click)="grantBtn(model)">
     授权
   </kf-button>
   <kf-button
-    (btnOuter)="copy(model)">
+    (click)="copy(model)">
     复制
   </kf-button>
 </ng-template>
@@ -33,8 +33,7 @@
 (closeOuter)="close()">
   <ng-template #drawerTpl >
     <ng-container *ngIf="isVisibleDrawer">
-      授权列表
-      <!-- <app-grant-paradigm [id]="currentGrantId"></app-grant-paradigm> -->
+      <app-grant-paradigm [id]="currentGrantId"></app-grant-paradigm>
     </ng-container>
   </ng-template>
 </kf-drawer>

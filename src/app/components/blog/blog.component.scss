@@ -1,0 +1,22 @@
+.app-blog {
+  display: flex;
+  padding-top: 1rem;
+}
+
+.blog-left {
+  width: 10rem;
+  height: 100vh;
+  border-right: 1px solid #f0f0f0;
+  text-align: center;
+}
+
+.blog-right {
+  padding-left: 1rem;
+  width: 100%;
+}
+
+:host ::ng-deep {
+  .ant-tree .ant-tree-treenode {
+    justify-content: center;
+  }
+}

@@ -8,44 +8,44 @@ import { ErrorInfo } from 'src/app/ui-config/type/errror';
   selector: 'app-package',
   templateUrl: './package.component.html',
   styleUrls: ['./package.component.scss'],
-  providers:[NzMessageService]
+  providers: [NzMessageService],
 })
 export class PackageComponent extends RequestService implements OnInit {
-  reLoad: any = {};
+  reload: any = {};
 
-  jsonUrlObj:JsonUrlDto = {
+  jsonUrlObj: JsonUrlDto = {
     tableJsonUrl: '/api/Paradigm/packages/table-config',
     tableDataUrl: '/api/Paradigm/packages/page',
     deleteJsonUrl: '/api/Paradigm/packages/{0}',
-    formJsonUrl: '/api/Paradigm/packages/form-config',
+    formJsonUrl: '/api/Paradigm/packages/create-form-config',
     formDataUrl: '/api/Paradigm/packages/{0}/for-edit',
-    saveUrl: '/api/Paradigm/packages/save-package'
+    saveUrl: '/api/Paradigm/packages/save-package',
   };
 
-  checkIdLen:number = 0;
+  checkIdLen: number = 0;
   isVisibleDrawer: boolean = false;
   isVisibleModal: boolean = false;
   formsJsonData?: any;
   inputDto: any = {
-    "id": null,
-    "title": ''
+    id: null,
+    title: '',
   };
   errorList: ErrorInfo[] = [];
   saveType: any = 0;
+  currentGrantId?: number;
 
   // 权限
   //inputGrantDto?:any;
-
 
   constructor(injector: Injector, private message: NzMessageService) {
     super(injector);
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   grantBtn(param: any) {
     this.isVisibleDrawer = true;
+    this.currentGrantId = param.id;
   }
 
   close() {
@@ -55,18 +55,26 @@ export class PackageComponent extends RequestService implements OnInit {
   copy(param: any) {
     this.inputDto.id = param.id;
     this.isVisibleModal = true;
+    const url = '/api/Paradigm/packages/copy-package-form-config';
+    this.request({
+      method: 'GET',
+      url,
+    }).subscribe((response) => {
+      this.formsJsonData = response;
+    });
   }
 
   closeModal(param: any) {
     if (param.modal) {
-      const url = `/api/Paradigm/copy-package/copy-package`;
+      const url = `/api/Paradigm/packages/copy-package`;
 
       this.request({
         method: 'POST',
         url,
         body: this.inputDto,
       }).subscribe((response) => {
-        this.reLoad = {};
+        this.isVisibleModal = false;
+        this.reload = {};
         // if (response.success) {
         //   this.errorList = [];
         //   this.isVisibleModal = false;
@@ -75,7 +83,7 @@ export class PackageComponent extends RequestService implements OnInit {
         //     // 编辑页面跳转
         //     this.route.navigate(['/app/paradigm/info/' + response.data.id]);
         //   } else {
-        //     this.reLoad = {};
+        //     this.reload = {};
         //   }
         // } else {
         //   this.errorList = response.error ? response.error.errorMessage : [];
@@ -99,5 +107,4 @@ export class PackageComponent extends RequestService implements OnInit {
 
   //   return url;
   // }
-
 }

@@ -1,7 +1,6 @@
 import { HttpClient, HttpParameterCodec, HttpParams } from "@angular/common/http";
 import { Injector } from "@angular/core";
 import { Params } from "@angular/router";
-import { isUndefinedOrEmptyString, template } from "projects/ui-angular/src/lib/utils";
 import { catchError, Observable, throwError } from "rxjs";
 import { environment } from "src/environments/environment";
 
@@ -52,11 +51,15 @@ export abstract class RequestService {
     return throwError(err);
   }
 
+  isUndefinedOrEmptyString(value: unknown): boolean {
+    return value === undefined || value === '';
+  }
+
   // 排除参数为null的情况
   private getParams(params: Params, encoder?: HttpParameterCodec): HttpParams {
     const filteredParams = Object.keys(params).reduce((acc, key) => {
       const value = params[key];
-      if (isUndefinedOrEmptyString(value)) return acc;
+      if (this.isUndefinedOrEmptyString(value)) return acc;
       if (value === null && !this.sendNullsAsQueryParam) return acc;
       acc[key] = value;
       return acc;

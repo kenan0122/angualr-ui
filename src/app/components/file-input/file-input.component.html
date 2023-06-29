@@ -1,0 +1,42 @@
+<!-- <kf-file-input
+  ngModel
+  [setting]="{
+    multiple: true,
+    fileSize: 100 * 1024 * 1024,
+    fileType: 'application/octet-stream'
+  }"
+  [(ngModel)]="value"
+  (fileOuter)="fileChanged($event)"
+></kf-file-input> -->
+
+<kf-file-input
+  ngModel
+  [setting]="{
+    multiple: true,
+    fileSize: null
+  }"
+  [(ngModel)]="value"
+  (fileOuter)="fileChanged($event)"
+></kf-file-input>
+
+<kf-file-input
+  ngModel
+  [setting]="{
+    multiple: true,
+    fileSize: 100 * 1024 * 1024
+  }"
+  [(ngModel)]="value"
+  (fileOuter)="fileChanged($event)"
+></kf-file-input>
+
+
+<!-- <kf-file-input-array
+  ngModel
+  [(ngModel)]="valueArray"
+  fileType="*"
+  [fileSize]="100 * 1024 * 1024"
+  [readonly]="false"
+  (fileArrayOuter)="fileArrayChanged($event)"
+></kf-file-input-array> -->
+
+<kf-button (click)="ok()"></kf-button>

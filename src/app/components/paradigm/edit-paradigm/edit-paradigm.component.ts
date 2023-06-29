@@ -60,10 +60,10 @@ export class EditParadigmComponent extends RequestService implements OnInit {
   }
 
   getFormJson(type: any) {
-    const url = '/api/Paradigm/paradigms/form-config';
+    const url = '/api/Paradigm/paradigms/create-form-config';
 
     this.request({
-      method: 'POST',
+      method: 'GET',
       url,
       body: { modelType: type },
     }).subscribe((response) => {

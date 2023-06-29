@@ -18,9 +18,8 @@ export const formInputDto = {
 
 
 export const options = {
-  苹果: 0,
-  香蕉: 1,
-  菠萝: 2
+  苹果: true,
+  香蕉: false
 }
 
 export const checkedIds = [1,2]

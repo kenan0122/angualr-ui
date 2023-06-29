@@ -1,43 +1,43 @@
 <app-table
-  [reLoad]="reLoad"
+  [reload]="reload"
   [jsonUrlObj]="jsonUrlObj"
   [extraBtnTemplate]="operationTpl"
   [tableTopTemplate]="topTpl"
+  [tdFirstTemplate]="tdFirstTemplate"
   [isEnableAddBtn]="false"
   [isEnableEditBtn]="false"
-  (switchOuter)="publish($event)">
+  [hasUpdateAuth]="false"
+  (switchOuter)="publish($event)"
+>
 </app-table>
+
+<ng-template #tdFirstTemplate let-model>
+  非官方个
+  <!-- <kf-thumbnail [thumbnail]="fillThumbnail(model.data)" [iconUrl]="fillIcon(model.data)"></kf-thumbnail> -->
+</ng-template>
 <ng-template #topTpl>
   <kf-button
-    style="width: 6.25rem;height: 2.5rem;"
-    (btnOuter)="addParadigm()">
+    [class]="'white'"
+    style="width: 6.25rem; height: 2.5rem"
+    (click)="addParadigm()"
+  >
     添加
   </kf-button>
 </ng-template>
-<ng-template #operationTpl  let-model>
-  <kf-button
-    (btnOuter)="rename(model)">
-    重复名
-  </kf-button>
-  <kf-button
-    (btnOuter)="copy(model)">
-    复制
-  </kf-button>
-  <kf-button
-    (btnOuter)="editInfo(model)">
-    编辑详情
-  </kf-button>
-  <kf-button
-  (btnOuter)="editParam(model)">
-  编辑参数
-</kf-button>
+<ng-template #operationTpl let-model>
+  <kf-button (click)="rename(model)"> 重复名 </kf-button>
+  <kf-button (click)="copy(model)"> 复制 </kf-button>
+  <kf-button (click)="editInfo(model)"> 编辑详情 </kf-button>
+  <kf-button (click)="editParam(model)"> 编辑参数 </kf-button>
 </ng-template>
 
-<kf-modal *ngIf="inputDto"
+<kf-modal
+  *ngIf="inputDto"
   width="700px"
   [isVisible]="isVisibleModal"
   [jsonData]="formsJsonData"
   [inputDto]="inputDto"
   [saveType]="saveType"
-  (modalOuter)="closeModal($event)">
+  (modalOuter)="closeModal($event)"
+>
 </kf-modal>

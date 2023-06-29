@@ -1,0 +1,78 @@
+{
+  "action": {
+    "serviceName": "确定按钮提交",
+    "methodName": "",
+    "dto": ""
+  },
+  "tabs": [
+    {
+      "displayName": "项目资源",
+      "action": {
+        "serviceName": "tab的提交",
+        "methodName": "",
+        "dto": ""
+      },
+      "fields": [
+        {
+          "type": 6,
+          "displayName": "查询",
+          "table": {
+            "displayName": "文章列表",
+            "search": {
+              "displayName": "查询",
+              "fields": [
+                {
+                  "rows": 1,
+                  "valueType": 1,
+                  "maxLength": 100,
+                  "placeholder": "搜索当前文件夹...",
+                  "type": 0,
+                  "label": "",
+                  "key": "title",
+                  "isRequired": false
+                }
+              ]
+            },
+            "breadcrumbs": [{ "key": "1", "label": "全部文件" }],
+            "columns": "相关表格列的数组",
+            "multiSelect": false,
+            "enablePagination": true,
+            "action": "相关查询dto以及服务请求"
+          }
+        },
+        {
+          "type": 1,
+          "valueType": 3,
+          "isMulti": false,
+          "style": 0
+        }
+      ]
+    },
+    {
+      "displayName": "本地资源",
+      "action": {
+        "serviceName": "tab的提交",
+        "methodName": "",
+        "dto": ""
+      },
+      "fields": [
+        {
+          "type": "上传类型",
+          "maxFileSize": 1,
+          "maxFileCount": 3,
+          "showUploadList": {
+            "showPreviewIcon": false,
+            "showRemoveIcon": true
+          },
+          "isAutoUpload": true
+        },
+        {
+          "type": "单选按钮",
+          "valueType": 3,
+          "isMulti": false,
+          "style": 0
+        }
+      ]
+    }
+  ]
+}
