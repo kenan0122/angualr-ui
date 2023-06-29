@@ -1,8 +1,8 @@
 <div class="edit-experiment">
-  <kf-button [class]="'no-border-btn absolute'" (btnOuter)="back()"> 返回 </kf-button>
+  <kf-button [class]="'no-border-btn absolute'" (click)="back()"> 返回 </kf-button>
   <div class="edit-experiment-btn">
-    <kf-button [class]="'no-border-btn'" (btnOuter)="preview()"> 预览 </kf-button>
-    <kf-button [class]="'no-border-btn'" (btnOuter)="save()"> 保存 </kf-button>
+    <kf-button [class]="'no-border-btn'" (click)="preview()"> 预览 </kf-button>
+    <kf-button [class]="'no-border-btn'" (click)="save()"> 保存 </kf-button>
     <nz-switch [(ngModel)]="isDark" [nzControl]="true" (click)="themeSwitch()" ></nz-switch>
   </div>
   <div id="experiment"></div>

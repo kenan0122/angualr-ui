@@ -1,5 +1,5 @@
-@import './radius-variable.scss';
-@import './color.scss';
+@import './radius-variables.scss';
+@import './colors.scss';
 
 .radius-1 {
   border-radius: $radius-1;
@@ -14,7 +14,7 @@
 }
 
 .radius-4 {
-  border-radius: $radius-5;
+  border-radius: $radius-4;
 }
 
 .border-1 {

@@ -1,19 +1,43 @@
 <div class="kf-checkbox-group"
   [ngClass]="{'kf-form-item-with-help': error$ | async}"
-  [ngClass]="flexDirection">
-  <ng-content></ng-content>
+  [class]="layout.htmlClass">
+  <label
+  *ngIf="setting.title"
+  [attr.for]="'control' + layout.id"
+  [class]="layout.labelHtmlClass"
+  [style.display]="setting.noTitle ? 'none' : ''"
+  [innerHTML]="setting.title"
+></label>
+
+<ng-content select="[name=extra]"></ng-content>
 
   <div>
-    <ng-container
-      *ngFor="let o of options | keyvalue; let i = index;trackBy: trackByOption"
+    <ng-container *ngIf="isArray; else elseBlock">
+      <ng-container
+      *ngFor="let o of options; let i = index;trackBy: trackByOption"
       (ngModelChange)="checkboxChange($event)">
       <span
         nz-checkbox
-        [nzChecked]="setOfCheckedId.has(o.value)"
-        (nzCheckedChange)="onCheckedChange(o.value, $event)">
+        [nzChecked]="setOfCheckedId.has(o[setting.valueField])"
+        (nzCheckedChange)="onCheckedChange([setting.valueField], $event)">
         {{o.key}}
       </span>
     </ng-container>
-    <kf-error [title]="title" [error$]="error$"></kf-error>
+    </ng-container>
+    <ng-template #elseBlock>
+      <ng-container
+        *ngFor="let o of options | keyvalue: unsorted; let i = index;trackBy: trackByOption"
+        (ngModelChange)="checkboxChange($event)">
+        <span
+          nz-checkbox
+          [nzChecked]="setOfCheckedId.has(o.value)"
+          (nzCheckedChange)="onCheckedChange(o.value, $event)">
+          {{o.key}}
+        </span>
+      </ng-container>
+    </ng-template>
+
+
+    <kf-error [title]="setting.title" [error$]="error$"></kf-error>
   </div>
 </div>

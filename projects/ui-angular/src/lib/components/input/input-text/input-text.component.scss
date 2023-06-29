@@ -4,6 +4,28 @@
   @extend .kf-form-item;
 }
 
+
+.text-content {
+  width: 100%;
+}
+
+input {
+  background: transparent;
+}
+
+nz-input-group {
+  width: 100%;
+  border: 1px solid #dadfe6;
+  transition: all 0.2s;
+  background: white;
+  border-radius: 0.25rem;
+}
+
+.ant-input-affix-wrapper-lg {
+  font-size: inherit;
+  height: 2.5rem;
+}
+
 .ant-input-lg {
   font-size: inherit;
 }

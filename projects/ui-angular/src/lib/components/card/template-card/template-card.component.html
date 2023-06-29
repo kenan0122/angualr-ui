@@ -1,19 +1,39 @@
-<div
-  class="kf-template-card"
-  [class]="flexDirection">
-  <ng-content></ng-content>
+<div class="kf-template-card" [class]="layout.htmlClass">
+  <label
+    *ngIf="setting.title"
+    [attr.for]="'control' + layout.id"
+    [class]="layout.labelHtmlClass"
+    [style.display]="setting.noTitle ? 'none' : ''"
+    [innerHTML]="setting.title"
+  ></label>
+
+  <ng-content select="[name=extra]"></ng-content>
 
   <div class="kf-grid-cols-2">
     <ng-container *ngFor="let option of options | keyvalue; let i = index">
-        <nz-card
-          style="width: 300px"
-          [style.border-color]="value === option.value['key'] ? '#22befb' : '#e9e9e9'"
-          [nzBorderless]="true"
-          [nzTitle]="option.key"
-          (click)="cardClick(option.value['key'])"
-        >
-          <p>{{ option.value["desc"] }}</p>
-        </nz-card>
+      <nz-card
+        [style]="cardStyle"
+        [style.border-color]="value === option.value ? '#22befb' : '#e9e9e9'"
+        [nzBorderless]="borderLess"
+        [nzExtra]="extraTemplate"
+        [nzCover]="coverTemplate"
+        (click)="cardClick(option.value)"
+      >
+        <div class="template-content" >
+          <div class="content-left">
+            <img
+              [src]="getDescByTemplateValue(option.value)['src']"
+              loading="lazy"
+            />
+          </div>
+          <div class="content-right">
+            <h6 class="text-center">{{ option.key }}</h6>
+            <span class="right-desc">{{
+              getDescByTemplateValue(option.value)["desc"]
+            }}</span>
+          </div>
+        </div>
+      </nz-card>
     </ng-container>
   </div>
 </div>

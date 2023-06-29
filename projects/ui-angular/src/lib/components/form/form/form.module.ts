@@ -1,3 +1,7 @@
+import { FileInputModule } from './../../input/file-input/file-input.module';
+import { FileInputArrayModule } from './../../input/file-input-array/file-input-array.module';
+import { CustomModule } from './../../custom/custom.module';
+
 import { TemplateCardModule } from './../../card/template-card/template-card.module';
 import { QuestionCoverModule } from './../../question-cover/question-cover.module';
 import { InputNumberModule } from '../../input/input-number/input-number.module';
@@ -37,7 +41,10 @@ import { PipeModule } from '../../../pipe/pipe.module';
     InputNumberModule,
     PipeModule,
     QuestionCoverModule,
-    TemplateCardModule
+    TemplateCardModule,
+    CustomModule,
+    FileInputArrayModule,
+    FileInputModule
   ]
 })
 export class FormModule { }

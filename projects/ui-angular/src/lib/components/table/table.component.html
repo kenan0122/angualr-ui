@@ -1,129 +1,59 @@
 <div class="kf-table">
-  <!-- 搜索 -->
-  <kf-form
-    *ngIf="jsonData.search.fields"
-    #formChild
-    class="kf-items-start"
-    [fields]="jsonData.search.fields"
-    [inputDto]="jsonData.action.dto"
-  >
-    <kf-button style="width: 6.25rem; height: 2.5rem" (btnOuter)="search()">
-      查询
-    </kf-button>
-  </kf-form>
-
-  <!-- 按钮数组 -->
-  <!-- <ng-content select="[buttons]" ></ng-content> -->
-  <ng-container
-    *ngTemplateOutlet="btnTemplate; context: { $implicit: setOfCheckedId }"
-  ></ng-container>
-
-  <nz-table
-    *ngIf="data"
-    #basicTable
-    nzBordered
-    [nzData]="data.items"
-    [nzTotal]="data.totalCount"
-    [nzPageSize]="pageSize"
-    [(nzPageIndex)]="pageNumber"
-    [nzFrontPagination]="false"
-    [nzHideOnSinglePage]="true"
-    [nzShowPagination]="jsonData.enablePagination"
-    (nzPageIndexChange)="pageNumberChange($event)"
-  >
-    <thead>
-      <tr>
-        <th
-          *ngIf="jsonData.multiSelect"
-          [nzChecked]="checked"
-          [nzDisabled]="disabledCheck"
-          [nzIndeterminate]="indeterminate"
-          (nzCheckedChange)="onAllChecked($event)"
-        ></th>
-
-        <ng-container *ngFor="let column of jsonData.columns">
-          <th
-            *ngIf="column.isShow"
-            [nzColumnKey]="column.key"
-            [nzSortFn]="true"
-            [nzShowSort]="column.isSort"
-            (nzSortOrderChange)="sortOderChange(column.key, $event)"
-          >
-            {{ column.label }}
-          </th>
-        </ng-container>
-
-        <th nzAlign="center">操作</th>
-      </tr>
-    </thead>
-    <tbody>
-      <ng-container *ngFor="let data of basicTable.data; let i = index">
-        <!-- 有的数据不需要tr点击事件-->
-        <tr>
-          <td
-            *ngIf="jsonData.multiSelect"
-            [nzChecked]="setOfCheckedId.has(data.id)"
-            [nzDisabled]="data[disabledProp]"
-            (nzCheckedChange)="onItemChecked(data.id, $event)"
-          ></td>
-
-          <td *ngFor="let column of jsonData.columns; let fi = index">
-            <ng-container [ngSwitch]="column.columnType">
-              <!-- 纯文本-->
-              <ng-container *ngSwitchCase="0">
-                <span class="kf-items-center" >
-                  <ng-container *ngIf="column.url">
-                    <img
-                      [src]="column.url"
-                      style="width: 24px; height: 24px"
-                      class="mr-2"
-                    />
-                  </ng-container>
-                  <ng-container *ngIf="column.isClick; else elseBlock">
-                    <a [attr.href]="data.path" (click)="navigate(data.path, $event)">{{ data[column.key] }}</a>
-                  </ng-container>
-                  <ng-template #elseBlock>
-                    {{ data[column.key] }}
-                  </ng-template>
-
-                </span>
-              </ng-container>
-              <!-- 下拉/枚举进行值转换 -->
-              <ng-container *ngSwitchCase="1">
-                {{ lg(data[column.key], column.options) }}
-              </ng-container>
-              <!-- Switch -->
-              <ng-container *ngSwitchCase="2">
-                <nz-switch
-                  [nzCheckedChildren]="checkedTemplate"
-                  [nzUnCheckedChildren]="unCheckedTemplate"
-                  [(ngModel)]="data[column.key]"
-                  [nzControl]="true"
-                  (click)="switchClick(data, column.action, column.key)"
-                >
-                </nz-switch>
-                <ng-template #checkedTemplate>{{
-                  lg(true, column.options)
-                }}</ng-template>
-                <ng-template #unCheckedTemplate>{{
-                  lg(false, column.options)
-                }}</ng-template>
-              </ng-container>
-
-              <ng-container *ngSwitchCase="3"> </ng-container>
-            </ng-container>
-          </td>
-          <td class="text-center">
-            <!--插槽/占位 -->
-            <ng-container
-              *ngTemplateOutlet="
-                operateTemplate;
-                context: { $implicit: { data: this.data, i: this.i } }
-              "
-            ></ng-container>
-          </td>
-        </tr>
-      </ng-container>
-    </tbody>
-  </nz-table>
+  <!-- <i class="fa fa-credit-card" (click)="switch(1)"></i>
+  <i class="fa fa-list-alt" (click)="switch(0)"></i> -->
+  <div [ngSwitch]="tableType">
+    <ng-container *ngSwitchCase="0">
+      <kf-table-list
+        #tableChild
+        [reload]="reload"
+        [jsonData]="jsonData"
+        [items]="items"
+        [totalCount]="totalCount"
+        [pageNumber]="pageNumber"
+        [pageSize]="pageSize"
+        [disabledProp]="disabledProp"
+        [onlyField]="onlyField"
+        [btnTemplate]="btnTemplate"
+        [operateTemplate]="operateTemplate"
+        [tdFirstTemplate]="tdFirstTemplate"
+        [tdCustomTemplate]="tdCustomTemplate"
+        (switchOuter)="switchClick($event)"
+        (tableOuter)="pageNumberChange($event)"
+        (trClick)="itemClick($event)"
+        (checkedChange)="checkedChanged($event)"
+      >
+      </kf-table-list>
+    </ng-container>
+    <ng-container *ngSwitchCase="1">
+      <kf-table-card
+        [reload]="reload"
+        [jsonData]="jsonData"
+        [items]="items"
+        [totalCount]="totalCount"
+        [pageNumber]="pageNumber"
+        [pageSize]="pageSize"
+        [btnTemplate]="btnTemplate"
+        [operateTemplate]="operateTemplate"
+        (cardOuter)="cardItemChange($event)"
+        (chooseOuter)="chooseChange($event)"
+      >
+      </kf-table-card>
+    </ng-container>
+    <ng-container *ngSwitchCase="2">
+      <kf-content-list
+        #tableChild
+        [reload]="reload"
+        [jsonData]="jsonData"
+        [items]="items"
+        [totalCount]="totalCount"
+        [pageNumber]="pageNumber"
+        [pageSize]="pageSize"
+        [btnTemplate]="btnTemplate"
+        [operateTemplate]="operateTemplate"
+        (tableOuter)="pageNumberChange($event)"
+        (trClick)="itemClick($event)"
+      >
+      </kf-content-list>
+    </ng-container>
+  </div>
 </div>

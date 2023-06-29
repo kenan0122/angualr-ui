@@ -1,0 +1,47 @@
+<div class="editor-style">
+  <div class="editor-style-content">
+    <!--S 一级导航ui-->
+    <ul class="editor-style-menu" *ngIf="menus">
+      <ng-container *ngIf="mode == 0">
+        <li
+          *ngFor="let item of menus; let index = index"
+          [ngClass]="{ active: menuSelectIndex == index }"
+          (click)="templateContent(item, index)"
+        >
+          {{ preSetTypeToName(item) }}
+        </li>
+      </ng-container>
+      <ng-container *ngIf="mode == 1">
+        <li
+          *ngFor="let item of menus; let index = index"
+          [ngClass]="{ active: menuSelectIndex == index }"
+        >
+          {{ preSetTypeToNameVuePress(item) }}
+        </li>
+      </ng-container>
+    </ul>
+    <!--E 一级导航ui-->
+    <!--S markdown content-->
+    <div class="editor-style-template" *ngIf="templateContents">
+      <div *ngFor="let content of templateContents" class="list-border-bottom">
+        <ng-container *ngIf="mode == 0">
+          <div *ngIf="getHtml(content)">
+            <div
+              class="cursor"
+              (click)="selectTemplateStyle(content)"
+              [innerHTML]="getHtml(content) | html"
+            ></div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="mode == 1">
+          <div
+            class="cursor"
+            (click)="selectTemplateStyle(content, mode)"
+            [innerHTML]="content.html | html"
+          ></div>
+        </ng-container>
+      </div>
+    </div>
+    <!--E markdown content-->
+  </div>
+</div>

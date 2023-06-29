@@ -1,0 +1,36 @@
+<kf-table-list
+    *ngIf="tableJsonData && tableData"
+    #tableChild
+    [data]="tableData"
+    [items]="tableData"
+    [jsonData]="tableJsonData"
+    [reload]="reload"
+    [operateTemplate]="customTpl"
+    [btnTemplate]="btnTpl"
+    (tableOuter)="tableChange($event)"
+  >
+  </kf-table-list>
+
+<ng-template #btnTpl  let-ids>
+  <kf-button
+  style="width: 6.25rem;height: 2.5rem;"
+  (click)="batchAdd()">
+  批量添加
+</kf-button>
+  <kf-button
+    style="width: 6.25rem;height: 2.5rem;"
+    (click)="deleteBatch()">
+    批量删除
+  </kf-button>
+</ng-template>
+
+<ng-template #customTpl  let-model>
+  <kf-button
+    (click)="delete(model)">
+    删除
+  </kf-button>
+  <kf-button
+    (click)="add(model)">
+    添加
+  </kf-button>
+</ng-template>

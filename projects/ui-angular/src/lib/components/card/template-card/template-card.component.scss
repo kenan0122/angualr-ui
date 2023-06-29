@@ -1,15 +1,26 @@
 @import '../../../styles/forms/inputs.scss';
-@import '../../../styles/colors/variables.scss';
 
 .kf-template-card {
   @extend .kf-form-item;
 }
 
+.template-content {
+  display: grid;
+  grid-template-columns: minmax(150px, max-content) 1fr;
+  grid-gap: 4rem;
+  align-items: center;
+}
+
+.right-desc {
+  color: #999;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
 nz-card{
   cursor: pointer;
-  border: 1px solid $color-light-grey-050;
 
   &:hover {
-    border-color: $color-blue;
+    border-color: #22befb;
   }
 }

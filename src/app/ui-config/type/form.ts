@@ -1,21 +1,15 @@
 import { IOptionEntry, ServiceRequestDto } from "./base";
 
-// export interface FormConfigSchemeDto {
-//   displayName?: string;
-//   serviceName?: string;
-//   methodName?: string;
-//   tabs: FormTabConfigScheme[];
-// }
-
 export interface FormConfigSchemeDto<T> {
   action: ServiceRequestDto<T>;
-  tabs: FormTabConfigScheme[];
+  tabs: FormTabConfigScheme<T>[];
 }
 
-export interface FormTabConfigScheme {
+export interface FormTabConfigScheme<T> {
   displayName?: string;
   // fields 是 FormFieldConfigSchemeBase[]
   fields: object[];
+  action?: ServiceRequestDto<T>;
 }
 
 /** 表单基类 */
@@ -55,8 +49,15 @@ export interface SelectConfigScheme extends FormFieldConfigSchemeBase {
 }
 
 export interface FileUploadConfigScheme extends FormFieldConfigSchemeBase {
-  fileType: FileType;
+  fileType: InputFileType;
+  /** 文件上传大小(MB为单位) */
   maxFileSize: number;
+  /** 文件个数 */
+  maxFileCount: number;
+  /**文件上展示的按钮 {showPreviewIcon: false, showRemoveIcon: true} */
+  showUploadList: object;
+  /** 是否自动上传 */
+  isAutoUpload: boolean;
   type: FormFieldType.FileUpload;
 }
 
@@ -72,15 +73,17 @@ export enum FormFieldType
     FileUpload,
     Group,
     MarkDown,
-    QuestionCover
+    QuestionCover,
+    Card,
+    Custom
 }
 
 /** 文件类型 */
-export enum FileType
+export enum InputFileType
 {
-    Img,
-    Zip,
-    Any
+  Img,
+  Zip,
+  Any
 }
 
 /** input类型 */
@@ -88,7 +91,8 @@ export enum ValueType
 {
   Number,
   String,
-  Date
+  Date,
+  Boolean
 }
 
 /** Select枚举 */

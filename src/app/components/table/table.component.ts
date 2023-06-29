@@ -11,9 +11,10 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { template } from 'projects/ui-angular/src/lib/utils';
 import { TableBaseService } from 'src/app/ui-config/service/table-base.service';
-import { ErrorInfo } from 'src/app/ui-config/type/errror';
+import type { ErrorInfo } from 'src/app/ui-config/type/errror';
+import { TableType } from 'projects/ui-angular/src/public-api';
+import { template } from '@psylab/utils';
 
 @Component({
   selector: 'app-table',
@@ -24,14 +25,20 @@ import { ErrorInfo } from 'src/app/ui-config/type/errror';
 export class TableComponent extends TableBaseService implements OnChanges {
   @Input() extraBtnTemplate!: TemplateRef<any>;
   @Input() tableTopTemplate!: TemplateRef<any>;
+  @Input() tdFirstTemplate!: TemplateRef<any>;
 
   @Input() isEnableAddBtn: boolean = true;
   @Input() isEnableEditBtn: boolean = true;
+  @Input() isEnableDelBtn: boolean = true;
   @Input() checkIdLen: number = 0;
-  @Input() reLoad!: object;
-  @Input() jsonUrlObj!: JsonUrlDto;
+  @Input() reload!: object;
+  @Input() jsonUrlObj!: JsonUrlDto | any;
+  @Input() tableType: TableType = TableType.List;
+  //是否有更新全新主要对 switch进行控制 Value:true 正常显示 Value：false只显示文字
+  @Input() hasUpdateAuth: boolean = true;
 
   @Output() switchOuter = new EventEmitter();
+  @Output() trClick = new EventEmitter();
 
   // 表单json数据
   formsJsonData!: any;
@@ -45,7 +52,7 @@ export class TableComponent extends TableBaseService implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     // 如果重新加载, 重新渲染列表
-    if (changes['reLoad']) {
+    if (changes['reload']) {
       if (this.tableJsonData) {
         // 如果是多选, 删除之后重新刷新列表
         if (this.tableJsonData.multiSelect) {
@@ -104,7 +111,7 @@ export class TableComponent extends TableBaseService implements OnChanges {
 
   requestFormJson() {
     const url = `${this.baseUrl}${this.jsonUrlObj.formJsonUrl}`;
-    const api = this.http.post<any>(url, {});
+    const api = this.http.get<any>(url, {});
 
     return api;
   }
@@ -137,7 +144,12 @@ export class TableComponent extends TableBaseService implements OnChanges {
   }
 
   // 翻页, 排序
-  tableChange(pageNumber: number) {
+  tableChange(param: any) {
+    // 重新存储当前页数
+    this.pageNumberChange(param.pageNumber);
+  }
+
+  pageNumberChange(pageNumber: number) {
     // 重新存储当前页数
     this.pageNumber = pageNumber;
     this.reLoadData();
@@ -151,12 +163,16 @@ export class TableComponent extends TableBaseService implements OnChanges {
       if (this.tableData.items.length <= delItemLength) {
         // 如果当前页就一项, 直接跳转到前一页
         this.pageNumber = this.pageNumber - 1;
-        this.tableChange(this.pageNumber);
+        this.pageNumberChange(this.pageNumber);
       } else {
-        this.tableChange(this.pageNumber);
+        this.pageNumberChange(this.pageNumber);
       }
     } else {
-      this.tableChange(this.pageNumber);
+      this.pageNumberChange(this.pageNumber);
     }
+  }
+
+  itemClick(param: any) {
+    this.trClick.emit(param);
   }
 }

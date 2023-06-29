@@ -1,0 +1,53 @@
+<div class="kingfar-wechat-navigation">
+  <button
+    nz-button
+    nzType="link"
+    (click)="getDarkOrHighlight()"
+    class="right-20"
+  >
+    {{ setting.isHighlight ? "浅色" : "暗色" }}
+  </button>
+  <button nz-button nzType="link" (click)="getWideScreen()" class="right-20">
+    {{ setting.isWideScreen ? "网页预览" : "手机预览" }}
+  </button>
+  <button nz-button nzType="link" (click)="getWaterMarker()" class="right-20">
+    {{ setting.isKingfar ? "Kingfar水印" : "ErgoLAB水印" }}
+  </button>
+  <kf-drop-down-button
+    *ngIf="mode === modeType"
+    [value]="themeColorName"
+    [options]="themeColors"
+    (selectOuter)="getThemeColor($event)"
+  ></kf-drop-down-button>
+  <kf-drop-down-button
+    value="复制"
+    [options]="copyTypes"
+    [showSelectValue]="false"
+    (selectOuter)="getCopyContent($event, navigationButtonType.Copy)"
+  ></kf-drop-down-button>
+  <!--这里默认只接受insert和save两种功能,写成setting是为了方便以后扩展引用,如果扩展后期可以将navigationButtonType进行传入-->
+  <ng-container ng-if="otherSetting" *ngFor="let setting of otherSetting">
+    <ng-container
+      *ngIf="setting.type == buttonType.DropDown && setting.options"
+    >
+      <kf-drop-down-button
+        [value]="setting.text"
+        [options]="setting.options"
+        [showSelectValue]="false"
+        (selectOuter)="
+          getInsertContent($event, navigationButtonType.Insert, setting)
+        "
+      ></kf-drop-down-button>
+    </ng-container>
+    <ng-container *ngIf="setting.type == buttonType.Button">
+      <button
+        nz-button
+        nzType="primary"
+        (click)="save(setting)"
+        *ngIf="setting.type === buttonType.Button"
+      >
+        {{ setting.text }}
+      </button>
+    </ng-container>
+  </ng-container>
+</div>

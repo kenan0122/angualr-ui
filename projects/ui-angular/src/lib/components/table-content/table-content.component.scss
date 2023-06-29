@@ -1,0 +1,39 @@
+@import '../../styles/colors/variables.scss';
+
+:host ::ng-deep {
+  .kf-table-content {
+    padding: 0 0.5rem;
+    border: 1px solid #f0f0f0;
+    width: 100%;
+  }
+
+  .content-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .header-prefix {
+    position: relative;
+    &::before {
+      content: "";
+      width: 1px;
+      height: 12px;
+      display: block;
+      background-color: #e6e9ed;
+      position: absolute;
+      left: 0;
+      top: calc(50% - 6px);
+    }
+  }
+
+  content-form {
+    flex: 1 1 0%;
+  }
+
+  .kf-button button {
+    background-color: transparent;
+    color:  $color-light-blue;
+  }
+}

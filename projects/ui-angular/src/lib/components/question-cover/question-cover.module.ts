@@ -1,3 +1,4 @@
+import { RadioGroupModule } from './../input/radio/radio-group/radio-group.module';
 import { IconButtonModule } from './../icon-button/icon-button.module';
 import { IconModule } from './../icon/icon.module';
 import { NgModule } from '@angular/core';
@@ -24,7 +25,8 @@ import { PipeModule } from '../../pipe/pipe.module';
     NzRadioModule,
     IconModule,
     IconButtonModule,
-    PipeModule
+    PipeModule,
+    RadioGroupModule
   ],
   declarations: [
     QuestionCoverComponent,

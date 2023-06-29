@@ -4,7 +4,6 @@ import { Validator, AbstractControl, NG_VALIDATORS, ValidatorFn } from '@angular
 
 export function chooseEmptyValidator(nonEmpty: boolean): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
-    debugger
     let emptyStr = false;
     if (nonEmpty) {
       if (!control.value && control.value !== '') {

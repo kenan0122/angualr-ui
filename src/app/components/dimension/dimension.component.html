@@ -1,17 +1,18 @@
 <app-table
-  [reLoad]="reLoad"
+  [reload]="reload"
   [jsonUrlObj]="jsonUrlObj"
   [checkIdLen]="checkIdLen"
   [tableTopTemplate]="topTpl"
+  (trClick)="trClick($event)"
   >
 </app-table>
 
 <ng-template #topTpl  let-ids>
   <kf-button
     style="width: 6.25rem;height: 2.5rem;"
-    (btnOuter)="deleteBatch(ids)">
+    (click)="deleteBatch(ids)">
     批量删除
   </kf-button>
 </ng-template>
 
-
+<kf-custom [component]="component" [param]="param"></kf-custom>

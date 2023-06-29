@@ -2,15 +2,13 @@
   <nz-drawer
     nzWrapClassName="vertical-right-drawer"
     [nzBodyStyle]="{padding: 0,overflow: 'auto'}"
-    [nzWidth]="860"
-    [nzClosable]="false"
+    [nzWidth]="width"
+    [nzClosable]="closable"
     [nzVisible]="visible"
-    nzPlacement="right"
-    [nzTitle]="nzDrawerTitle"
+    [nzPlacement]="placement"
+    [nzTitle]="titleTemplate"
+    [nzFooter]="footerTemplate"
     (nzOnClose)="close()">
-    <ng-template #nzDrawerTitle>
-      <!-- 标题 -->
-    </ng-template>
     <ng-container *nzDrawerContent>
       <!--插槽/占位 -->
       <ng-container *ngTemplateOutlet="drawerTemplate; context: {}"></ng-container>

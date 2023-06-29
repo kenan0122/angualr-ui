@@ -3,11 +3,18 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnInit,
   Output,
   TemplateRef,
   ViewEncapsulation,
 } from '@angular/core';
-import { AbstractValueAccessor, MakeProvider } from '../../asbstract-value-accessor';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { assignNullProps, notNullish } from '@psylab/utils';
+import {
+  AbstractValueAccessor,
+  MakeProvider,
+} from '../../asbstract-value-accessor';
+import { getDefaultLayout, getRadioSetting } from '../../input-setting';
 
 @Component({
   selector: 'kf-radio-group',
@@ -17,16 +24,13 @@ import { AbstractValueAccessor, MakeProvider } from '../../asbstract-value-acces
   providers: MakeProvider(RadioGroupComponent),
   styleUrls: ['./radio-group.component.scss'],
 })
-export class RadioGroupComponent extends AbstractValueAccessor {
-  @Input() title: string = '';
-  @Input() options: any;
-  // 前台要显示的字段名称
-  @Input() fontName: string = 'name';
-  // 绑定的后台字段
-  @Input() backProp: string = 'value';
-  // 控件名字
-  @Input() name: string = 'radio';
-  @Input() flexDirection: string = 'kf-justify-center';
+export class RadioGroupComponent
+  extends AbstractValueAccessor
+  implements OnInit
+{
+  @Input() options?: object;
+  @Input() setting: any = getRadioSetting();
+  @Input() layout: any = getDefaultLayout('radio');
 
   @Output() radioOuter = new EventEmitter();
 
@@ -39,12 +43,31 @@ export class RadioGroupComponent extends AbstractValueAccessor {
     this._required = v;
   }
 
+  isArray: boolean = false;
+
   constructor() {
     super();
   }
 
-  radioChange() {
+  ngOnInit(): void {
+    assignNullProps(this.setting, getRadioSetting());
+    assignNullProps(this.layout, getDefaultLayout('radio'));
+  }
+
+  radioChange(param: any) {
     this.firstLoad = false;
-    this.radioOuter.emit();
+    this.radioOuter.emit(param);
+  }
+
+  // But for angular 7 or above, you need to put an empty function to keep data unsorted.
+  //change keyvalue's order, 不能删除
+  unsorted() {return 0}
+
+  /**
+   * 实现自定义校验，写在组件类可介入入参
+   * @param control AbstractControl
+   */
+  override validate(control: AbstractControl): ValidationErrors | null {
+    return null;
   }
 }

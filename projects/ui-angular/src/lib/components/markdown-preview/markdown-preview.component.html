@@ -1,0 +1,95 @@
+<div
+  class="rich-text"
+  [ngClass]="{
+    'header-maxwidth': isWideScreen,
+    'header-minwidth': !isWideScreen
+  }"
+>
+  <div
+    class="rich-header kingfar-markdown-tool kingfar-markdown-preview-scroll"
+    [ngClass]="{
+      'header-maxwidth': isWideScreen,
+      'header-minwidth': !isWideScreen
+    }"
+  >
+    <div (click)="skipBack()" *ngIf="setting.backUrl" class="kingfar-back">
+      <kf-icon
+        [path]="path"
+        size="1rem"
+        color="#1890ff"
+        style="position: relative; transform: rotate(45deg)"
+      ></kf-icon
+      >返回
+    </div>
+    <div>
+      <button
+        nz-button
+        nzType="primary"
+        class="right-20 button"
+        (click)="getDarkOrHighlight()"
+      >
+        {{ isHighlight ? "浅色" : "暗色" }}
+      </button>
+      <button
+        nz-button
+        nzType="primary"
+        class="right-20 button"
+        (click)="getWaterMarker()"
+      >
+        {{ isKingfar ? "Kingfar水印" : "ErgoLAB水印" }}
+      </button>
+      <button
+        nz-button
+        nzType="primary"
+        class="right-20 button"
+        (click)="getWideScreen()"
+        *ngIf="!isMobile"
+      >
+        {{ isWideScreen ? "网页预览" : "手机预览" }}
+      </button>
+      <kf-drop-down-button
+        [value]="themeColor"
+        [options]="themeColors"
+        (selectOuter)="getThemeColor($event)"
+      ></kf-drop-down-button>
+      <span class="right-20"></span>
+      <button
+        nz-button
+        nzType="primary"
+        class="right-20 button"
+        (click)="getCopyContent($event)"
+      >
+        复制
+      </button>
+      <!-- <kf-drop-down-button
+        value="复制"
+        [options]="copyTypes"
+        [showSelectValue]="false"
+        (selectOuter)="getCopyContent($event)"
+      ></kf-drop-down-button> -->
+    </div>
+  </div>
+  <div class="rich-content">
+    <div
+      [ngClass]="{
+        'kingfar-markdown-maxwidth': isWideScreen,
+        'kingfar-markdown-dark': !isHighlight,
+        'kingfar-markdown-minwidth': !isWideScreen,
+        'hiden-top-maxwidth': isMobile,
+        'hiden-toc-maxwidth': !showToc,
+        'kingfar-docs': isDocs
+      }"
+      class="rich-text-left rich-text-container"
+    >
+      <div
+        *ngIf="htmlContent"
+        [innerHTML]="htmlContent"
+        class="kingfar-markdown-preview-content aritcle-content"
+      ></div>
+    </div>
+    <div
+      class="right-text-right js-toc"
+      [ngClass]="{ 'hidden-js-toc': isMobile || !showToc }"
+    ></div>
+  </div>
+</div>

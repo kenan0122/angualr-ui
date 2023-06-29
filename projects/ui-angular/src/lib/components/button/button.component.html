@@ -1,9 +1,14 @@
+<button
+  #btn
+  [attr.type]="type"
+  [disabled]="disabled"
+  [style]="style"
+  [ngClass]="{ 'kf-loading': loading }"
+  [class]="class"
+>
+  <i nz-icon nzType="loading" *ngIf="loading" class="kf-btn-icon"></i>
 
-<button #btn
-[attr.type]="type"
-[disabled]="disabled"
-[style]="style"
-[class]="class"
-(click)="btnClick()">
-<span class="content"><ng-content></ng-content></span>
+  <span class="content">
+    <ng-content></ng-content>
+  </span>
 </button>

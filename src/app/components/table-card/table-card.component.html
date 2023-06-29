@@ -1,0 +1,20 @@
+<div class="app-article">
+  <kf-table-content
+    *ngIf="tableJsonData && tableData"
+    [breadcrumbItem]="breadcrumbItem"
+    [reload]="reload"
+    [items]="tableData.items"
+    [totalCount]="tableData.totalCount"
+    [jsonData]="tableJsonData"
+    [isSearch]="isSearch"
+    [tableType]="1"
+    (tableOuter)="tableChange($event)"
+    (cardOuter)="cardItemChange($event)"
+    (chooseOuter)="chooseChange($event)"
+  >
+  </kf-table-content>
+</div>
+
+
+
+

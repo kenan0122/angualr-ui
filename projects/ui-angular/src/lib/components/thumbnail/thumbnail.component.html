@@ -1,0 +1,25 @@
+<span *ngIf="thumbnail && !disabledImg; else iconTemplate">
+  <picture>
+    <source
+      *ngIf="thumbnail.webpUrl"
+      [srcset]="thumbnail.webpUrl"
+      type="image/webp"
+    />
+    <img
+      class="thumbnail"
+      [ngStyle]="{ width: size + 'px', height: size + 'px' }"
+      [src]="thumbnail.imgUrl"
+      alt="暂无图片"
+      (error)="onLoadError()"
+    />
+  </picture>
+</span>
+<ng-template #iconTemplate>
+  <kf-icon
+    [path]="iconUrl"
+    [size]="iconSetting.size"
+    [color]="iconSetting.color"
+    [style]="iconSetting.style"
+  >
+  </kf-icon>
+</ng-template>

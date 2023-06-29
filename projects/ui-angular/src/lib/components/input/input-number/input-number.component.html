@@ -1,20 +1,52 @@
-<div class="kf-number"
-  [ngClass]="{'kf-form-item-with-help': error$ | async}"
-  [ngClass]="flexDirection">
+<div
+  class="kf-number"
+  [ngClass]="{ 'kf-form-item-with-help': error$ | async }"
+  [ngClass]="layout.htmlClass"
+>
   <!-- <ng-container  *ngTemplateOutlet="textTemplate;context: {}"></ng-container> -->
-  <ng-content></ng-content>
-  <div>
-    <input nz-input
-      [name]="name"
-      [nzSize]="size"
-      [(ngModel)]="value"
-      [placeholder]="placeholder"
-      [required]="required"
-      [maxLength]="maxLength"
-      [appAllowableFormat]="rex"
-      (ngModelChange)="numberChange($event)"
-      (focus)="focus()"/>
+  <div class="input-label">
+    <label
+      *ngIf="setting.title"
+      [attr.for]="'control' + layout.id"
+      [class]="layout.labelHtmlClass"
+      [style.display]="setting.noTitle ? 'none' : ''"
+      [innerHTML]="setting.title"
+    ></label>
+  </div>>
+  <ng-content select="[name=extra]"></ng-content>
 
-      <kf-error [title]="errorTip" info="" [error$]="error$"></kf-error>
-  </div>
+  <div class="text-content">
+    <nz-input-group [nzSuffix]="suffixTemplateInfo" [nzSize]="layout.size">
+      <ng-content></ng-content>
+      <input
+        nz-input
+        [id]="'control' + layout.id"
+        [name]="'control' + layout.id"
+        [(ngModel)]="value"
+        [placeholder]="setting.placeholder"
+        [nzBorderless]="layout.borderless"
+        [disabled]="setting.readonly"
+        [required]="setting.required"
+        [maxLength]="setting.maxLength"
+        [class]="layout.fieldHtmlClass"
+        [appAllowableFormat]="rex"
+        (ngModelChange)="numberChange($event)"
+        (focus)="focus()"
+      />
+    </nz-input-group>
+    <ng-template #suffixTemplateInfo>
+      <i
+        *ngIf="isClear"
+        class="search-icon"
+        nz-icon
+        nzType="close"
+        (click)="clear()"
+      ></i>
+      <ng-container
+        *ngTemplateOutlet="numberTemplate; context: { $implicit: null }"
+      ></ng-container>
+    </ng-template>
+
+    <kf-error [title]="errorTip" info="" [error$]="error$"></kf-error>
+  </div>>
 </div>

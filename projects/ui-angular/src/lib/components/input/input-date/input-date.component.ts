@@ -1,6 +1,20 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  TemplateRef,
+  ViewEncapsulation,
+} from '@angular/core';
+import { assignNullProps } from '@psylab/utils';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
-import { AbstractValueAccessor, MakeProvider } from '../asbstract-value-accessor';
+import {
+  AbstractValueAccessor,
+  MakeProvider,
+} from '../asbstract-value-accessor';
+import { getDefaultLayout, getDefaultSetting } from '../input-setting';
 
 @Component({
   selector: 'kf-input-date',
@@ -8,18 +22,12 @@ import { AbstractValueAccessor, MakeProvider } from '../asbstract-value-accessor
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: MakeProvider(InputDateComponent),
-  styleUrls: ['./input-date.component.scss']
+  styleUrls: ['./input-date.component.scss'],
 })
-export class InputDateComponent extends AbstractValueAccessor {
-  @Input() size: NzSizeLDSType = 'large';
-  @Input() title: string = '';
-  // 控件名字
-  @Input() name: string = 'date';
-  @Input() placeholder: string = '请输入要日期';
-  @Input() flexDirection: string = 'kf-justify-center';
-
-  @Input()
-  dateTemplate!: TemplateRef<any>;
+export class InputDateComponent extends AbstractValueAccessor implements OnInit {
+  @Input() setting: any = getDefaultSetting();
+  @Input() layout: any = getDefaultLayout('date');
+  @Input() dateTemplate!: TemplateRef<any>;
   @Output() dateOuter = new EventEmitter();
 
   @Input()
@@ -35,7 +43,12 @@ export class InputDateComponent extends AbstractValueAccessor {
     super();
   }
 
+  ngOnInit() {
+    assignNullProps(this.setting, getDefaultSetting());
+    assignNullProps(this.layout, getDefaultLayout('input'));
+  }
+
   dateChange(date: Date) {
-    this.dateOuter.emit(date)
+    this.dateOuter.emit(date);
   }
 }

@@ -1,0 +1,35 @@
+<div class="app-blog">
+  <div class="blog-left">
+    <kf-button [class]="'no-border-btn'" (click)="addBlog()"> 新建博客 </kf-button>
+    <nz-tree
+      [nzData]="nodes"
+      [nzExpandedIcon]="multiExpandedIconTpl"
+      (nzClick)="clickNode($event)"
+    >
+      <ng-template #multiExpandedIconTpl let-node let-origin="origin">
+        <ng-container *ngIf="origin.url; else elseBlock">
+          <img
+            class="mr-2 ng-star-inserted"
+            style="width: 24px; height: 24px"
+            [src]="origin.url"
+          />
+        </ng-container>
+        <ng-template #elseBlock>
+          <kf-icon [path]="path" size="1.5rem" color="#ffd55c"></kf-icon>
+        </ng-template>
+      </ng-template>
+    </nz-tree>
+  </div>
+  <div class="blog-right">
+    <kf-tabs [tabs]="tabs" [tabsTemplate]="slotTpl" [extraTemplate]="extraTpl">
+      <div >fff</div>
+    </kf-tabs>
+    <ng-template #slotTpl let-tabIndex>
+     <app-table [reload]="reload"  [jsonUrlObj]="tabs[tabIndex].jsonUrlObj"></app-table>
+    </ng-template>
+    <ng-template #extraTpl>
+      <div>ffff</div>
+    </ng-template>
+
+  </div>
+</div>

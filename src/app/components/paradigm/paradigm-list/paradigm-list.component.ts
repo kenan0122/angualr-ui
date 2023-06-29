@@ -12,12 +12,12 @@ import { template } from '@psylab/utils';
 })
 export class ParadigmListComponent extends RequestService implements OnInit {
 
-  reLoad: any = null;
+  reload: any = null;
   jsonUrlObj: JsonUrlDto = {
-    tableJsonUrl: '/api/Paradigm/paradigms/table-config',
-    tableDataUrl: '/api/Paradigm/paradigms/page',
+    tableJsonUrl: '/api/square/paradigms/table-config',
+    tableDataUrl: '/api/square/paradigms',
     deleteJsonUrl: '/api/Paradigm/paradigms/{0}',
-    formJsonUrl: '/api/Paradigm/paradigms/form-config',
+    formJsonUrl: '/api/Paradigm/paradigms/create-form-config',
     formDataUrl: '/api/Paradigm/paradigms/{0}/for-edit',
     saveUrl: '/api/Paradigm/paradigms/save-paradigm',
   };
@@ -36,10 +36,10 @@ export class ParadigmListComponent extends RequestService implements OnInit {
   addParadigm() {
     this.saveType = 0;
     // 弹框展示 "模板类型"和"范式名称"
-    const url = '/api/Paradigm/paradigms/template-form-config';
+    const url = '/api/square/paradigms/pre-create-form-config';
 
     this.request({
-      method: 'POST',
+      method: 'get',
       url,
     }).subscribe((response) => {
       this.formsJsonData = response;
@@ -57,7 +57,7 @@ export class ParadigmListComponent extends RequestService implements OnInit {
       url,
       body: param.column.dto,
     }).subscribe((response) => {
-      this.reLoad = {};
+      this.reload = {};
     });
   }
 
@@ -69,7 +69,7 @@ export class ParadigmListComponent extends RequestService implements OnInit {
     this.route.navigate(['/app/paradigm/info/' + param.id]);
   }
 
-  async rename(param: any) {
+  rename(param: any) {
     this.saveType = 2;
     this.getRenameData(param.id);
   }
@@ -133,7 +133,7 @@ export class ParadigmListComponent extends RequestService implements OnInit {
             // 编辑页面跳转
             this.route.navigate(['/app/paradigm/info/' + response.data.id]);
           } else {
-            this.reLoad = {};
+            this.reload = {};
           }
         } else {
           this.errorList = response.error ? response.error.errorMessage : [];
@@ -159,6 +159,10 @@ export class ParadigmListComponent extends RequestService implements OnInit {
     }
 
     return url;
+  }
+
+  itemClick(param: any) {
+    console.log('click',param)
   }
 
 }

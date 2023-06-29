@@ -1,75 +1,106 @@
-import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+  OnInit,
+} from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { assignNullProps } from '@psylab/utils';
+import { getDefaultLayout, getDefaultSetting } from '../../input/input-setting';
 
 @Component({
   selector: 'kf-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
-export class FormComponent implements AfterViewInit, OnInit {
+export class FormComponent implements OnInit, AfterViewInit {
   @ViewChild('validateForm') form!: NgForm;
 
   /** 表单数据 */
   @Input() fields: any[] = [];
   /** 填充数据的dto */
   @Input() inputDto: any;
-  @Input() size: any = 'large';
-  @Input() class: string = '';
+  @Input() formClass: string = 'cols-max-content-1';
+  @Input() customObj?: Object;
+
+  @Input() setting = getDefaultSetting();
+  @Input() layout = getDefaultLayout('form');
 
   @Output() selectOuter = new EventEmitter();
   @Output() initOuter = new EventEmitter();
+  @Output() customOuter = new EventEmitter();
+  @Output() customInstance = new EventEmitter();
+  @Output() fileArrayOuter = new EventEmitter();
+  @Output() fileOuter = new EventEmitter();
 
   // 正则表达式
   orderRex = '^[0-9]*$';
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
+    assignNullProps(this.setting, getDefaultSetting());
+    assignNullProps(this.layout, getDefaultLayout('from'));
   }
 
   ngAfterViewInit(): void {
-     this.initOuter.emit(this.form);
-   }
+    setTimeout(() => {
+      this.initOuter.emit(this.form);
+    }, 0);
+  }
 
-
-  selectChange(param: {id: any, name: any}) {
+  selectChanged(param: { id: any; name: any }) {
     this.initOuter.emit(this.form);
     this.selectOuter.emit(param);
   }
 
-  checkGroupChange(param: any) {
+  checkGroupChanged(_: any) {
     this.initOuter.emit(this.form);
   }
 
-  dateChange(param: Date) {
+  dateChanged(_: Date) {
     this.initOuter.emit(this.form);
   }
 
-  radioChange() {
+  radioChanged() {
     this.initOuter.emit(this.form);
   }
 
-  textareaChange(_: string) {
+  textareaChanged(_: string) {
     this.initOuter.emit(this.form);
   }
 
-  textChange(_: string) {
+  textChanged(_: string) {
     this.initOuter.emit(this.form);
   }
 
-  numberChange(_:number) {
+  numberChanged(_: number) {
     this.initOuter.emit(this.form);
   }
 
-  listChange() {
+  listChanged() {
     this.initOuter.emit(this.form);
   }
 
-  coverChange() {
+  coverChanged() {
     this.initOuter.emit(this.form);
   }
 
-  templateCardChange() {
+  templateCardChanged() {
+    this.initOuter.emit(this.form);
+  }
+
+  fileArrayChanged(param: any) {
+    this.fileArrayOuter.emit(param);
+    this.initOuter.emit(this.form);
+  }
+
+  fileChanged(param: any) {
+    this.fileOuter.emit(param);
     this.initOuter.emit(this.form);
   }
 }

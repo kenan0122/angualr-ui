@@ -1,10 +1,30 @@
-<!-- <kf-upload
-  [required]="true"
+ <!-- <kf-upload
   ngModel
-  [name]="'file'"
-  [ngModelOptions]="{name: 'file'}"
+  name="'file'"
+  #manualUploadChild
+  listType="picture-card"
+  [ngModelOptions]="{ name: 'file' }"
+  [uploadFileNum]="3"
   [(ngModel)]="fileArray"
-  (fileOuter)="uploadFile($event)"></kf-upload> -->
-  <nz-breadcrumb [nzAutoGenerate]="true" [nzRouteLabelFn]="translateFn"></nz-breadcrumb>
+  [required]="true"
+  [upload]="upload"
+  (fileOuter)="uploadFile($event)"
+></kf-upload> -->
 
-<router-outlet ></router-outlet>
+<!-- <kf-upload
+
+name="'file'"
+#manualUploadChild
+listType="picture-card"
+[uploadFileNum]="3"
+[fileArray]="fileArray"
+[required]="true"
+[upload]="upload"
+></kf-upload> -->
+
+<kf-button [loading]="loading" [class]="'btn btn-primary'" (click)="save($event)">按钮</kf-button>
+<!-- <button (click)="handleUpload()" [class]="'btn btn-primary'">按钮</button> -->
+<!-- <nz-breadcrumb [nzAutoGenerate]="true" [nzRouteLabelFn]="translateFn"></nz-breadcrumb> -->
+
+<router-outlet></router-outlet>
+<!-- <button (click)="markdownPreview()">markdown预览</button> -->

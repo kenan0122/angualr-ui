@@ -1,4 +1,3 @@
-import { template } from 'projects/ui-angular/src/lib/utils';
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { articleTableJson, articleTableStructure } from 'src/app/ui-config/json/articleJson';
 
@@ -8,7 +7,7 @@ import { articleTableJson, articleTableStructure } from 'src/app/ui-config/json/
   styleUrls: ['./article-list.component.scss']
 })
 export class ArticleListComponent implements OnInit {
-  reLoad: any = {};
+  reload: any = {};
   tableJsonData?:any;
   tableData?: any;
 
@@ -19,7 +18,7 @@ export class ArticleListComponent implements OnInit {
     const random = Math.ceil(Math.random() * 10);
 
     const items = articleTableStructure.items.map(item => {
-      item.path = item.path + random;
+      item.slug = item.slug + random;
       item.title = item.title + random;
       return item;
     });

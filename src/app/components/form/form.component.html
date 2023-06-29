@@ -1,7 +1,93 @@
-<form #validateForm="ngForm"  appIdentityRevealed
+<form
+  #validateForm="ngForm"
+  appIdentityRevealed
   nzLayout="inline"
-  autocomplete="off">
-<!-- <kf-button>测试按钮444</kf-button>
+  autocomplete="off"
+>
+  <!-- <kf-radio-group
+    ngModel
+    [name]="'radio'"
+    [ngModelOptions]="{ name: 'radio' }"
+    [options]="_checkboxGroups"
+    [(ngModel)]="checkedId"
+    [required]="true"
+  >
+    <kf-input-title title="单选: "></kf-input-title>
+  </kf-radio-group>
+  <kf-radio-group
+  name="state" *ngIf="statusList"
+  ngModel
+  [setting]="{
+    valueField: 'key',
+    labelField: 'value'
+  }"
+  [(ngModel)]="state"
+  [options]="statusList"
+  (radioChanged)="radioChanged($event)"
+>
+</kf-radio-group> -->
+<!-- <kf-input-number
+ngModel
+[setting]="{ title: '数字:', required: true }"
+[layout]="{
+  id: 'textyy',
+  labelHtmlClass: 'flex-initial',
+  fieldHtmlClass: 'border-bottom',
+  borderless: true
+}"
+[ngModelOptions]="{ name: 'fruit' }"
+[(ngModel)]="textValue"
+
+>
+</kf-input-number> -->
+
+  <kf-input-text
+    ngModel
+    [setting]="{ title: '文本框:', required: true }"
+    [layout]="{
+      id: 'fruit',
+      htmlClass: 'grid-64-content items-center',
+      labelHtmlClass: 'flex-initial ant-input-affix-wrapper-lg',
+      fieldHtmlClass: 'border-bottom',
+      borderless: true
+    }"
+    [ngModelOptions]="{ name: 'fruit' }"
+    [(ngModel)]="textValue"
+    rex="^1[3456789]\d{9}$"
+    [rexErrorInfo]="
+      '请输入正确的手机号码或者座机号码，如：13888888888或者010-88888888'"
+    [required]="false"
+  >
+  </kf-input-text>
+  <!-- <kf-input-text
+  ngModel
+  [setting]="{ title: '文本框:'}"
+  [layout]="{
+    id: 'fruit',
+    labelHtmlClass: 'flex-initial',
+    fieldHtmlClass: 'border-bottom',
+    borderless: true
+  }"
+  [ngModelOptions]="{ name: 'fruit' }"
+  [(ngModel)]="textValue"
+  [required]="true"
+>
+</kf-input-text> -->
+  <kf-select
+  ngModel
+  [setting]="{
+    title: '分类:',
+    labelField: 'key',
+    valueField: 'value',
+    allowClear: false
+  }"
+  [ngModelOptions]="{name: 'select'}"
+  [(ngModel)]="category"
+  [options]="categories"
+  [required]="true"
+>
+</kf-select>
+  <!-- <kf-button>测试按钮444</kf-button>
    <kf-checkbox-group
       ngModel
       [name]="'checkGroup'"
@@ -22,14 +108,7 @@
   >
     <kf-input-title title="复选框: "></kf-input-title>
   </kf-checkbox>
-  <kf-input-text
-    ngModel
-    [name]="'fruit'"
-    [ngModelOptions]="{name: 'fruit'}"
-    [(ngModel)]="textValue"
-    [required]="true">
-    <kf-input-title title="文本框: "></kf-input-title>
-  </kf-input-text>
+
 
   <kf-input-date
     ngModel
@@ -50,15 +129,7 @@
     <kf-input-title title="单选: "></kf-input-title>
   </kf-radio-group>
 
-  <kf-select
-    ngModel
-    [name]="'select'"
-    [ngModelOptions]="{name: 'select'}"
-    [(ngModel)]="checkedId"
-    [options]="_checkboxGroups"
-    [required]="true"
-  >
-  </kf-select>
+
 
 <kf-textarea
     ngModel
@@ -70,22 +141,24 @@
     <kf-input-title title="文本框: "></kf-input-title>
   </kf-textarea>
 
-   <kf-list
-  ngModel
-  [name]="'list'"
-  [ngModelOptions]="{name: 'list'}"
-  [(ngModel)]="checkedId"
-  [options]=" _checkboxGroups "
-  [required]="true">
+-->
+
+  <!-- <kf-form-page [forms]="formsJsonData" [inputDto]="formInputData">
+</kf-form-page> -->
+<!-- <kf-list
+ngModel
+[name]="'list'"
+[ngModelOptions]="{name: 'list'}"
+[(ngModel)]="checkedId"
+[options]=" _checkboxGroups "
+[required]="true">
 </kf-list> -->
-
- <kf-form-page [forms]="formsJsonData" [inputDto]="formInputData">
-</kf-form-page>
-
-  <!-- <kf-button
-    class="btn--danger"
-    [disabled]="!(validateForm.form.valid)"
-    (btnOuter)="click($event)">
+{{ !validateForm.form.valid }}
+  <button
+    class="btn btn-primary"
+    [disabled]="!validateForm.form.valid"
+    (click)="click($event)"
+  >
     测试按钮444
-  </kf-button> -->
+  </button>
 </form>

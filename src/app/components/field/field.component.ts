@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 export class FieldComponent {
   baseUrl: string = environment.apis.default.url;
-  reLoad: any = {};
+  reload: any = {};
 
   jsonUrlObj:JsonUrlDto = {
     tableJsonUrl: '/api/Paradigm/fields/table-config',
@@ -36,7 +36,7 @@ export class FieldComponent {
     this.http.post<any>(url, {ids: ids})
     .subscribe((response)=>{
       this.message.success('删除成功');
-      this.reLoad = {};
+      this.reload = {};
     })
   }
 

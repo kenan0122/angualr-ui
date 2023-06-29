@@ -1,0 +1,9 @@
+@import '../colors/colors.scss';
+
+.folder-icon {
+  flex-shrink: 0;
+  margin-right: 10px;
+  color: $color-folder;
+  background-color: transparent;
+  font-size: 1.25rem;
+}

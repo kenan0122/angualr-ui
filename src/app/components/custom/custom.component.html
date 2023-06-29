@@ -1,4 +1,6 @@
 <div style="display: flex; padding: 2rem; flex-direction: column">
+  {{ param }}
+  1111
   <span>生成的界面类型</span>
   <kf-select
     ngModel
@@ -28,25 +30,82 @@
     [rows]="10"
   >
   </kf-textarea>
-  <kf-button (btnOuter)="click()">保存</kf-button>
+  <kf-button [class]="'black'" (click)="click()">保存</kf-button>
 
   <span style="padding-top: 2rem">界面</span>
   <div style="border: solid 1px gray; min-height: 400px">
-    <ng-container *ngIf="selectIndex === 0;else elseBlock">
+    <ng-container *ngIf="selectIndex === 0; else elseBlock">
       <kf-table
         *ngIf="viewJson"
-        [data]="viewData"
+        [items]="viewData.items"
+        [totalCount]="viewData.totalCount"
         [jsonData]="viewJson"
-        [reLoad]="reLoad"
+        [reload]="reload"
       >
       </kf-table>
     </ng-container>
     <ng-template #elseBlock>
       <kf-form-page
-      [forms]="viewJson"
-      [inputDto]="viewData">
-    </kf-form-page>
-    </ng-template>
+        [formClass]="'cols-max-content-1'"
+        [forms]="viewJson"
+        [inputDto]="viewData"
+        (formPageOuter)="formPageChanged($event)"
+      >
+      </kf-form-page>
+      <!-- <kf-modal
+        [isVisible]="true"
+        [jsonData]="viewJson"
+        [inputDto]="viewData"
+        [kfFooter]="kfFooter"
+        [visibleBtn]="{ cancel: false, promise: false }"
+        (initOuter)="initFormData($event)"
 
+      >
+      <ng-template #kfFooter>
+        <kf-button [class]="'btn btn-outline-gray'" style="margin: 0.25rem" >
+          取消
+        </kf-button>
+        <kf-button
+          [class]="'btn btn-primary'"
+          style="margin: 0.25rem"
+          [disabled]="!formControllerValid"
+        >
+          保存
+        </kf-button>
+      </ng-template>
+      </kf-modal> -->
+    </ng-template>
   </div>
 </div>
+
+<!-- <kf-modal
+    *ngIf="viewData"
+    [isVisible]="true"
+    [jsonData]="viewJson"
+    [inputDto]="viewData"
+    [kfFooter]="modalFooter"
+    [visibleBtn]="{  cancel: false,
+      promise: false}"
+  >
+  </kf-modal>
+  <ng-template #modalFooter>
+    <kf-button
+      [class]="'btn btn-outline-gray'"
+      style="text-decoration: none; margin: 0.25rem"
+      >取消</kf-button
+    >
+    <kf-button
+      [class]="'btn btn-primary'"
+      style="text-decoration: none; margin-top: 0.25rem"
+      >保存3</kf-button
+    >
+  </ng-template> -->
+<!-- <kf-form-page
+  #formPage
+  *ngIf="viewJson && viewData && customObj"
+  [forms]="viewJson"
+  [inputDto]="viewData"
+  [customObj]="customObj"
+  (customInstance)="instanceChanged($event)"
+  (formPageOuter)="formPageChange($event)">
+</kf-form-page> -->

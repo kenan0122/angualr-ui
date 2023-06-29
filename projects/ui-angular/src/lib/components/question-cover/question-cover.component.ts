@@ -1,6 +1,7 @@
-import { Component, Input, OnInit, Output, EventEmitter, ViewEncapsulation, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, ViewEncapsulation, ChangeDetectionStrategy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { notNullish } from '@psylab/utils';
 import { AbstractValueAccessor, MakeProvider } from '../input/asbstract-value-accessor';
-import { createDefaultCoverContent, ICoverContentV1 } from './cover-content';
+import { CoverQuestionType, createDefaultCoverContent, ICoverContentV1 } from './cover-content';
 
 @Component({
   selector: 'kf-question-cover',
@@ -10,46 +11,66 @@ import { createDefaultCoverContent, ICoverContentV1 } from './cover-content';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: MakeProvider(QuestionCoverComponent)
 })
-export class QuestionCoverComponent extends AbstractValueAccessor implements AfterViewInit {
+export class QuestionCoverComponent extends AbstractValueAccessor {
+  @Input() override _value: any;
   @Input() flexDirection: string = 'kf-justify-center';
 
   @Output() coverOuter = new EventEmitter();
 
-  coverContentDto: ICoverContentV1 = {
-    version: 1,
-    instruction: '',
-    questions: []
+  options = {
+    '单选': CoverQuestionType.SingleChoice,
+    '量表': CoverQuestionType.Scale
   };
-
+  private _defaultCoverContent:ICoverContentV1 = createDefaultCoverContent() as ICoverContentV1;
+  coverContentDto?: ICoverContentV1 ;
+  private _fistLoad: boolean = true;
 
   override set value(val: any) {
-    console.log(777, val)
     this._value = val;
+    if (this._fistLoad) {
+      this._initCoverData(val);
+      this._fistLoad = false;
+    }
     this.setErrorInfo(val);
     this.textOnChange(this._value);
   }
 
-  ngAfterViewInit(){
-    console.log(777888, this._value)
-  }
 
-  constructor() {
+  constructor(private ref: ChangeDetectorRef) {
     super();
   }
 
   ngOnInit() {
-    console.log(666, this._value)
-    // 编辑
-    if (this.value) {
-      this.coverContentDto = JSON.parse(this.value);
-    } else {
       // 添加, 初始化组件dto;
-      this.coverContentDto = createDefaultCoverContent() as ICoverContentV1;
-    }
+      this.coverContentDto = this._defaultCoverContent;
   }
 
-  textChange() {
+  textChanged() {
     this.value = JSON.stringify(this.coverContentDto);
     this.coverOuter.emit();
+  }
+
+  styleChanged() {
+    if (this.coverContentDto) {
+      this.coverContentDto.questions.map(item => {
+        item.scale.value = -1;
+        item.singleChoice.index = -1;
+        return item;
+      });
+    }
+    this.value = JSON.stringify(this.coverContentDto);
+  }
+
+  singleOptionChanged() {
+    this.value = JSON.stringify(this.coverContentDto);
+  }
+
+
+  private _initCoverData(val: any) {
+    if (val) {
+      this.coverContentDto = JSON.parse(val);
+      this.ref.markForCheck();
+      this.ref.detectChanges();
+    }
   }
 }

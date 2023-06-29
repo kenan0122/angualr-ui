@@ -9,11 +9,13 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { assignNullProps } from '@psylab/utils';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import {
   AbstractValueAccessor,
   MakeProvider,
 } from '../asbstract-value-accessor';
+import { getDefaultLayout, getDefaultSetting } from '../input-setting';
 
 @Component({
   selector: 'kf-input-number',
@@ -24,18 +26,13 @@ import {
   providers: MakeProvider(InputNumberComponent),
 })
 export class InputNumberComponent extends AbstractValueAccessor implements OnInit {
-  @Input() size: NzSizeLDSType = 'large';
-  @Input() title: string = '';
-  /** 控件名字 */
-  @Input() name: string = 'text';
-  @Input() placeholder: string = '请输入...';
-  @Input() maxLength: number = 10;
-  /** 排列方式 */
-  @Input() flexDirection: string = 'kf-justify-center';
   /** 验证的正则 */
   @Input() rex: string = '^[0-9]*$';
   /** 验证错误提示消息 */
   @Input() rexErrorInfo:string = '请输入正数';
+  @Input() isClear: boolean = true;
+  @Input() setting: any = getDefaultSetting();
+  @Input() layout: any = getDefaultLayout('number');
 
   @Input()
   numberTemplate!: TemplateRef<any>;
@@ -57,7 +54,9 @@ export class InputNumberComponent extends AbstractValueAccessor implements OnIni
   }
 
   ngOnInit(): void {
-    this.errorTip = this.title + '不能为空';
+    assignNullProps(this.setting, getDefaultSetting());
+    assignNullProps(this.layout, getDefaultLayout('input'));
+    this.errorTip = this.setting.title + '不能为空';
   }
 
   /**
@@ -65,20 +64,35 @@ export class InputNumberComponent extends AbstractValueAccessor implements OnIni
   * @param control AbstractControl
   */
   override validate(control: AbstractControl): ValidationErrors | null {
-    if (control.dirty && this._required) {
-      if (control.value) {
-        // 不为空的情况下,验证正则
-        const reg = new RegExp(this.rex)
-        const allowable = reg.test(control.value);
-        if (!allowable) {
-          this.error$.next(!allowable);
-          this.errorTip = this.rexErrorInfo;
-        }
+    if (control.dirty) {
+      if (this._required) {
+        if (control.value) {
+          if (this.rex) {
+            // 不为空的情况下,验证正则
+            const reg = new RegExp(this.rex);
+            const allowable = reg.test(control.value);
+            if (!allowable) {
+              this.error$.next(!allowable);
+              this.errorTip = this.rexErrorInfo;
+            }
 
-        return allowable ? null : {invalid: true}
+            return allowable ? null : { invalid: true };
+          }
+        } else {
+          this.errorTip = this.setting.title + '不能为空';
+          return { invalid: true };
+        }
       } else {
-        this.errorTip = this.title + '不能为空';
-        return { invalid: true };
+        if (this.rex && control.value) {
+          const reg = new RegExp(this.rex);
+          const allowable = reg.test(control.value);
+          if (!allowable) {
+            this.error$.next(!allowable);
+            this.errorTip = this.rexErrorInfo;
+          }
+
+          return allowable ? null : { invalid: true };
+        }
       }
     }
 
@@ -88,5 +102,9 @@ export class InputNumberComponent extends AbstractValueAccessor implements OnIni
 
   numberChange(text: number) {
     this.numberOuter.emit(text);
+  }
+
+  clear() {
+    this.value = ''
   }
 }

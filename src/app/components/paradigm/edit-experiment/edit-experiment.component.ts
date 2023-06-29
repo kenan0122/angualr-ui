@@ -61,27 +61,27 @@ export class EditExperimentComponent extends RequestService implements OnInit {
     const blockFormTypes = range(10, 30);
     const expDto1 = {
       id: this.paradigmId,
-      isEmpty: true,
-      isPublished: false,
-      isReadonly: false,
+      isEmpty: this.paradigmEditDto.isEmpty,
+      isPublished: this.paradigmEditDto.isPublished,
+      isReadonly: this.paradigmEditDto.isReadonly,
       name: this.paradigmEditDto.name,
       // 范式广场的模板id
-      templateId: undefined,
+      templateId: this.paradigmEditDto.templateId,
       // 模板类型
       type: this.paradigmEditDto.type,
       // 试次类型
       blockFormTypes: this.paradigmEditDto.blockFormTypes || blockFormTypes,
     };
 
-    const uploadUrl = this.baseUrl + '/api/file/paradigm/config/';
+    const uploadUrl = this.baseUrl + '/api/paradigm/config/';
     const configUrl = this.baseUrl + '/api/Paradigm/paradigms/';
-    const downUrl = this.baseUrl + '/api/paradigm/config/';
+    const downUrl = this.baseUrl + '/api/file/paradigm/';
 
     const api = new ServerApi({
       expId: this.paradigmId,
       configDtoUrl: `${configUrl}save-config`,
       // reportDtoUrl: `${apiBaseUrl}report`,
-      expDownloadBaseUrl: `${configUrl}download`,
+      expDownloadBaseUrl: `${downUrl}download`,
       uploadUrl: `${uploadUrl}upload`,
       // templateDownloadBaseUrl: `${serviceBaseUrl}/api/paradigm/egl`,
     });

@@ -1,0 +1,12 @@
+@import "../../styles/colors/variables.scss";
+
+.upload-style {
+  padding: 0.5rem 2rem;
+  background-color: $color-light-blue;
+  border-radius: 0.25rem;
+  color: $color-white;
+
+  &:hover {
+    background-color: $color-light-blue-600;
+  }
+}

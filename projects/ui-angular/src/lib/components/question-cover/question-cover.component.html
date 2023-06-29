@@ -1,66 +1,114 @@
 <div class="kf-cover" [ngClass]="flexDirection">
-  <ng-content></ng-content>
+  <div class="cols-max-content-1">
+    <ng-content></ng-content>
 
-  <div *ngIf="coverContentDto.version === 1">
-    <kf-textarea
-      ngModel
-      name="instruction"
-      title="指导语"
-      [rows]="10"
-      [ngModelOptions]="{name: 'instruction'}"
-      [(ngModel)]="coverContentDto.instruction"
-      (textareaOuter)="textChange()">
-      <kf-input-title title="指导语"></kf-input-title>
-    </kf-textarea>
-    <ng-container *ngFor="let question of coverContentDto.questions; let i = index">
-      <div>
-        <kf-input-text
+    <ng-container *ngIf="coverContentDto">
+      <ng-container *ngIf="coverContentDto.version === 1">
+        <kf-input-title title="样式"></kf-input-title>
+        <kf-radio-group
           ngModel
-          title="题干"
-          placeholder="请输入题干"
-          [maxlength]="100"
-          [name]="'stem' + i"
-          [ngModelOptions]="{name: 'stem' + i}"
-          [(ngModel)]="question.stem"
-          (textOuter)="textChange()">
-            <kf-input-title title="题干"></kf-input-title>
-        </kf-input-text>
+          [name]="'radio'"
+          [ngModelOptions]="{ name: 'radio' }"
+          [options]="options"
+          [(ngModel)]="coverContentDto.styleType"
+          (radioOuter)="styleChanged()"
+        >
+        </kf-radio-group>
+        <kf-input-title title="指导语" class="align-self"></kf-input-title>
+        <kf-textarea
+          ngModel
+          name="instruction"
+          title="指导语"
+          [rows]="10"
+          [ngModelOptions]="{ name: 'instruction' }"
+          [(ngModel)]="coverContentDto.instruction"
+          (textareaOuter)="textChanged()"
+        >
+        </kf-textarea>
+        <ng-container
+          *ngFor="let question of coverContentDto.questions; let i = index"
+        >
+          <kf-input-text
+            ngModel
+            [setting]="{
+              placeholder: '请输入题干',
+              maxLength: '100',
+              title: '题干'
+            }"
+            [layout]="{ id: 'stem' + i }"
+            [ngModelOptions]="{ name: 'stem' + i }"
+            [(ngModel)]="question.stem"
+            (textOuter)="textChanged()"
+          >
+          </kf-input-text>
 
-        <!-- 单选 -->
-        <ng-container *ngIf="question.type === 0; else elseBlock">
-          <ng-container *ngFor="let option of question.singleChoice.options; let o = index">
-            <nz-radio-group [(ngModel)]="question.singleChoice.index">
-              <kf-input-text
-                ngModel
-                placeholder="请输入选项"
-                flexDirection="kf-justify-reverse-start"
-                [maxlength]="100"
-                [name]="'option' + i + o"
-                [ngModelOptions]="{name: 'option' + i + o}"
-                [(ngModel)]="option.text"
-                (textOuter)="textChange()">
-                <div class="kf-items-center mr-8">
-                  <kf-input-title title="正确答案"></kf-input-title>
-                  <label class="mr-2" nz-radio [nzValue]="o"></label>
-                </div>
-              </kf-input-text>
-            </nz-radio-group>
+          <ng-container [ngSwitch]="coverContentDto.styleType">
+            <!-- 单选 -->
+            <ng-container *ngSwitchCase="0">
+              <ng-container
+                *ngFor="
+                  let option of question.singleChoice.options;
+                  let o = index
+                "
+              >
+                <nz-radio-group
+                  [(ngModel)]="question.singleChoice.index"
+                  (ngModelChange)="singleOptionChanged()"
+                >
+                  <kf-input-text
+                    ngModel
+                    [setting]="{
+                      placeholder: '请输入选项',
+                      maxLength: '100'
+                    }"
+                    [layout]="{
+                      id: 'option' + i + o,
+                      htmlClass: 'kf-justify-reverse-start'
+                    }"
+                    [ngModelOptions]="{ name: 'option' + i + o }"
+                    [(ngModel)]="option.text"
+                    (textOuter)="textChanged()"
+                  >
+                    <div class="kf-items-center ml-8" name="extra">
+                      <kf-input-title title="正确答案"></kf-input-title>
+                      <label class="mr-2" nz-radio [nzValue]="o"></label>
+                    </div>
+                  </kf-input-text>
+                </nz-radio-group>
+              </ng-container>
+            </ng-container>
+            <!-- 量表 -->
+            <ng-container *ngSwitchCase="1">
+              <ng-container
+                *ngFor="let option of question.scale.options; let o = index"
+              >
+                <kf-input-text
+                  ngModel
+                  [setting]="{
+                    placeholder: '请输入选项',
+                    maxLength: '100'
+                  }"
+                  [layout]="{
+                    id: 'option' + i + o,
+                    htmlClass: 'kf-justify-reverse-start'
+                  }"
+                  [ngModelOptions]="{ name: 'option' + i + o }"
+                  [(ngModel)]="option.text"
+                  (textOuter)="textChanged()"
+                >
+                </kf-input-text>
+              </ng-container>
+              <kf-input-title title=""></kf-input-title>
+              <kf-star
+                [name]="'start' + i"
+                [ngModelOptions]="{ name: 'start' + i }"
+                [(ngModel)]="question.scale.value"
+                (starOuter)="textChanged()"
+              ></kf-star>
+            </ng-container>
           </ng-container>
         </ng-container>
-
-        <!-- 量表 -->
-        <ng-template #elseBlock>
-          <kf-star
-            [name]="'start' + i"
-            [ngModelOptions]="{name: 'start' + i}"
-            [(ngModel)]="question.scale.value"
-            (starOuter)="textChange()"></kf-star>
-        </ng-template>
-
-      </div>
-
+      </ng-container>
     </ng-container>
-
   </div>
 </div>
-

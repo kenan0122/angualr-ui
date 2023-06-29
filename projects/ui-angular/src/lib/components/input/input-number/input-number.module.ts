@@ -5,6 +5,7 @@ import { DirectivesModule } from '../../../directives/directives.module';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorModule } from '../../error/error.module';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { ErrorModule } from '../../error/error.module';
     FormsModule,
     ErrorModule,
     ReactiveFormsModule,
+    NzIconModule,
     DirectivesModule
   ],
   declarations: [InputNumberComponent],

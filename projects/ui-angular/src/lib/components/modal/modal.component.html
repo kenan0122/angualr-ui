@@ -1,27 +1,51 @@
 <nz-modal
   [nzWidth]="width"
   [(nzVisible)]="isVisible"
-  nzTitle="Custom Modal Title"
-  (nzOnCancel)="handleCancel()">
-  <div *nzModalContent>
-    <kf-form-page
-      [forms]="jsonData"
-      [inputDto]="inputDto"
-      (formPageOuter)="saveForm($event)">
-      <div  *ngIf="infoList.length > 0">
-        <kf-error *ngFor="let item of infoList"
-          [error$]="error$"
-          [title]="item.label+':'"
-          [info]="item.msg">
-        </kf-error>
-      </div>
-    </kf-form-page>
-  </div>
-  <div *nzModalFooter>
-    <ng-container *ngIf="displayFooter">
-      <span>Modal Footer:</span>
-      <button nz-button nzType="default" (click)="handleCancel()">取消</button>
-      <button nz-button nzType="primary" (click)="handleOk()">确定</button>
-    </ng-container>
-  </div>
+  [nzTitle]="displayName"
+  [nzContent]="modalContent"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="handleCancel()"
+>
+  <ng-template #modalContent>
+    <div>
+      <kf-form-page
+        [forms]="jsonData"
+        [inputDto]="inputDto"
+        [formClass]="formClass"
+        [layout]="layout"
+        [visibleBtn]="visibleBtn"
+        (initOuter)="initFormData($event)"
+        (formPageOuter)="saveForm($event)"
+        (fileArrayOuter)="fileArrayChanged($event)"
+        (fileOuter)="fileChanged($event)"
+      >
+        <div *ngIf="infoList.length > 0">
+          <kf-error
+            *ngFor="let item of infoList"
+            [error$]="error$"
+            [title]="item.label + ':'"
+            [info]="item.msg"
+          >
+          </kf-error>
+        </div>
+      </kf-form-page>
+    </div>
+  </ng-template>
+  <ng-template #modalFooter>
+    <div>
+      <ng-container *ngIf="kfFooter; else defaultFooterButtons">
+        <ng-container
+          *ngTemplateOutlet="kfFooter; context: { $implicit: {valid: formControllerValid} }"
+        ></ng-container>
+      </ng-container>
+      <ng-template #defaultFooterButtons>
+        <ng-container *ngIf="displayFooter">
+          <button nz-button nzType="default" (click)="handleCancel()">
+            取消
+          </button>
+          <button nz-button nzType="primary" (click)="handleOk()">确定</button>
+        </ng-container>
+      </ng-template>
+    </div>
+  </ng-template>
 </nz-modal>

@@ -48,6 +48,8 @@ export abstract class TableBaseService extends RequestService {
       params: dto,
     }).subscribe((response) => {
       this.tableData = response;
+    }, err => {
+      console.error(err)
     });
   }
 }

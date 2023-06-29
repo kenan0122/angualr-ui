@@ -1,28 +1,32 @@
-<div class="kf-upload"
-  [ngClass]="{'kf-form-item-with-help': error$ | async}"
-  [ngClass]="flexDirection">
+<div
+  class="kf-upload"
+  [ngClass]="{ 'kf-form-item-with-help': error$ | async }"
+  [ngClass]="flexDirection"
+>
   <ng-content></ng-content>
 
-  <nz-card style="width:100%;min-width:150px;border: none;">
+  <nz-card style="width: 100%; min-width: 150px; border: none">
     <nz-upload
       nzName="uploadFile"
+      [nzListType]="listType"
+      [nzFileType]="fileType"
       [nzDisabled]="isEnableUpload"
       [nzCustomRequest]="doImgUpload"
-      nzListType="picture-card"
       [nzBeforeUpload]="beforeUpload"
-      nzAccept="image/*"
       [(nzFileList)]="fileArray"
       [nzShowUploadList]="showUploadList"
-      [nzShowButton]="fileArray.length < 1"
+      [nzShowButton]="fileArray.length < uploadFileNum"
       [nzPreview]="handlePreview"
+      [nzMultiple]="multiple"
       [nzRemove]="removeFile"
-      (nzChange)="change($event)"
+      (nzChange)="handleChange($event)"
     >
-      <i nz-icon nzType="plus"></i>
-      <div class="ant-upload-text">Upload</div>
+      <!-- <i nz-icon nzType="plus"></i> -->
+      <div [ngClass]="uploadClass">{{uploadTitle}}</div>
     </nz-upload>
   </nz-card>
-  <nz-modal *ngIf="fileType === 0"
+  <nz-modal
+    *ngIf="fileType === 'image/*'"
     name="fileModal"
     [nzVisible]="previewVisible"
     [nzContent]="fileContent"

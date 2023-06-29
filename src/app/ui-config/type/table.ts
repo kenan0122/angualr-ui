@@ -3,16 +3,18 @@ import { IOptionEntry, ServiceRequestDto } from './base';
 export interface TableConfigScheme<T> {
   /** 页面名称 */
   displayName: string;
-  search?: Search;
+  search?: TableSearch;
   /** 是否显示分页, 没有分页的话, dto不需要定义相关页面参数 */
   enablePagination: boolean;
   /** 是否多选(true: 第一列为checkbox) */
   multiSelect: boolean;
+  /** 隐藏显示操作列 */
+  disableOperation?: boolean;
   columns: Array<ColumnBase>;
   action: ServiceRequestDto<T>;
 }
 
-export interface Search {
+export interface TableSearch {
   /** 按钮名称 */
   displayName: string;
   /** 表单集合 */
@@ -34,13 +36,6 @@ export interface ColumnBase {
   columnType: ColumnType;
   /** 值的类型 */
   valueType: ValueType;
-
-
-  // 新增属性
-    /** 当前列是否可以点击 */
-  isClick?: boolean;
-  /** image图片的路径 */
-  url?: string;
 }
 
 export interface SelectColumn extends ColumnBase {

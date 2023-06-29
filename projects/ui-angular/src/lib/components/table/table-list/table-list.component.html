@@ -1,0 +1,154 @@
+<div class="kf-table-list">
+  <!-- 搜索 -->
+  <!-- <kf-form
+    *ngIf="jsonData.search"
+    #formChild
+    [formClass]="'kf-items-start'"
+    [fields]="jsonData.search?.fields"
+    [inputDto]="jsonData.action.dto"
+  >
+    <kf-button style="width: 6.25rem; height: 2.5rem" (click)="search()">
+      查询
+    </kf-button>
+  </kf-form> -->
+
+  <!-- 按钮数组: 例如添加,批量删除等 -->
+  <ng-container
+    *ngTemplateOutlet="btnTemplate; context: { $implicit: setOfCheckedId }"
+  ></ng-container>
+
+  <nz-table
+    *ngIf="items"
+    #basicTable
+    nzBordered
+    [nzData]="items"
+    [nzTotal]="totalCount"
+    [nzPageSize]="pageSize"
+    [(nzPageIndex)]="pageNumber"
+    [nzFrontPagination]="false"
+    [nzHideOnSinglePage]="true"
+    [nzShowPagination]="jsonData.enablePagination"
+    (nzPageIndexChange)="pageNumberChange($event)"
+  >
+    <thead>
+      <tr>
+        <th
+          *ngIf="jsonData.multiSelect"
+          [nzChecked]="checked"
+          [nzDisabled]="disabledCheck"
+          [nzIndeterminate]="indeterminate"
+          (nzCheckedChange)="onAllChecked($event)"
+        ></th>
+
+        <ng-container *ngFor="let column of jsonData.columns">
+          <th
+            *ngIf="column.isShow"
+            [nzColumnKey]="column.key"
+            [nzSortFn]="true"
+            [nzShowSort]="column.isSort"
+            (nzSortOrderChange)="sortOderChange(column.key, $event)"
+          >
+            {{ column.label }}
+          </th>
+        </ng-container>
+
+        <th nzAlign="center" *ngIf="!jsonData.disableOperation">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container
+        *ngFor="
+          let data of basicTable.data;
+          let i = index;
+          trackBy: trackByItems
+        "
+      >
+        <!-- 有的数据不需要tr点击事件-->
+        <tr [class.tr-active]="i === selectedTrIndex && isShowTrBg" (click)="itemClick(i, data, $event); $event.preventDefault()">
+          <td
+            *ngIf="jsonData.multiSelect"
+            [nzChecked]="setOfCheckedId.has(data[onlyField])"
+            [nzDisabled]="data[disabledProp]"
+            (nzCheckedChange)="onItemChecked(data[onlyField], $event)"
+          ></td>
+
+          <td
+            *ngFor="
+              let column of jsonData.columns;
+              let fi = index;
+              trackBy: trackByColumns
+            "
+          >
+            <ng-container *ngIf="column.isShow">
+              <ng-container [ngSwitch]="column.columnType">
+                <!-- 纯文本-->
+                <ng-container *ngSwitchCase="0">
+                  <span class="kf-items-center">
+                    <ng-container
+                      *ngTemplateOutlet="
+                        tdFirstTemplate;
+                        context: { $implicit: { data, i, fi } }
+                      "
+                    ></ng-container>
+                    <!-- 日期 -->
+                    <ng-container
+                      *ngIf="column.valueType === 2; else elseBlock"
+                    >
+                      {{ data[column.key] | timeConversion }}
+                    </ng-container>
+                    <ng-template #elseBlock>
+                      {{ data[column.key] }}
+                    </ng-template>
+                  </span>
+                </ng-container>
+                <!-- 下拉/枚举进行值转换 -->
+                <ng-container *ngSwitchCase="1">
+                  {{ lg(data[column.key], column.options) }}
+                </ng-container>
+                <!-- Switch -->
+                <ng-container *ngSwitchCase="2">
+                  <nz-switch
+                    *ngIf="hasUpdateAuth"
+                    [nzCheckedChildren]="checkedTemplate"
+                    [nzUnCheckedChildren]="unCheckedTemplate"
+                    [(ngModel)]="data[column.key]"
+                    [nzControl]="true"
+                    (click)="switchClick(data, column.action, column.key)"
+                  >
+                  </nz-switch>
+                  <ng-template #checkedTemplate>
+                    {{ lg(true, column.options) }}
+                  </ng-template>
+                  <ng-template #unCheckedTemplate>
+                    {{ lg(false, column.options) }}
+                  </ng-template>
+                  <span *ngIf="!hasUpdateAuth">
+                    {{ lg(data[column.key], column.options) }}
+                  </span>
+                </ng-container>
+                <!-- 自定义列 -->
+                <ng-container *ngSwitchCase="3">
+                  <ng-container
+                    *ngTemplateOutlet="
+                      tdCustomTemplate;
+                      context: { $implicit: { data, i, fi } }
+                    "
+                  ></ng-container>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </td>
+          <td class="text-center" *ngIf="!jsonData.disableOperation">
+            <!--插槽/占位 -->
+            <ng-container
+              *ngTemplateOutlet="
+                operateTemplate;
+                context: { $implicit: { data: data, i: i } }
+              "
+            ></ng-container>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </nz-table>
+</div>

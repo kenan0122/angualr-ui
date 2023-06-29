@@ -12,7 +12,7 @@ export class RangePipe implements PipeTransform {
       return [];
     }
 
-    const array = [];
+    let array:number[] = [];
     for (let n = 0; n < length; n++) {
       array.push(offset + n);
     }

@@ -1,7 +1,9 @@
-import { notNullish } from 'projects/ui-angular/src/lib/utils';
+import { notNullish } from '../../utils';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { AbstractValueAccessor, MakeProvider } from '../input/asbstract-value-accessor';
+import { getDefaultLayout, getListSetting } from '../input/input-setting';
+import { assignNullProps } from '@psylab/utils';
 
 @Component({
   selector: 'kf-list',
@@ -12,13 +14,9 @@ import { AbstractValueAccessor, MakeProvider } from '../input/asbstract-value-ac
   providers: MakeProvider(ListComponent)
 })
 export class ListComponent extends AbstractValueAccessor implements OnInit {
-  @Input() title: string = '';
   @Input() options: Object = {};
-  // 根据传过来的字段, 判断为false禁用复选框, true可选复选框
-  @Input() disabledProp: string = '';
-  @Input() itemSize = 32;
-  @Input() maxItemLength = 8;
-  @Input() flexDirection: string = 'kf-justify-center';
+  @Input() setting: any = getListSetting();
+  @Input() layout: any = getDefaultLayout('list');
 
   @Output() listOuter = new EventEmitter();
 
@@ -44,12 +42,19 @@ export class ListComponent extends AbstractValueAccessor implements OnInit {
 
   override set value(val: any) {
     this._value = val;
+    if (this.firstLoad) {
+      this.checked = Object.keys(this.options).length === val.length;
+    }
+
     this.setErrorInfo(val);
     this.setOfCheckedId = new Set(val)
     this.textOnChange(this._value);
   }
 
   ngOnInit() {
+    assignNullProps(this.setting, getListSetting());
+    assignNullProps(this.layout, getDefaultLayout('list'));
+
     this.optionsLength = Object.keys(this.options).length;
   }
 

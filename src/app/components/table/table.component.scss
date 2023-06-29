@@ -1,6 +1,9 @@
 .app-table {
   padding: 2rem;
+}
 
+.table-name {
+  font-size: 1rem;
 }
 
 .grid-column-base {
@@ -18,5 +21,9 @@
 .grid-column-start {
   @extend .grid-column-base;
 
-  justify-content: start;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #f0f0f0;
+  border-bottom: none;
+  padding: 1rem;
 }

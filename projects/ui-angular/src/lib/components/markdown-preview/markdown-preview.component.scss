@@ -1,0 +1,195 @@
+:host ::ng-deep {
+  /**默认docs的样式更改**/
+  .kingfar-docs table td {
+    border: 1px solid #dfe6ee;
+    padding: 0.2em 0.4em;
+    min-width: 100px;
+  }
+  .kingfar-docs thead,
+  tbody,
+  tfoot,
+  tr,
+  td,
+  th {
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+  }
+  .kingfar-docs table {
+    margin: 0 0 16px;
+  }
+  /*滚动条样式设置*/
+  ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.25);
+    transition: color 0.2s ease;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 0;
+  }
+
+  ::selection {
+    background-color: #cce2ff;
+    color: rgba(0, 0, 0, 0.87);
+  }
+
+  .height-20 {
+    height: 20px;
+  }
+  .rich-header .ant-btn-primary {
+    background-color: #1890ff !important;
+  }
+  .rich-header .button {
+    height: 32px;
+    background: #1890ff;
+    line-height: 32px;
+    color: #fff;
+    border-radius: 4px;
+    padding: 0 8px;
+  }
+  .rich-header .button:hover {
+    cursor: pointer;
+    background: #40a9ff;
+  }
+  .arrow {
+    margin-left: 5px;
+    width: 0;
+    height: 0;
+    border-top: 8px solid #fff;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+  }
+}
+.kingfar-markdown-preview {
+  margin: 0 auto;
+  // height: calc(100vh - 40px);
+  // margin: 10px auto;
+  border: 1px solid rgb(229, 231, 235);
+  outline-offset: 2px;
+  border-radius: 0.5rem;
+}
+.kingfar-markdown-maxwidth {
+  width: 1120px;
+}
+.kingfar-markdown-minwidth {
+  max-width: 420px;
+}
+.kingfar-markdown-minwidth .right-20 {
+  margin-right: 10px;
+}
+.kingfar-markdown-tool {
+  background: #f3f7f6;
+  border: 1px solid rgb(229, 231, 235);
+  border-top: none;
+  height: 48px;
+  line-height: 48px;
+  padding: 0 10px;
+  text-align: right;
+  position: fixed;
+}
+.kingfar-markdown-preview-content {
+  padding: 0 10px;
+}
+.right-20 {
+  margin-right: 20px;
+}
+.kingfar-markdown-dark {
+  background: rgb(25, 25, 25);
+  color: #fff;
+}
+.js-toc {
+  position: fixed;
+  width: 240px;
+}
+.rich-text-container {
+  padding: 2px 2px;
+  position: relative;
+  min-height: 100%;
+  width: 1000px !important;
+}
+.kingfar-back {
+  display: flex;
+  align-items: center;
+}
+.kingfar-back:hover {
+  cursor: pointer;
+  color: #1890ff;
+}
+.header {
+  position: fixed;
+  flex: 1;
+  border-bottom: 1px solid rgb(229, 231, 235);
+}
+.rich-text {
+  margin: 0 auto;
+}
+.right-text-right {
+  width: 240px;
+}
+.rich-header {
+  position: fixed;
+  height: 48px;
+  z-index: 999;
+  display: flex;
+  justify-content: space-between;
+}
+.header-minwidth {
+  width: 660px;
+}
+.header-maxwidth {
+  width: 1240px;
+}
+.rich-content {
+  position: relative;
+  top: 48px;
+  display: flex;
+  min-height: calc(100vh - 68px);
+}
+.rich-text-container {
+  left: 240px;
+}
+.hiden-top-maxwidth.rich-text-container {
+  left: 0 !important;
+}
+.hiden-toc-maxwidth.rich-text-container {
+  left: 0 !important;
+}
+.kingfar-markdown-minwidth.hiden-toc-maxwidth {
+  max-width: 660px;
+  width: 660px !important;
+}
+.kingfar-markdown-maxwidth.hiden-toc-maxwidth {
+  max-width: 1240px;
+  width: 1240px !important;
+}
+
+.hiden-top-maxwidth {
+  max-width: 660px;
+  width: 660px !important;
+}
+:host ::ng-deep {
+  .toc-list li {
+    line-height: 26px;
+    margin: 4px 0;
+    // background: #ff6600;
+  }
+  .js-toc {
+    border-bottom: 1px solid rgb(229, 231, 235);
+    padding-bottom: 10px;
+  }
+  .is-active-link::before {
+    background-color: #1890ff;
+  }
+  .hidden-js-toc {
+    display: none;
+  }
+}

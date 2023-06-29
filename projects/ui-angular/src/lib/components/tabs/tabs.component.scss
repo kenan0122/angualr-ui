@@ -1,0 +1,122 @@
+.hidden {
+  display: none;
+}
+.block {
+  display: block;
+}
+
+.kf-tabs {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: #000000d9;
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  list-style: none;
+  font-feature-settings: "tnum", "tnum";
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.tabs-nav {
+  position: relative;
+  display: flex;
+  flex: none;
+  align-items: center;
+  margin: 0 0 1rem;
+  overflow: hidden;
+
+  &::before {
+    bottom: 0;
+    position: absolute;
+    right: 0;
+    left: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    content: "";
+  }
+}
+
+.tabs-nav-wrap {
+  position: relative;
+  display: flex;
+  flex: auto;
+  align-self: stretch;
+  overflow: hidden;
+  white-space: nowrap;
+  transform: translate(0);
+
+  &::before {
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s;
+    content: "";
+    pointer-events: none;
+    left: 0;
+    box-shadow: inset 10px 0 8px -8px;
+    top: 0;
+    bottom: 0;
+    width: 30px;
+  }
+}
+
+.tabs-nav-list {
+  position: relative;
+  display: flex;
+  transition: transform 0.3s;
+}
+
+.tabs-tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 0;
+  font-size: 14px;
+  background: transparent;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  border-bottom: solid 1px transparent;
+
+  &:hover {
+    color: #40a9ff;
+  }
+}
+
+.tabs-tab+.tabs-tab {
+  margin: 0 0 0 2rem;
+}
+
+.tabs-tab-btn {
+  outline: none;
+  transition: all .3s;
+}
+
+.tabs-tab.tabs-tab-active .tabs-tab-btn {
+  color: #1890ff;
+  text-shadow: 0 0 .25px currentcolor;
+}
+
+.tabs-tab.tabs-tab-active {
+  border-bottom: solid 1px #1890ff;
+}
+
+.tabs-content-holder {
+  flex: auto;
+  min-width: 0;
+  min-height: 0;
+}
+
+.tabs-content {
+  display: flex;
+  width: 100%;
+  transition: margin 0.3s;
+}
+
+.tabs-tabpane {
+  flex: none;
+  width: 100%;
+  outline: none;
+}

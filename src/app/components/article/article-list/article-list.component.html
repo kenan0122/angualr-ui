@@ -3,7 +3,7 @@
     *ngIf="tableJsonData"
     [data]="tableData"
     [jsonData]="tableJsonData"
-    [reLoad]="reLoad"
+    [reload]="reload"
     [operateTemplate]="customTpl"
     [btnTemplate]="btnTpl"
   >
@@ -13,7 +13,7 @@
     <div class="grid-column-start">
       <kf-button
         style="width: 6.25rem;height: 2.5rem;"
-        (btnOuter)="add()">
+        (click)="add()">
         添加
       </kf-button>
     </div>
@@ -25,13 +25,13 @@
     <!-- <kf-button
       buttonType="button--danger"
       buttonClass="ml-10"
-      (btnOuter)="delete(model.data)">
+      (click)="delete(model.data)">
       删除
     </kf-button>
     <kf-button
       buttonType="button--danger"
       buttonClass="ml-10"
-      (btnOuter)="edit(model.data)">
+      (click)="edit(model.data)">
       编辑
     </kf-button> -->
   </div>

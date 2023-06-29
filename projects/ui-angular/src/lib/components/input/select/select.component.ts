@@ -7,10 +7,15 @@ import {
   Output,
   TemplateRef,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
+import { assignNullProps } from '@psylab/utils';
 import { NzSelectModeType, NzSelectSizeType } from 'ng-zorro-antd/select';
-import { AbstractValueAccessor, MakeProvider } from '../asbstract-value-accessor';
+import {
+  AbstractValueAccessor,
+  MakeProvider,
+} from '../asbstract-value-accessor';
+import { getDefaultLayout, getSelectSetting } from '../input-setting';
 
 @Component({
   selector: 'kf-select',
@@ -18,19 +23,14 @@ import { AbstractValueAccessor, MakeProvider } from '../asbstract-value-accessor
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: MakeProvider(SelectComponent),
-  styleUrls: ['./select.component.scss']
+  styleUrls: ['./select.component.scss'],
 })
 export class SelectComponent extends AbstractValueAccessor implements OnInit {
   @ViewChild('select') select: any;
 
-  @Input() size: NzSelectSizeType = 'large';
-  // 是否多选
-  @Input() isMulti: boolean = false;
-  @Input() title: string = '';
-  @Input() options: Object = {};
-  // 控件名字
-  @Input() name: string = 'select';
-  @Input() flexDirection: string = 'kf-justify-center';
+  @Input() options: object | undefined;
+  @Input() setting: any = getSelectSetting();
+  @Input() layout: any = getDefaultLayout('select');
 
   @Output() selectOuter = new EventEmitter();
 
@@ -43,14 +43,17 @@ export class SelectComponent extends AbstractValueAccessor implements OnInit {
     this._required = v;
   }
 
-  selectMode:NzSelectModeType = 'default';
+  selectMode: NzSelectModeType = 'default';
 
   constructor() {
     super();
   }
 
   ngOnInit(): void {
-    this.selectMode = this.isMulti ? 'multiple' : 'default';
+    assignNullProps(this.setting, getSelectSetting());
+    assignNullProps(this.layout, getDefaultLayout('select'));
+
+    this.selectMode = this.setting.isMulti ? 'multiple' : 'default';
   }
 
   /**
@@ -59,6 +62,12 @@ export class SelectComponent extends AbstractValueAccessor implements OnInit {
    */
   selectChange(id: any) {
     this.firstLoad = false;
-    this.selectOuter.emit({id, name: this.name});
+    this.selectOuter.emit({ id });
+  }
+
+  // But for angular 7 or above, you need to put an empty function to keep data unsorted.
+  //change keyvalue's order, 不能删除
+  unsorted() {
+    return 0;
   }
 }

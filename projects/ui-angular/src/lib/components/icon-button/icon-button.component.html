@@ -2,8 +2,8 @@
   class="kf-icon-button"
   [style]="style"
   [attr.data-hint]="title"
-  (click)="iconBtn()"
+  [class]="class"
 >
-  <kf-icon [path]="path" [size]="iconSize" [style]="style" [color]="color">
+  <kf-icon [class]="iconClass" [path]="path" [size]="iconSize" [style]="style" [color]="color">
   </kf-icon>
 </div>

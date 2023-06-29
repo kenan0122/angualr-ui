@@ -1,25 +1,52 @@
-<div class="kf-text"
-  [ngClass]="{'kf-form-item-with-help': error$ | async}"
-  [class]="flexDirection">
-  <!-- <ng-container  *ngTemplateOutlet="textTemplate;context: {}"></ng-container> -->
-  <ng-content></ng-content>
-  <div>
-    <input nz-input
-      [name]="name"
-      [nzSize]="size"
-      [(ngModel)]="value"
-      [placeholder]="placeholder"
-      [required]="required"
-      [maxLength]="maxLength"
-      (ngModelChange)="textChange($event)"
-      (focus)="focus()"/>
+<div
+  class="kf-text"
+  [class.kf-form-item-with-help]="error$ | async"
+  [class]="layout.htmlClass"
+>
+  <div class="input-label">
+    <label
+      *ngIf="setting.title"
+      [attr.for]="'control' + layout.id"
+      [class]="layout.labelHtmlClass"
+      [style.display]="setting.noTitle ? 'none' : ''"
+      [innerHTML]="setting.title"
+    ></label>
+  </div>
 
-      <kf-error [title]="title" [error$]="error$"></kf-error>
-    <!-- <div class="kf-form-item-explain"
-      *ngIf="error$ | async">
-      <div class="text-danger">
-        {{title}}不能为空
-      </div>
-    </div> -->
+  <ng-content select="[name=extra]"></ng-content>
+
+  <div class="text-content">
+    <nz-input-group [nzSuffix]="suffixTemplateInfo" [nzSize]="layout.size">
+      <ng-content select="[name=inputContent]"></ng-content>
+      <input
+        nz-input
+        [id]="'control' + layout.id"
+        [name]="'control' + layout.id"
+        [(ngModel)]="value"
+        [placeholder]="setting.placeholder"
+        [nzBorderless]="layout.borderless"
+        [disabled]="setting.readonly"
+        [required]="required"
+        [maxLength]="setting.maxLength"
+        [class]="layout.fieldHtmlClass"
+        [appAllowableFormat]="rex"
+        (ngModelChange)="textChange($event)"
+        (focus)="focus()"
+      />
+    </nz-input-group>
+    <ng-template #suffixTemplateInfo>
+      <i
+        *ngIf="isClear"
+        class="search-icon"
+        nz-icon
+        nzType="close"
+        (click)="clear()"
+      ></i>
+      <ng-container
+        *ngTemplateOutlet="textTemplate; context: { $implicit: null }"
+      ></ng-container>
+    </ng-template>
+
+    <kf-error [title]="errorTip" info="" [error$]="error$"></kf-error>
   </div>
 </div>
