@@ -1,24 +1,41 @@
-<div class="kf-select"
-  [ngClass]="{'kf-form-item-with-help': error$ | async}"
-  [ngClass]="flexDirection">
-  <ng-content></ng-content>
+<div
+  class="kf-select"
+  [class.kf-form-item-with-help]="error$ | async"
+  [class]="layout.htmlClass"
+>
+<div class="input-label">
+  <label
+    *ngIf="setting.title"
+    [attr.for]="'control' + layout.id"
+    [class]="layout.labelHtmlClass"
+    [style.display]="setting.noTitle ? 'none' : ''"
+    [innerHTML]="setting.title"
+  ></label>
+</div>
 
-  <div>
+  <ng-content select="[name=extra]"></ng-content>
+
+  <div class="select-content">
     <nz-select
-      [name]="name"
-      [nzSize]="size"
-      nzShowSearch
-      nzAllowClear
+      [id]="'control' + layout.id"
+      [name]="'control' + layout.id"
+      [nzSize]="layout.size"
+      [nzShowSearch]="setting.showSearch"
+      [nzAllowClear]="setting.allowClear"
+      [nzBorderless]="layout.borderless"
+      [class]="layout.fieldHtmlClass"
       [nzMode]="selectMode"
-      [nzPlaceHolder]="'请选择'+title"
+      [nzPlaceHolder]="setting.placeholder ?? '请选择'  + setting.title"
       [(ngModel)]="value"
-      [required]="required"
+      [disabled]="setting.readonly"
+      [required]="setting.required"
       (ngModelChange)="selectChange($event)"
-      (nzFocus)="focus()">
-      <ng-container *ngFor="let item of options | keyvalue;let i = index">
-        <nz-option [nzLabel]="item.key" [nzValue]="item.value" ></nz-option>
+      (nzFocus)="focus()"
+    >
+      <ng-container *ngFor="let item of options | keyvalue: unsorted; let i = index">
+        <nz-option [nzLabel]="item[setting.labelField]" [nzValue]="item[setting.valueField]"></nz-option>
       </ng-container>
     </nz-select>
-    <kf-error [title]="title" [error$]="error$"></kf-error>
+    <kf-error [title]="setting.title" [error$]="error$"></kf-error>
   </div>
 </div>

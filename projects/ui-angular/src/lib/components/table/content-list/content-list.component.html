@@ -1,0 +1,57 @@
+<div class="kf-content-list">
+  <!-- 搜索 -->
+  <kf-form
+    *ngIf="jsonData.search"
+    #formChild
+    [formClass]="'kf-items-start'"
+    [fields]="jsonData.search?.fields"
+    [inputDto]="jsonData.action.dto"
+  >
+    <kf-button style="width: 6.25rem; height: 2.5rem" (click)="search()">
+      查询
+    </kf-button>
+  </kf-form>
+
+  <!-- 按钮数组: 例如添加,批量删除等 -->
+  <ng-container
+    *ngTemplateOutlet="btnTemplate; context: { $implicit: null }"
+  ></ng-container>
+
+  <nz-table
+    *ngIf="items"
+    #basicTable
+    nzBordered
+    [nzData]="items"
+    [nzTotal]="totalCount"
+    [nzPageSize]="pageSize"
+    [(nzPageIndex)]="pageNumber"
+    [nzFrontPagination]="false"
+    [nzHideOnSinglePage]="true"
+    [nzShowPagination]="jsonData.enablePagination"
+    (nzPageIndexChange)="pageNumberChange($event)"
+  >
+    <ng-container *ngFor="let item of basicTable.data; let i = index">
+      <nz-list nzItemLayout="horizontal" (click)="listClick(item, i, $event)">
+        <nz-list-item>
+          <nz-list-item-meta>
+            <nz-list-item-meta-avatar *ngIf="item.path" [nzSrc]="item.path">
+            </nz-list-item-meta-avatar>
+            <nz-list-item-meta-title>
+              <span>{{ item.name }}</span>
+            </nz-list-item-meta-title>
+            <nz-list-item-meta-description>
+              {{ item.description }}
+            </nz-list-item-meta-description>
+          </nz-list-item-meta>
+          <nz-list-item-extra>
+            <i
+              *ngIf="selectList.includes(item)"
+              class="fa fa-check"
+              style="color: #202d406f; font-size: 1.25rem"
+            ></i>
+          </nz-list-item-extra>
+        </nz-list-item>
+      </nz-list>
+    </ng-container>
+  </nz-table>
+</div>

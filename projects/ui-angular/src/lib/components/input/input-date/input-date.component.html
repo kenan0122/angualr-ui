@@ -1,20 +1,36 @@
-<div class="kf-date"
-  [ngClass]="{'kf-form-item-with-help': error$ | async}"
-  [ngClass]="flexDirection">
-  <ng-content></ng-content>
+<div
+  class="kf-date"
+  [ngClass]="{ 'kf-form-item-with-help': error$ | async }"
+  [class]="layout.htmlClass"
+>
+  <div class="input-label">
+    <label
+      *ngIf="setting.title"
+      [attr.for]="'control' + layout.id"
+      [class]="layout.labelHtmlClass"
+      [style.display]="setting.noTitle ? 'none' : ''"
+      [innerHTML]="setting.title"
+    ></label>
+  </div>
 
-  <div>
+  <ng-content select="[name=extra]"></ng-content>
+
+  <div class="data-parent">
     <nz-date-picker
-      [name]="name"
-      [nzSize]="size"
+      [id]="'control' + layout.id"
+      [name]="'control' + layout.id"
+      [nzSize]="layout.size"
       [(ngModel)]="value"
-      [nzPlaceHolder]="placeholder"
-      [required]="required"
+      [nzPlaceHolder]="setting.placeholder"
+      [disabled]="setting.readonly"
+      [required]="setting.required"
+      [class]="layout.fieldHtmlClass"
       (ngModelChange)="dateChange($event)"
       (nzOnOpenChange)="focus()"
-      (focus)="focus()">
+      (focus)="focus()"
+    >
     </nz-date-picker>
 
-    <kf-error [title]="title" [error$]="error$"></kf-error>
+    <kf-error [title]="setting.title" [error$]="error$"></kf-error>
   </div>
 </div>

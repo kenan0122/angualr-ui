@@ -1,20 +1,51 @@
-
 <ng-container *ngIf="tabs.length > 1; else tabElse">
-  <nz-tabset
+  <!-- <nz-tabset
+    [nzTabBarExtraContent]="extraTemplate"
     [nzTabPosition]="nzTabPosition"
     [(nzSelectedIndex)]="selectedIndex"
-    (nzSelectChange)="selectChange"
+    (nzSelectChange)="(selectChange)"
   >
-  <nz-tab
-    *ngFor="let tab of tabs; let i = index"
-    [nzTitle]="tab.displayName"
-  >
-    <ng-container  *ngTemplateOutlet="tabsTemplate;context: {$implicit: i}"></ng-container>
-  </nz-tab>
-</nz-tabset>
+    <nz-tab *ngFor="let tab of tabs; let i = index" [nzTitle]="tab.displayName">
+        <ng-container
+          *ngTemplateOutlet="tabsTemplate; context: { $implicit: i }"
+        ></ng-container>
+    </nz-tab>
+  </nz-tabset> -->
+
+  <div class="kf-tabs">
+    <div class="tabs-nav">
+      <div class="tabs-nav-wrap">
+        <div class="tabs-nav-list" style="transform: translate(0px, 0px)">
+          <div
+            class="tabs-tab"
+            [ngClass]="{ 'tabs-tab-active': selectIndex === i }"
+            *ngFor="let tab of tabs; let i = index"
+          >
+            <div class="tabs-tab-btn" (click)="clickNavItem(tab, i)">
+              {{ tab.displayName }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tabs-content-holder">
+      <div class="tabs-content" [style.marginLeft.%]="-selectIndex * 100">
+        <div
+          class="tabs-tabpane"
+          aria-hidden="true"
+          [ngStyle]="{ visibility: selectIndex === i ? '' : 'hidden' }"
+          *ngFor="let tab of tabs; let i = index"
+        >
+          <ng-container
+            *ngTemplateOutlet="tabsTemplate; context: { $implicit: i }"
+          ></ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
 </ng-container>
 <ng-template #tabElse>
-  <ng-container  *ngTemplateOutlet="tabsTemplate;context: {$implicit: 0}"></ng-container>
+  <ng-container
+    *ngTemplateOutlet="tabsTemplate; context: { $implicit: 0 }"
+  ></ng-container>
 </ng-template>
-
-

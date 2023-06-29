@@ -1,0 +1,44 @@
+.file-container {
+  @extend .relative;
+
+  box-sizing: border-box;
+  border-color: aqua;
+  border-radius: 0.25rem;
+
+  img {
+    @extend .w-full, .h-full;
+
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.absolute {
+  position: absolute;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.relative {
+  position: relative;
+}
+
+.hidden {
+  display: none;
+}
+
+.file-border {
+  @extend .h-full;
+  @extend .w-full;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

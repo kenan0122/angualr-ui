@@ -14,8 +14,6 @@ export class IconComponent implements OnInit {
   @Input() class: string = '';
   @Input() color: string = '';
 
-  htmlStr: string =
-    'Plain Text Example &amp; <strong>Bold Text Example</strong>';
   private readonly el?: HTMLElement;
 
   get viewBox() {
@@ -23,11 +21,11 @@ export class IconComponent implements OnInit {
   }
 
   constructor(elementRef: ElementRef, public readonly renderer: Renderer2) {
-    this.el = elementRef.nativeElement;
+    //this.el = elementRef.nativeElement;
   }
 
   ngOnInit(): void {
-    const dom = this.el?.querySelector('svg') as unknown as HTMLParagraphElement;
-    dom.innerHTML = this.path;
+    // const dom = this.el?.querySelector('svg') as unknown as HTMLParagraphElement;
+    // dom.innerHTML = this.path;
   }
 }

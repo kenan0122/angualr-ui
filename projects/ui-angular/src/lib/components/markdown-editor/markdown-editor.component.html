@@ -1,0 +1,46 @@
+<div
+  style="
+    display: flex;
+    --editor-theme-color: #20304b;
+    --theme-color: #38b2ac;
+    position: relative;
+  "
+  [ngClass]="{
+    'kingfar-wechat': isWeChat,
+    'kingfar-docs': !isWeChat
+  }"
+  [ngStyle]="editorStyle"
+>
+
+  <!--S 左侧导航模板 微信和資源中心都需要左側央視才展示 *ngIf="isWeChat"-->
+  <ng-container>
+    <div class="custom-style">
+      <kingfar-style-template
+        (templateOuter)="getTemplateMarkdown($event)"
+        [readonly]="setting.readonly"
+        [mode]="setting.mode"
+      ></kingfar-style-template>
+    </div>
+  </ng-container>
+  <!--E 左侧导航模板-->
+
+  <!--S 编辑区域 -->
+  <div *ngIf="setting"
+    #markdownEditor
+    [id]="setting.id"
+    style="width: 100%"
+    [ngClass]="{ 'markdown-redonly': setting.readonly }"
+  ></div>
+  <!--E 编辑区域-->
+
+  <!--S 自定义右侧导航-->
+  <app-custom-navigation
+    (navigationSettingOuter)="changedNavigationSetting($event)"
+    [setting]="navParamsObj"
+    [otherSetting]="setting.buttonSetting"
+    [mode]="setting.mode"
+  >
+  </app-custom-navigation>
+  <!--E 自定义右侧导航-->
+</div>
+<!-- <div (click)="onclickInsert()">点击按钮</div> -->

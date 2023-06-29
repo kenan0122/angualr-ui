@@ -1,5 +1,4 @@
-@import '../../styles/colors/variables.scss';
-
+@import "../../styles/colors/variables.scss";
 
 $button-text-color: $color-white;
 
@@ -8,6 +7,25 @@ $button-text-color: $color-white;
     transition: background-color 0.25s ease-out;
     padding: 0;
     border-radius: 4px;
+    border: 0;
+  }
+
+  .kf-loading {
+    position: relative;
+    cursor: default;
+
+    &::before {
+      position: absolute;
+      inset: -1px;
+      z-index: 1;
+      display: block;
+      background: #fff;
+      border-radius: inherit;
+      opacity: .35;
+      transition: opacity .2s;
+      content: "";
+      pointer-events: none;
+    }
   }
 
   button {
@@ -20,7 +38,7 @@ $button-text-color: $color-white;
       text-overflow: ellipsis;
       overflow: clip;
       width: 100%;
-      display: block;
+      display: inline;
       white-space: nowrap;
     }
 
@@ -36,53 +54,91 @@ $button-text-color: $color-white;
       pointer-events: none;
     }
   }
-}
 
-.no-border-btn {
-  @extend .m-2;
+  .black {
+    background-color: $color-white;
+    color: #000000d9;
+    border: 1px solid transparent;
+    border-color: #d9d9d9;
 
-  background-color: transparent;
-  background-image: none;
-  color: rgba(33,150,243);
+    &:hover {
+      color: $color-light-blue;
+      border-color: $color-light-blue;
+    }
+  }
 
-  &:hover {
-    background-color: #00000014;
+  .no-border-btn {
+    @extend .m-2;
+
+    background-color: transparent;
+    background-image: none;
+    color: $color-light-blue;
+
+    &:hover {
+      background-color: #00000014;
+    }
+  }
+
+  .m-2 {
+    margin: 0.5rem;
+  }
+
+  .white {
+    background-color: $color-white;
+    color: $color-light-blue;
+    border:  1px solid #f0f0f0;
+
+    &:hover {
+      background-color: $color-light-blue;
+      color: $color-white;
+    }
+  }
+
+
+
+  .success {
+    background-color: $color-green;
+    color: $color-white;
+
+    &:hover {
+      background-color: $color-green-600;
+    }
+  }
+
+  .danger {
+    background-color: $color-red;
+    color: $color-white;
+
+    &:hover {
+      background-color: $color-red-600;
+    }
+  }
+
+  .primary {
+    background-color: $color-light-blue;
+    color: $color-white;
+
+    &:hover {
+      background-color: $color-light-blue-600;
+    }
+  }
+
+  .warning {
+    background-color: $color-orange;
+    color: $color-white;
+
+    &:hover {
+      background-color: $color-orange-600;
+    }
   }
 }
 
-.m-2 {
-  margin: 0.5rem;
+.disabled-button {
+  pointer-events: none;
 }
 
-.success {
-  background-color: $color-green;
-
-  &:hover {
-    background-color: $color-green-600;
-  }
+.kf-btn-icon {
+  vertical-align: 2px;
+  margin-right: 0.5rem;
 }
 
-.danger {
-  background-color: $color-red;
-
-  &:hover {
-    background-color: $color-red-600;
-  }
-}
-
-.primary {
-  background-color: $color-blue;
-  color: $color-white;
-
-  &:hover {
-    background-color: $color-blue-600;
-  }
-}
-
-.warning {
-  background-color: $color-orange;
-
-  &:hover {
-    background-color: $color-orange-600;
-  }
-}

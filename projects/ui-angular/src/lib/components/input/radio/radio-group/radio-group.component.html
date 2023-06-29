@@ -1,22 +1,54 @@
-<div class="kf-group-radio"
-  [ngClass]="{'kf-form-item-with-help': error$ | async}"
-  [ngClass]="flexDirection">
-  <!-- <ng-container *ngIf="showName">
-    <ng-container  *ngTemplateOutlet="radioTemplate;context: {}"></ng-container>
-  </ng-container> -->
-  <ng-content></ng-content>
+<div
+  class="kf-group-radio"
+  [ngClass]="{ 'kf-form-item-with-help': error$ | async }"
+  [class]="layout.htmlClass"
+>
+<div class="input-label">
+  <label
+    *ngIf="setting.title"
+    [attr.for]="'control' + layout.id"
+    [class]="layout.labelHtmlClass"
+    [style.display]="setting.noTitle ? 'none' : ''"
+    [innerHTML]="setting.title"
+  ></label>
+</div>
 
-  <div>
-    <nz-radio-group
-      [name]="name"
+  <ng-content select="[name=extra]"></ng-content>
+
+  <div class="radio-content">
+    <nz-radio-group *ngIf="options"
+      [id]="'control' + layout.id"
+      [name]="'control' + layout.id"
+      [class]="layout.fieldHtmlClass"
       [(ngModel)]="value"
-      [required]="required"
-      (ngModelChange)="radioChange()">
-      <label nz-radio [nzValue]="radio.value" *ngFor="let radio of options | keyvalue">
-        {{radio.key}}
-      </label>
+      [nzButtonStyle]="setting.buttonStyle"
+      [disabled]="setting.readonly"
+      [required]="setting.required"
+      (ngModelChange)="radioChange($event)"
+    >
+
+      <ng-container *ngFor="let option of options | keyvalue: unsorted">
+        <ng-container *ngIf="setting.radioType === 'radio'; else elseBlock">
+          <label
+            nz-radio
+            [nzDisabled]="setting.isExtra ? option.value[setting.disabledField] : false"
+            [nzValue]="option[setting.valueField]"
+          >
+            {{ setting.isExtra ? option.value[setting.labelField] : option[setting.labelField] }}
+          </label>
+        </ng-container>
+        <ng-template #elseBlock>
+          <label
+          nz-radio-button
+          [nzDisabled]="setting.isExtra ? option.value[setting.disabledField] : false"
+          [nzValue]="option[setting.valueField]"
+        >
+          {{ setting.isExtra ? option.value[setting.labelField] : option[setting.labelField] }}
+        </label>
+          </ng-template>
+      </ng-container>
     </nz-radio-group>
 
-    <kf-error [title]="title" [error$]="error$"></kf-error>
+    <kf-error [title]="setting.title" [error$]="error$"></kf-error>
   </div>
 </div>

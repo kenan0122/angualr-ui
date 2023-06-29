@@ -1,0 +1,64 @@
+<form class="content-form"
+  #validateForm="ngForm"
+  appIdentityRevealed
+  nzLayout="inline"
+  autocomplete="off"
+  [ngClass]="layout.htmlClass"
+>
+  <ng-container *ngFor="let field of fields; let i = index">
+    <ng-container [ngSwitch]="field.type">
+      <ng-container *ngSwitchCase="0">
+        <ng-container *ngIf="field.rows <= 1 && field.valueType === 1">
+          <kf-input-text
+            ngModel
+            [setting]="{
+              title: field.label,
+              placeholder: field.placeholder,
+              maxLength: field.maxlength,
+              required: field.isRequired
+            }"
+            [layout]="{id: field.key + i, size: layout.size}"
+            [ngModelOptions]="{ name: field.key + i }"
+            [(ngModel)]="inputDto[field.key]"
+            (textOuter)="textChange($event)"
+          >
+          </kf-input-text>
+        </ng-container>
+      </ng-container>
+      <!-- 下拉框: ComboBox/List;  选择框: CheckBox/Radio-->
+      <ng-container *ngSwitchCase="1">
+        <ng-container *ngIf="field.style === 1">
+          <kf-select
+            ngModel
+            [name]="field.key + i"
+            [ngModelOptions]="{ name: field.key }"
+            [(ngModel)]="inputDto[field.key]"
+            [setting]="{
+              placeholder: field.placeholder,
+              title: field.label,
+              isMulti: field.isMulti
+            }"
+            [layout]="{
+              id: field.key + i,
+              size: layout.size,
+              labelHtmlClass: layout.labelHtmlClass,
+              fieldHtmlClass: layout.fieldHtmlClass,
+              htmlClass: layout.htmlClass
+            }"
+
+            [title]="field.label"
+            [options]="field.options"
+            [required]="field.isRequired"
+            (selectOuter)="selectChange($event)"
+          >
+          </kf-select>
+        </ng-container>
+      </ng-container>
+
+      <!-- 文件上传: FileUpload -->
+      <ng-container *ngSwitchCase="2"> </ng-container>
+    </ng-container>
+  </ng-container>
+
+  <ng-content></ng-content>
+</form>

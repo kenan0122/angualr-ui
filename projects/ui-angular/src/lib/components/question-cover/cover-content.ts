@@ -6,6 +6,7 @@ interface ICoverContent {
 export interface ICoverContentV1 extends ICoverContent {
   instruction: string;
   questions: ICoverQuestionContent[];
+  styleType: CoverQuestionType;
 }
 
 interface ICoverQuestionContent {
@@ -29,9 +30,10 @@ interface OptionText {
 interface ICoverScaleContent {
   /**显示5个星星, value值: 0-4 */
   value: number;
+  options: OptionText[];
 }
 
-enum CoverQuestionType {
+export enum CoverQuestionType {
   // 单选
   SingleChoice,
   // 量表
@@ -43,6 +45,7 @@ export function createDefaultCoverContent(version:number = 1): ICoverContent {
     type: CoverQuestionType.Scale,
     stem: '',
     scale: {
+      options: [{text: ''},{text: ''}],
       value: -1
     },
     singleChoice: {
@@ -53,6 +56,7 @@ export function createDefaultCoverContent(version:number = 1): ICoverContent {
 
   return {
     version: version,
+    styleType: CoverQuestionType.Scale,
     instruction: '',
     questions: [
       question,

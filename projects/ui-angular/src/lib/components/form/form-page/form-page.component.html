@@ -4,33 +4,39 @@
     <kf-form
       *ngIf="forms.tabs[tabIndex].fields"
       #formChild
+      [formClass]="formClass"
       [fields]="forms.tabs[tabIndex].fields"
       [inputDto]="inputDto"
+      [customObj]="customObj"
+      [layout]="layout"
       (initOuter)="initFormData($event)"
+      (fileArrayOuter)="fileArrayChanged($event)"
+      (fileOuter)="fileChanged($event)"
     ></kf-form>
   </ng-template>
 
   <ng-content></ng-content>
 
-  <div class="grid-column-center">
+  <div
+    class="grid-column-center page-footer"
+    *ngIf="visibleBtn.cancel || visibleBtn.promise"
+  >
     <kf-button
       *ngIf="visibleBtn.cancel"
-      class="primary"
-      style="width: 100px;"
-      (btnOuter)="cancel()"
+      [class]="'black'"
+      style="width: 6.25rem; height: 2.5rem"
+      (click)="cancel()"
     >
       取消
     </kf-button>
-
     <kf-button
       *ngIf="visibleBtn.promise"
-      class="primary"
-      style="width: 100px;"
+      [class]="'primary'"
+      style="width: 6.25rem; height: 2.5rem"
       [disabled]="!formControllerValid"
-      (btnOuter)="click()"
+      (click)="click()"
     >
       保存
     </kf-button>
-
   </div>
 </div>

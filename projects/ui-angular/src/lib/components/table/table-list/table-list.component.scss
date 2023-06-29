@@ -1,0 +1,13 @@
+@import '../../../styles/forms/inputs.scss';
+
+.tr-active {
+  background-color: #f2f4f6;
+}
+:host ::ng-deep {
+  .kf-table-list table thead tr:first-child {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+}

@@ -1,40 +1,54 @@
-<div class="kf-list"
-  [ngClass]="{'kf-form-item-with-help': error$ | async}"
-  [class]="flexDirection">
-  <ng-content></ng-content>
+<div
+  class="kf-list"
+  [ngClass]="{ 'kf-form-item-with-help': error$ | async }"
+  [class]="layout.htmlClass"
+>
+<div class="input-label">
+  <label
+    *ngIf="setting.title"
+    [attr.for]="'control' + layout.id"
+    [class]="layout.labelHtmlClass"
+    [style.display]="setting.noTitle ? 'none' : ''"
+    [innerHTML]="setting.title"
+  ></label>
+</div>
 
-  <div class="border-1">
+  <ng-content select="[name=extra]"></ng-content>
+
+  <div>
     <cdk-virtual-scroll-viewport
-    [itemSize]="itemSize"
-    [maxBufferPx]="itemSize * maxItemLength"
-    [minBufferPx]="itemSize * maxItemLength"
-    (scrolledIndexChange)="onScrolledIndexChange($event)"
-    [style.height.px]="optionsLength * itemSize"
-    [style.max-height.px]="itemSize * maxItemLength"
-  >
-    <nz-list nzBordered>
-      <nz-list-header>
-        <label
-          nz-checkbox
-          [nzChecked]="checked"
-          [nzDisabled]="disabledCheck"
-          [nzIndeterminate]="indeterminate"
-          (nzCheckedChange)="onAllChecked($event)">
-        </label>
-        全选
-      </nz-list-header>
-      <nz-list-item *ngFor="let item of options | keyvalue">
-        <span
-          nz-checkbox
-          [nzChecked]="setOfCheckedId.has(item.value)"
-          (nzCheckedChange)="onItemChecked(item.value, $event)">
-        </span>
-        {{ item.key }}
-      </nz-list-item>
-    </nz-list>
+      [itemSize]="setting.itemSize"
+      [maxBufferPx]="setting.itemSize * setting.maxItemLength"
+      [minBufferPx]="setting.itemSize * setting.maxItemLength"
+      (scrolledIndexChange)="onScrolledIndexChange($event)"
+      [style.height.px]="optionsLength * setting.itemSize"
+      [style.max-height.px]="setting.itemSize * setting.maxItemLength"
+      [style.width.px]="360"
+    >
+      <nz-list nzBordered>
+        <nz-list-header>
+          <label
+            nz-checkbox
+            [nzChecked]="checked"
+            [nzDisabled]="disabledCheck"
+            [nzIndeterminate]="indeterminate"
+            (nzCheckedChange)="onAllChecked($event)"
+          >
+          </label>
+          全选
+        </nz-list-header>
+        <nz-list-item *ngFor="let item of options | keyvalue">
+          <span
+            nz-checkbox
+            [nzChecked]="setOfCheckedId.has(item[setting.valueField])"
+            (nzCheckedChange)="onItemChecked(item[setting.valueField], $event)"
+          >
+          </span>
+          {{ item[setting.labelField] }}
+        </nz-list-item>
+      </nz-list>
     </cdk-virtual-scroll-viewport>
 
-    <kf-error [title]="title" [error$]="error$"></kf-error>
+    <kf-error [title]="setting.title" [error$]="error$"></kf-error>
   </div>
-
 </div>

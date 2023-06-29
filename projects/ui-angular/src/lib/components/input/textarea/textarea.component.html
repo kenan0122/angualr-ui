@@ -1,24 +1,36 @@
-<div class="kf-textarea"
-  [ngClass]="{'kf-form-item-with-help': error$ | async}"
-  [class]="flexDirection">
-  <ng-content></ng-content>
+<div
+  class="kf-textarea"
+  [ngClass]="{ 'kf-form-item-with-help': error$ | async }"
+  [class]="layout.htmlClass"
+>
+  <div class="input-label">
+    <label
+      *ngIf="setting.title"
+      [attr.for]="'control' + layout.id"
+      [class]="layout.labelHtmlClass"
+      [style.display]="setting.noTitle ? 'none' : ''"
+      [innerHTML]="setting.title"
+    ></label>
+  </div>
 
-  <div>
+  <div class="textarea-content">
     <textarea
       nz-input
-      [name]="name"
+      [id]="'control' + layout.id"
+      [name]="'control' + layout.id"
       [(ngModel)]="value"
       [required]="required"
-      [placeholder]="placeholder"
+      [placeholder]="setting.placeholder"
+      [disabled]="setting.readonly"
+      [class]="layout.fieldHtmlClass"
       [rows]="rows"
       (focus)="focus()"
-      (ngModelChange)="textareaChange($event)">
+      (ngModelChange)="textareaChange($event)"
+    >
     </textarea>
 
     <div *ngIf="required && (!value || value.length <= 0) && !firstLoad">
-      <div class="text-danger">
-        {{title}}不能为空
-      </div>
+      <div class="text-danger">{{ setting.title }}不能为空</div>
     </div>
   </div>
 </div>

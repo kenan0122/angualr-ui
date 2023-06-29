@@ -6,6 +6,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { UploadComponent } from './upload.component';
 import { ErrorModule } from '../error/error.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [UploadComponent],
@@ -16,7 +17,9 @@ import { ErrorModule } from '../error/error.module';
     NzCardModule,
     NzModalModule,
     ErrorModule,
-    NzMessageModule
-  ]
+    NzMessageModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
 })
-export class UploadModule { }
+export class UploadModule {}

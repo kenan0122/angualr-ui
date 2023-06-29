@@ -1,4 +1,4 @@
-import { notNullish } from 'projects/ui-angular/src/lib/utils';
+import { notNullish } from '../../utils';
 import {
   ExistingProvider,
   forwardRef,
@@ -92,7 +92,7 @@ export abstract class  AbstractValueAccessor  implements ControlValueAccessor, V
     if (typeof value === 'string') {
       error = value.trim() === '';
     } else {
-      error = (!value && value !== 0) || value.length <= 0;
+      error = (!value && value !== 0 && value !== false) || value.length <= 0;
     }
 
     return error;

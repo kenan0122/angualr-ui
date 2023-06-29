@@ -1,0 +1,22 @@
+@import '../../../styles/forms/inputs.scss';
+
+.file-input-array {
+  @extend .kf-form-item;
+}
+
+.file-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.file-item {
+  position: relative;
+  text-align: center;
+  margin-right: 0.75rem;
+}
+
+.file-remove {
+  position: absolute;
+  top: -9px;
+  right: -9px;
+}

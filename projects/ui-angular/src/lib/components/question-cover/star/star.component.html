@@ -1,11 +1,11 @@
 <div class="kf-star">
-  <ng-container *ngFor="let item of count | range; let i = index">
+  <ng-container *ngFor="let item of (count | range); let i = index">
     <kf-icon-button
       style="padding-right: 0.5rem"
       iconSize="2rem"
       [path]="path"
       [color]="value >= i ? 'yellow' : 'gray'"
-      (iconOuter)="choice(i)"
+      (click)="choice(i)"
     ></kf-icon-button>
   </ng-container>
 </div>

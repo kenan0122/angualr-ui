@@ -1,0 +1,21 @@
+<button
+  nz-button
+  nz-dropdown
+  [nzDropdownMenu]="dropDownTemplate"
+  nzType="primary"
+  [style]="customStyle"
+>
+  {{ value ? value : "" }}<span class="arrow"></span>
+</button>
+<nz-dropdown-menu #dropDownTemplate="nzDropdownMenu">
+  <ul nz-menu>
+    <li
+      *ngFor="let op of options"
+      nz-menu-item
+      [ngStyle]="{ color: op.color }"
+      (click)="selectDropDown(op)"
+    >
+      {{ op.name }}
+    </li>
+  </ul>
+</nz-dropdown-menu>

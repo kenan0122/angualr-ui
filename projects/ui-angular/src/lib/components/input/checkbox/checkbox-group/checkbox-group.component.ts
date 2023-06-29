@@ -1,7 +1,20 @@
-import { notNullish } from 'projects/ui-angular/src/lib/utils';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { notNullish } from '../../../../utils';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
-import { AbstractValueAccessor, MakeProvider } from '../../asbstract-value-accessor';
+import {
+  AbstractValueAccessor,
+  MakeProvider,
+} from '../../asbstract-value-accessor';
+import { getCheckboxSetting, getDefaultLayout } from '../../input-setting';
+import { assignNullProps } from '@psylab/utils';
 
 @Component({
   selector: 'kf-checkbox-group',
@@ -9,13 +22,12 @@ import { AbstractValueAccessor, MakeProvider } from '../../asbstract-value-acces
   styleUrls: ['./checkbox-group.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: MakeProvider(CheckboxGroupComponent)
+  providers: MakeProvider(CheckboxGroupComponent),
 })
-export class CheckboxGroupComponent extends AbstractValueAccessor {
-  @Input() title: string = '';
-  @Input() options: Object = {};
-  @Input() nzDisabled: boolean = false;
-  @Input() flexDirection: string = 'kf-justify-center';
+export class CheckboxGroupComponent extends AbstractValueAccessor implements OnInit {
+  @Input() options: any;
+  @Input() setting: any = getCheckboxSetting();
+  @Input() layout: any = getDefaultLayout('checkbox');
   @Output() checkboxGroupOuter = new EventEmitter();
 
   @Input()
@@ -28,17 +40,30 @@ export class CheckboxGroupComponent extends AbstractValueAccessor {
   }
 
   setOfCheckedId = new Set<any>();
+  isArray: boolean = false;
 
   override set value(val: any) {
     this._value = val;
     this.setErrorInfo(val);
-    this.setOfCheckedId = new Set(val)
+    this.setOfCheckedId = new Set(val);
 
     this.textOnChange(this._value);
   }
 
   constructor() {
     super();
+  }
+
+  ngOnInit() {
+    const defaultLayout = getDefaultLayout('checkbox');
+    assignNullProps(this.setting, getCheckboxSetting());
+    assignNullProps(this.layout, defaultLayout);
+
+    if (Array.isArray(this.options)) {
+      this.isArray = true
+    } else {
+      this.isArray = false;
+    }
   }
 
   trackByOption(_: number, option: any): string {
@@ -57,16 +82,20 @@ export class CheckboxGroupComponent extends AbstractValueAccessor {
   }
 
   checkboxChange(option: any) {
-    this.checkboxGroupOuter.emit(option)
+    this.checkboxGroupOuter.emit(option);
   }
 
-    /**
-  * 实现自定义校验，写在组件类可介入入参
-  * @param control AbstractControl
-  */
+  unsorted() {
+    return 0;
+  }
+
+  /**
+   * 实现自定义校验，写在组件类可介入入参
+   * @param control AbstractControl
+   */
   override validate(control: AbstractControl): ValidationErrors | null {
     if (control.dirty && this._required) {
-      const check = control.value.some((item: any) => notNullish(item))
+      const check = control.value.some((item: any) => notNullish(item));
       if (check) {
         return null;
       } else {
@@ -76,5 +105,4 @@ export class CheckboxGroupComponent extends AbstractValueAccessor {
 
     return null;
   }
-
 }

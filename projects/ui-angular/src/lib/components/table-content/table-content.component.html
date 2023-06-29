@@ -1,0 +1,44 @@
+<div class="kf-table-content">
+  <div class="content-header">
+    <content-breadcrumb
+      *ngIf="breadcrumbs"
+      [breadcrumbs]="breadcrumbs"
+    ></content-breadcrumb>
+
+    <span class="header-prefix"></span>
+    <content-form
+      *ngIf="jsonData.search.fields"
+      #formChild
+      [class]="'kf-items-start'"
+      [fields]="jsonData.search.fields"
+      [inputDto]="jsonData.action.dto"
+    >
+      <kf-button style="width: 6.25rem; height: 2.5rem" (click)="search()">
+        查询
+      </kf-button>
+    </content-form>
+  </div>
+
+  <!-- 按钮数组: 例如添加,批量删除等 -->
+  <ng-container
+    *ngTemplateOutlet="btnTemplate; context: { $implicit: setOfCheckedId }"
+  ></ng-container>
+
+  <kf-table
+    [tableType]="tableType"
+    [reload]="reload"
+    [jsonData]="jsonData"
+    [items]="items"
+    [totalCount]="totalCount"
+    [pageNumber]="pageNumber"
+    [pageNumber]="pageNumber"
+    [pageSize]="pageSize"
+    [disabledProp]="disabledProp"
+    [btnTemplate]="btnTemplate"
+    [operateTemplate]="operateTemplate"
+    (switchOuter)="switchClick($event)"
+    (cardOuter)="cardItemChange($event)"
+    (chooseOuter)="chooseChange($event)"
+  >
+  </kf-table>
+</div>

@@ -1,0 +1,31 @@
+@import '../../../styles/forms/table.scss';
+
+.folder-name {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 120px;
+}
+
+:host ::ng-deep {
+  .ant-breadcrumb {
+    padding-right: 1rem;
+  }
+}
+
+::ng-deep {
+  .ant-dropdown {
+    width: 140px;
+  }
+
+  .ant-breadcrumb-link {
+    @extend .folder-name;
+
+    display: inline-block;
+  }
+
+  nz-breadcrumb-item {
+    display: inline-flex;
+    align-items: center;
+  }
+}

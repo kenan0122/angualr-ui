@@ -1,0 +1,39 @@
+.add-button {
+  @extend .relative;
+
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 2px;
+  transition: border-color 0.3s;
+  background-color: transparent;
+}
+
+
+.relative {
+  position: relative;
+}
+
+.upload {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.85);
+  outline: 0;
+  cursor: pointer;
+}
+
+.onlyShowOnHover {
+  opacity: 0;
+}
+
+.border {
+  border: 1px dashed #d9d9d9;
+  background-color: #fafafa;
+}
+
+.disabled {
+  cursor: not-allowed;
+}

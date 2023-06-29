@@ -1,0 +1,56 @@
+<div
+  class="kf-file"
+  [class.readonly]="setting.readonly"
+  [ngClass]="{ 'kf-form-item-with-help': error$ | async }"
+  [class]="layout.htmlClass"
+>
+  <label
+    *ngIf="setting.title"
+    [attr.for]="'control' + layout.id"
+    [class]="layout.labelHtmlClass"
+    [style.display]="setting.noTitle ? 'none' : ''"
+    [innerHTML]="setting.title"
+  ></label>
+
+  <ng-content select="[name=extra]"></ng-content>
+  <div
+    class="file-container"
+    [class]="layout.fieldHtmlClass"
+    [ngStyle]="{ width: width, height: height }"
+  >
+    <div class="absolute w-full h-full">
+      <ng-container *ngIf="fileObj.isImg; else other">
+        <img
+          *ngIf="fileValue && !isDisableImg"
+          [src]="fileValue | safeUrl"
+          alt=""
+          #img
+        />
+      </ng-container>
+      <ng-template #other>
+        <div class="file-border border">
+          <kf-icon [path]="fileIcon"></kf-icon>
+          <label style="word-break: break-word;">{{ fileObj.name }}</label>
+        </div>
+      </ng-template>
+    </div>
+    <div style="display: inline-block">
+      <kf-add-button
+        [onlyShowOnHover]="hasValue"
+        [height]="height"
+        [width]="width"
+        (click)="onClick()"
+      ></kf-add-button>
+    </div>
+    <input
+      #inputEl
+      type="file"
+      class="hidden"
+      [accept]="setting.fileType"
+      [disabled]="setting.readonly"
+      [multiple]="setting.multiple"
+      (change)="onFileSelected()"
+    />
+    <kf-error [title]="setting.title" [error$]="error$"></kf-error>
+  </div>
+</div>

@@ -1,24 +1,46 @@
-<form #validateForm="ngForm"  appIdentityRevealed
+<form
+  #form
+  #validateForm="ngForm"
+  class="kf-form"
+  [class]="formClass"
+  appIdentityRevealed
   nzLayout="inline"
   autocomplete="off"
-  [ngClass]="class">
-
-  <ng-container *ngFor="let field of fields;let i = index">
+>
+  <ng-container *ngFor="let field of fields; let i = index">
     <ng-container [ngSwitch]="field.type">
       <!-- 文本: number, string, date;  文本域: textarea-->
       <ng-container *ngSwitchCase="0">
         <!-- 文本域: textarea-->
-        <ng-container *ngIf="field.rows > 1;else textBlock">
+        <ng-container *ngIf="field.rows > 1; else textBlock">
+          <!-- <kf-input-title
+            *ngIf="field.label"
+            class="align-self"
+            [title]="field.label"
+          ></kf-input-title> -->
           <kf-textarea
             ngModel
+            [setting]="{
+              noTitle: setting.noTitle,
+              placeholder: field.placeholder,
+              maxLength: field.maxLength,
+              title: field.label,
+              readonly: setting.readonly
+            }"
+            [layout]="{
+              id: field.key + i,
+              size: layout.size,
+              labelHtmlClass: layout.labelHtmlClass,
+              fieldHtmlClass: layout.fieldHtmlClass,
+              htmlClass: layout.htmlClass
+            }"
             [name]="field.key + i"
-            [ngModelOptions]="{name: field.key}"
-            [(ngModel)]="inputDto[field.key]"
-            [title]="field.label"
             [required]="field.isRequired"
+            [ngModelOptions]="{ name: field.key + i }"
+            [(ngModel)]="inputDto[field.key]"
             [rows]="field.rows"
-            (textareaOuter)="textareaChange($event)">
-            <kf-input-title [title]="field.label"></kf-input-title>
+            (textareaOuter)="textareaChanged($event)"
+          >
           </kf-textarea>
         </ng-container>
 
@@ -29,79 +51,137 @@
             <ng-container *ngSwitchCase="0">
               <kf-input-number
                 ngModel
+                [setting]="{
+                  noTitle: setting.noTitle,
+                  placeholder: field.placeholder,
+                  maxLength: field.maxLength,
+                  title: field.label,
+                  readonly: setting.readonly
+                }"
+                [layout]="{
+                  id: field.key + i,
+                  size: layout.size,
+                  labelHtmlClass: layout.labelHtmlClass,
+                  fieldHtmlClass: layout.fieldHtmlClass,
+                  htmlClass: layout.htmlClass
+                }"
                 [name]="field.key + i"
-                [title]="field.label"
-                [placeholder]="field.placeholder"
-                [ngModelOptions]="{name: field.key}"
-                [(ngModel)]="inputDto[field.key]"
-                [maxlength]="field.maxlength"
                 [required]="field.isRequired"
-                (numberOuter)="numberChange($event)">
-                 <kf-input-title [title]="field.label"></kf-input-title>
+                [ngModelOptions]="{ name: field.key + i }"
+                [(ngModel)]="inputDto[field.key]"
+                (numberOuter)="numberChanged($event)"
+              >
               </kf-input-number>
             </ng-container>
             <!-- string -->
             <ng-container *ngSwitchCase="1">
               <kf-input-text
                 ngModel
+                [setting]="{
+                  noTitle: setting.noTitle,
+                  placeholder: field.placeholder,
+                  maxLength: field.maxLength,
+                  title: field.label,
+                  readonly: setting.readonly
+                }"
+                [layout]="{
+                  id: field.key + i,
+                  size: layout.size,
+                  labelHtmlClass: layout.labelHtmlClass,
+                  fieldHtmlClass: layout.fieldHtmlClass,
+                  htmlClass: layout.htmlClass
+                }"
                 [name]="field.key + i"
-                [ngModelOptions]="{name: field.key}"
-                [(ngModel)]="inputDto[field.key]"
-                [placeholder]="field.placeholder"
-                [maxlength]="field.maxlength"
-                [size]="size"
-                [title]="field.label"
+                [rex]="field.rex"
+                [rexErrorInfo]="field.errorInfo"
                 [required]="field.isRequired"
-                (textOuter)="textChange($event)">
-                  <kf-input-title [title]="field.label"></kf-input-title>
+                [ngModelOptions]="{ name: field.key + i }"
+                [(ngModel)]="inputDto[field.key]"
+                (textOuter)="textChanged($event)"
+              >
               </kf-input-text>
             </ng-container>
             <!-- date -->
             <ng-container *ngSwitchCase="2">
               <kf-input-date
                 ngModel
+                [setting]="{
+                  noTitle: setting.noTitle,
+                  placeholder: field.placeholder,
+                  maxLength: field.maxLength,
+                  title: field.label,
+                  readonly: setting.readonly
+                }"
+                [layout]="{
+                  id: field.key + i,
+                  size: layout.size,
+                  labelHtmlClass: layout.labelHtmlClass,
+                  fieldHtmlClass: layout.fieldHtmlClass,
+                  htmlClass: layout.htmlClass
+                }"
                 [name]="field.key + i"
-                [placeholder]="field.placeholder"
-                [ngModelOptions]="{name: field.key}"
-                [(ngModel)]="inputDto[field.key]"
-                [size]="size"
-                [title]="field.label"
                 [required]="field.isRequired"
-                (dateOuter)="dateChange($event)">
-                  <kf-input-title [title]="field.label"></kf-input-title>
+                [ngModelOptions]="{ name: field.key }"
+                [(ngModel)]="inputDto[field.key]"
+                (dateOuter)="dateChanged($event)"
+              >
               </kf-input-date>
             </ng-container>
           </ng-container>
         </ng-template>
-
       </ng-container>
       <!-- 下拉框: ComboBox/List;  选择框: CheckBox/Radio-->
       <ng-container *ngSwitchCase="1">
         <ng-container [ngSwitch]="field.style">
           <!-- 复选框: checkbox / 单选框: Radio-->
           <ng-container *ngSwitchCase="0">
-             <!-- 复选框: checkbox-->
+            <!-- 复选框: checkbox-->
             <ng-container *ngIf="field.isMulti; else checkBlock">
               <kf-checkbox-group
                 ngModel
+                [setting]="{
+                  noTitle: setting.noTitle,
+                  title: field.label,
+                  readonly: setting.readonly
+                }"
+                [layout]="{
+                  id: field.key + i,
+                  size: layout.size,
+                  labelHtmlClass: layout.labelHtmlClass,
+                  fieldHtmlClass: layout.fieldHtmlClass,
+                  htmlClass: layout.htmlClass
+                }"
                 [name]="field.key + i"
-                [ngModelOptions]="{name: field.key}"
-                [(ngModel)]="inputDto[field.key]"
                 [required]="field.isRequired"
-                (checkboxGroupOuter)="checkGroupChange($event)"
+                [ngModelOptions]="{ name: field.key + i }"
+                [(ngModel)]="inputDto[field.key]"
+                (checkboxGroupOuter)="checkGroupChanged($event)"
               >
               </kf-checkbox-group>
             </ng-container>
             <ng-template #checkBlock>
               <kf-radio-group
                 ngModel
-                [name]="'radio'"
-                [ngModelOptions]="{name: 'radio'}"
+                [setting]="{
+                  noTitle: setting.noTitle,
+                  title: field.label,
+
+                  readonly: setting.readonly
+                }"
+                [layout]="{
+                  id: field.key + i,
+                  size: layout.size,
+                  labelHtmlClass: layout.labelHtmlClass,
+                  fieldHtmlClass: layout.fieldHtmlClass,
+                  htmlClass: layout.htmlClass
+                }"
+                [name]="field.key + i"
+                [required]="field.isRequired"
+                [ngModelOptions]="{ name: field.key + i }"
                 [options]="field.options"
                 [(ngModel)]="inputDto[field.key]"
-                [required]="field.isRequired"
-                (radioOuter)="radioChange()">
-                <kf-input-title [title]="field.label"></kf-input-title>
+                (radioOuter)="radioChanged()"
+              >
               </kf-radio-group>
             </ng-template>
           </ng-container>
@@ -109,30 +189,52 @@
           <ng-container *ngSwitchCase="1">
             <kf-select
               ngModel
+              [setting]="{
+                noTitle: setting.noTitle,
+                placeholder: field.placeholder,
+                title: field.label,
+                readonly: setting.readonly,
+                isMulti: field.isMulti
+              }"
+              [layout]="{
+                id: field.key + i,
+                size: layout.size,
+                labelHtmlClass: layout.labelHtmlClass,
+                fieldHtmlClass: layout.fieldHtmlClass,
+                htmlClass: layout.htmlClass
+              }"
               [name]="field.key + i"
-              [ngModelOptions]="{name: field.key}"
-              [(ngModel)]="inputDto[field.key]"
-              [size]="size"
-              [title]="field.label"
-              [isMulti]="field.isMulti"
-              [options]="field.options"
               [required]="field.isRequired"
-              (selectOuter)="selectChange($event)"
+              [ngModelOptions]="{ name: field.key + i }"
+              [(ngModel)]="inputDto[field.key]"
+              [options]="field.options"
+              (selectOuter)="selectChanged($event)"
             >
-              <kf-input-title [title]="field.label"></kf-input-title>
             </kf-select>
           </ng-container>
           <!-- 带有复选框的下拉框: List-->
           <ng-container *ngSwitchCase="2">
             <kf-list
               ngModel
+              [setting]="{
+                noTitle: setting.noTitle,
+                title: field.label,
+                readonly: setting.readonly
+              }"
+              [layout]="{
+                id: field.key + i,
+                size: layout.size,
+                labelHtmlClass: layout.labelHtmlClass,
+                fieldHtmlClass: layout.fieldHtmlClass,
+                htmlClass: layout.htmlClass
+              }"
               [name]="field.key + i"
-              [ngModelOptions]="{name: field.key}"
+              [required]="field.isRequired"
+              [ngModelOptions]="{ name: field.key + i }"
               [options]="field.options"
               [(ngModel)]="inputDto[field.key]"
-              [required]="field.isRequired"
-              (listOuter)="listChange()">
-              <kf-input-title [title]="field.label"></kf-input-title>
+              (listOuter)="listChanged()"
+            >
             </kf-list>
           </ng-container>
         </ng-container>
@@ -140,29 +242,87 @@
 
       <!-- 文件上传: FileUpload -->
       <ng-container *ngSwitchCase="2">
-
+        <ng-container *ngIf="field.fileCount > 1; else elseBlock">
+          <kf-file-input-array
+            ngModel
+            [setting]="{
+              noTitle: setting.noTitle,
+              title: field.label,
+              readonly: setting.readonly,
+              fileSize: field.maxFileSize,
+              maxLength: field.fileCount,
+              fileType: field.acceptType
+            }"
+            [layout]="{
+              id: field.key + i,
+              size: layout.size,
+              labelHtmlClass: layout.labelHtmlClass,
+              fieldHtmlClass: layout.fieldHtmlClass,
+              htmlClass: layout.htmlClass
+            }"
+            [name]="field.key + i"
+            [required]="field.isRequired"
+            [ngModelOptions]="{ name: field.key + i }"
+            [(ngModel)]="inputDto[field.key]"
+            (fileArrayOuter)="fileArrayChanged($event)"
+          >
+          </kf-file-input-array>
+        </ng-container>
+        <ng-template #elseBlock>
+          <kf-file-input
+            ngModel
+            [setting]="{
+              noTitle: setting.noTitle,
+              title: field.label,
+              readonly: setting.readonly,
+              fileSize: field.maxFileSize,
+              fileType: field.acceptType
+            }"
+            [layout]="{
+              id: field.key + i,
+              size: layout.size,
+              labelHtmlClass: layout.labelHtmlClass,
+              fieldHtmlClass: layout.fieldHtmlClass,
+              htmlClass: layout.htmlClass
+            }"
+            [name]="field.key + i"
+            [required]="field.isRequired"
+            [ngModelOptions]="{ name: field.key + i }"
+            [(ngModel)]="inputDto[field.key]"
+            [hasValue]="!!inputDto[field.key]"
+            (fileOuter)="fileChanged($event)"
+          >
+          </kf-file-input>
+        </ng-template>
       </ng-container>
 
       <!-- 表单组: Group -->
       <ng-container *ngSwitchCase="3">
-          <kf-form
-            [fields]="field.fields"
-            [inputDto]="inputDto[field.key]">
-          </kf-form>
+        <kf-form
+          [setting]="setting"
+          [layout]="layout"
+          [fields]="field.fields"
+          [inputDto]="inputDto[field.key]"
+        >
+        </kf-form>
       </ng-container>
 
       <!-- 编辑器: MarkDown -->
-      <ng-container *ngSwitchCase="4">
-      </ng-container>
+      <ng-container *ngSwitchCase="4"> </ng-container>
 
       <!-- 封面内容: QuestionCover -->
       <ng-container *ngSwitchCase="5">
+        <kf-input-title
+          *ngIf="field.label"
+          [title]="field.label"
+        ></kf-input-title>
         <kf-question-cover
           ngModel
           [name]="field.key + i"
-          [ngModelOptions]="{name: field.key}"
+          [ngModelOptions]="{ name: field.key }"
           [(ngModel)]="inputDto[field.key]"
-          (coverOuter)="coverChange()">
+          (coverOuter)="coverChanged()"
+        >
         </kf-question-cover>
       </ng-container>
 
@@ -170,17 +330,42 @@
       <ng-container *ngSwitchCase="6">
         <kf-template-card
           ngModel
+          [setting]="{
+            noTitle: setting.noTitle,
+            title: field.label,
+            readonly: setting.readonly
+          }"
+          [layout]="{
+            id: field.key + i,
+            size: layout.size,
+            labelHtmlClass: layout.labelHtmlClass,
+            fieldHtmlClass: layout.fieldHtmlClass,
+            htmlClass: layout.htmlClass
+          }"
           [name]="field.key + i"
           [options]="field.options"
-          [ngModelOptions]="{name: field.key}"
+          [ngModelOptions]="{ name: field.key }"
           [required]="field.isRequired"
           [(ngModel)]="inputDto[field.key]"
-          (cardOuter)="templateCardChange()">
-          <kf-input-title [title]="field.label"></kf-input-title>
+          (cardOuter)="templateCardChanged()"
+        >
         </kf-template-card>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="7">
+        <ng-container *ngIf="customObj && customObj[field.key]">
+          <kf-input-title [title]="field.label"></kf-input-title>
+          <kf-custom
+            ngModel
+            [name]="field.key + i"
+            [component]="customObj[field.key].component"
+            [params]="customObj[field.key].params"
+            [outer]="customObj[field.key].outer"
+          ></kf-custom>
+        </ng-container>
       </ng-container>
     </ng-container>
   </ng-container>
 
-  <ng-content ></ng-content>
+  <ng-content></ng-content>
 </form>

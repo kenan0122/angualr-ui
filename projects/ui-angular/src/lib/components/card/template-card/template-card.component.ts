@@ -1,5 +1,21 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
-import { AbstractValueAccessor, MakeProvider } from '../../input/asbstract-value-accessor';
+import { TemplateRef } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
+import { assignNullProps } from '@psylab/utils';
+import { InputBoolean } from 'ng-zorro-antd/core/util';
+import {
+  AbstractValueAccessor,
+  MakeProvider,
+} from '../../input/asbstract-value-accessor';
+import { getDefaultLayout, getDefaultSetting } from '../../input/input-setting';
+import { templateDesc } from './template-card';
 
 @Component({
   selector: 'kf-template-card',
@@ -11,7 +27,12 @@ import { AbstractValueAccessor, MakeProvider } from '../../input/asbstract-value
 })
 export class TemplateCardComponent extends AbstractValueAccessor {
   @Input() options: Object = {};
-  @Input() flexDirection: string = 'kf-justify-center';
+  @Input() cardStyle: string = '';
+  @Input() @InputBoolean() borderLess: boolean = false;
+  @Input() setting: any = getDefaultSetting();
+  @Input() layout: any = getDefaultLayout('card');
+  @Input() extraTemplate?: string | TemplateRef<any>;
+  @Input() coverTemplate?: TemplateRef<any>;
 
   @Output() cardOuter = new EventEmitter();
 
@@ -26,14 +47,24 @@ export class TemplateCardComponent extends AbstractValueAccessor {
 
   constructor() {
     super();
-   }
-
-  ngOnInit() {
   }
 
-  cardClick(index: number) {
+  ngOnInit() {
+    assignNullProps(this.setting, getDefaultSetting());
+    assignNullProps(this.layout, getDefaultLayout('card'));
+  }
+
+  getDescByTemplateValue(value: any) {
+    const templateObj = templateDesc[value];
+
+    if (templateObj) {
+      return templateObj;
+    }
+    return {src: '', desc: ''};
+  }
+
+  cardClick(index: any) {
     this.value = index;
     this.cardOuter.emit();
   }
-
 }

@@ -1,32 +1,33 @@
 import {
-  HttpClient,
-  HttpParameterCodec,
-  HttpParams,
-} from '@angular/common/http';
-import {
   Component,
   EventEmitter,
-  Injector,
   Input,
-  OnChanges,
   OnInit,
   Output,
-  SimpleChanges,
   TemplateRef,
+  ViewChild,
 } from '@angular/core';
-import { Router } from '@angular/router';
 
+export enum TableType {
+  List,
+  Card,
+  ContentList
+}
 @Component({
   selector: 'kf-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
-export class TableComponent implements OnChanges, OnInit {
-  @Input() reLoad!: object;
+export class TableComponent implements OnInit {
+  @Input() tableType: TableType = TableType.List;
+  @Input() reload!: object;
   /** 表格json数据 */
   @Input() jsonData: any;
   /** 表格数据 */
   @Input() data: any;
+  @Input() items:any;
+  // 表格字段列表
+  @Input() totalCount: number = 0;
 
   /** 当前页数 */
   @Input() pageNumber: number = 1;
@@ -34,118 +35,57 @@ export class TableComponent implements OnChanges, OnInit {
   @Input() pageSize: number = 10;
   // 根据传过来的字段, 判断为false禁用复选框, true可选复选框
   @Input() disabledProp: string = '';
+  @Input() onlyField: string = 'id';
 
   @Input() operateTemplate!: TemplateRef<any>;
   @Input() btnTemplate!: TemplateRef<any>;
+  @Input() tdFirstTemplate!: TemplateRef<any>;
+  @Input() tdCustomTemplate!: TemplateRef<any>;
 
   @Output() tableOuter = new EventEmitter();
+  @Output() cardOuter = new EventEmitter();
   @Output() switchOuter = new EventEmitter();
+  @Output() chooseOuter = new EventEmitter();
+  @Output() trClick = new EventEmitter();
+  @Output() checkedChange = new EventEmitter();
+  @ViewChild('tableChild') tableChild: any;
 
-  checked: boolean = false;
-  indeterminate: boolean = false;
-  disabledCheck: boolean = false;
-  setOfCheckedId = new Set<string>();
 
-  constructor(public http: HttpClient, private injector: Injector) {}
+  constructor() {}
   ngOnInit(): void {
-    console.log('init', this.data)
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    // 如果重新加载, 重新渲染列表
-    if (changes['reLoad']) {
-      if (this.jsonData.multiSelect) {
-        this.resetData();
-      }
-    }
-  }
-
-  onAllChecked(checked: boolean) {
-    this.data.items
-      .filter((item: any) => !item[this.disabledProp])
-      .forEach((item: any) => this.updateCheckedSet(item.id, checked));
-    this.refreshCheckedStatus();
-  }
-
-  onItemChecked(id: any, checked: boolean): void {
-    this.updateCheckedSet(id, checked);
-    this.refreshCheckedStatus();
-  }
-
-  /** 更新当前页复选框的状态 */
-  private updateCheckedSet(id: any, checked: boolean): void {
-    if (checked) {
-      this.setOfCheckedId.add(id);
-    } else {
-      this.setOfCheckedId.delete(id);
-    }
-  }
-
-  /** 刷新新当前页复选框的状态 */
-  private refreshCheckedStatus(): void {
-    const listOfEnabledData = this.data.items.filter(
-      (item: any) => !item[this.disabledProp]
-    );
-
-    this.checked = listOfEnabledData.every((item: any) =>
-      this.setOfCheckedId.has(item.id)
-    );
-    this.indeterminate =
-      listOfEnabledData.some((item: any) => this.setOfCheckedId.has(item.id)) &&
-      !this.checked;
-  }
-
-  private findKey(obj: any, value: any, compare = (a: any, b: any) => a === b) {
-    return Object.keys(obj).find((k) => compare(obj[k], value));
-  }
-
-  /**
-   * @param item 要转换的数据
-   * @param options 数据集合
-   * @returns 转换后的文本
-   */
-  lg(item: any, options: any) {
-    return this.findKey(options, item);
-  }
-
-  switchClick(data: any, column: any, state: any) {
-    Object.keys(column.dto).forEach((key) => {
-      const value = key === state ? !data[key] : data[key];
-      column.dto[key] = value;
-    });
-
-    this.switchOuter.emit({ column });
+  switchClick(param: any) {
+    this.switchOuter.emit({ column: param.column });
   }
 
   // 分页
-  pageNumberChange(param: number) {
-    this.tableOuter.emit(param);
+  pageNumberChange(param: any) {
+    this.tableOuter.emit({pageNumber: param.pageNumber});
   }
 
-  // 重置选中的数据
-  resetData() {
-    this.setOfCheckedId.clear();
-    this.checked = false;
-    this.indeterminate = false;
+  cardItemChange(param: any) {
+    this.cardOuter.emit(param);
   }
 
   search() {
     this.pageNumber = 1;
-    this.pageNumberChange(this.pageNumber);
+    this.pageNumberChange({pageNumber: this.pageNumber});
   }
 
-
-  sortOderChange(sortField: string, sortOrder: string | null) {
-    const index = sortOrder?.lastIndexOf('end');
-    const order = sortOrder?.substring(0, index);
-
-    this.jsonData.action.dto.sortingKey = sortField;
-    this.jsonData.action.dto.sortingType = order;
-    this.search();
+  switch(tableType: TableType) {
+    this.tableType = tableType === TableType.Card ? TableType.List : TableType.Card;
   }
 
-  navigate(url: string, e: MouseEvent): void {
-    e.preventDefault();
-    this.injector.get(Router).navigateByUrl(url);
+  chooseChange(param: any) {
+    this.chooseOuter.emit(param);
+  }
+
+  itemClick(param: any) {
+    this.trClick.emit(param);
+  }
+
+  checkedChanged(ids: Set<any>) {
+    this.checkedChange.emit(ids);
   }
 }

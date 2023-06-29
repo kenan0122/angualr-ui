@@ -1,29 +1,45 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  TemplateRef,
+  ViewEncapsulation,
+} from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { NzUploadFile, NzUploadListType } from 'ng-zorro-antd/upload';
 import { Observable, Observer, Subscription } from 'rxjs';
-import { AbstractValueAccessor, MakeProvider } from '../input/asbstract-value-accessor';
+import {
+  AbstractValueAccessor,
+  MakeProvider,
+} from '../input/asbstract-value-accessor';
 
-export enum FileType {
-  Image,
-  File
-}
 @Component({
   selector: 'kf-upload',
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: MakeProvider(UploadComponent)
+  providers: MakeProvider(UploadComponent),
 })
 export class UploadComponent extends AbstractValueAccessor implements OnInit {
   @Input() title: string = '';
-  @Input() isEnableUpload:boolean = false;
-  @Input() fileType:FileType = FileType.Image
-  @Input() typeList: Array<string> = ['.png', '.jpg', '.gif', '.svg', '.jfif'];
+  @Input() uploadTitle: string = '上传';
+  @Input() isEnableUpload: boolean = false;
+  /** audio/*; video/*;  image/*; */
+  @Input() fileType: string = '';
   /** 以兆为单位 */
   @Input() fileSize: number = 2;
   @Input() flexDirection: string = 'kf-justify-center';
+  @Input() uploadFileNum: number = 1;
+  @Input() multiple: boolean = false;
+  @Input() listType: NzUploadListType = 'picture-card';
+  @Input() uploadClass: string = '';
+  @Input() upload?: (options: any, input: any) => void;
 
   @Output() fileOuter = new EventEmitter();
 
@@ -36,18 +52,19 @@ export class UploadComponent extends AbstractValueAccessor implements OnInit {
     this._required = v;
   }
 
-  fileArray:any = [];
+  avatarUrl?: string;
+  fileArray: any = [];
   showUploadList = {
     showPreviewIcon: false,
     showRemoveIcon: true,
-    hidePreviewIconInNonImage: true
+    hidePreviewIconInNonImage: true,
   };
   previewImage: string | undefined;
-  previewVisible:boolean = false;
+  previewVisible: boolean = false;
 
   constructor(private message: NzMessageService) {
     super();
-   }
+  }
 
   override set value(val: any) {
     this._value = val;
@@ -60,82 +77,63 @@ export class UploadComponent extends AbstractValueAccessor implements OnInit {
   }
 
   fetch(options: any) {
-    const formData = new FormData();
-    for (const file of this.fileArray) {
-     // file.uid = new Date().getTime().toString();
-      formData.append('files', file);
-    }
     // options.onSuccess 文件上传成功之后的回调函数
-    this.fileOuter.emit({status: options.onSuccess,formData, type: 'fetch'})
+    if (this.upload) {
+      this.upload(options, this.fileArray);
+    }
   }
 
   //#region 上传图片方法
-    // 图片上传
-    doImgUpload = (options: any) => {
-      const { onSuccess, onError, file, onProgress } = options;
-      this.fileArray = [file];
+  // 图片上传
+  doImgUpload = (options: any) => {
+    const { onSuccess, onError, file, onProgress } = options;
+    //this.fileArray = [file];
+    this.fileArray = [file];
+    this.fetch(options);
+    return new Subscription();
+  };
 
-     this.fetch(options);
-      return new Subscription();
-    }
+  beforeUpload = (file: NzUploadFile) => {
+    return new Observable((observer: Observer<boolean>) => {
+      const size = file.size ? file.size : 0;
+      const isLimit = size / 1024 / 1024 < this.fileSize;
 
-    beforeUpload = (file: NzUploadFile) => {
-      return new Observable((observer: Observer<boolean>) => {
-        const picType = this.typeList.indexOf(file.name.substring(file.name.lastIndexOf('.')));
-
-        if (picType < 0) {
-          this.message.create('error', `包含文件格式不正确，只支持 ${picType} 格式!`);
-          observer.complete();
-          return;
-        }
-
-       const size= file.size ? file.size : 0;
-        const isLimit = size / 1024 / 1024 < this.fileSize;
-
-        if (!isLimit) {
-          this.message.create('error', `文件超过${this.fileSize}MB, 请重新上传!`);
-          observer.complete();
-          return;
-        }
-        observer.next((picType >= 0 ) && isLimit);
+      if (!isLimit) {
+        this.message.create('error', `文件超过${this.fileSize}MB, 请重新上传!`);
         observer.complete();
+        return;
+      }
 
-      });
-    }
+      observer.next(isLimit);
+      observer.complete();
+    });
+  };
 
-    handleChange(info: { file: NzUploadFile }) {
-      // 状态选择
-      switch (info.file.status) {
-        case 'done': // 上传完成
-          // 获取服务端返回的信息
+  handleChange(info: { file: NzUploadFile }) {
+    // 状态选择
+    switch (info.file.status) {
+      case 'done': // 上传完成
+        // 获取服务端返回的信息
+        if (info.file.response) {
           if (info.file.response.success) {
           }
-          break;
-        case 'error': // 上传错误
-          this.message.create('error', '上传失败')
-          break;
-      }
+        }
+        break;
+      case 'error': // 上传错误
+        this.message.create('error', '上传失败');
+        break;
     }
+  }
 
-    handlePreview = (file: NzUploadFile) => {
-      this.previewImage = file.url || file.thumbUrl;
-      this.previewVisible = true;
-    }
+  handlePreview = (file: NzUploadFile) => {
+    this.previewImage = file.url || file.thumbUrl;
+    this.previewVisible = true;
+  };
 
-    removeFile = (file: NzUploadFile) => {
-      // this.fileOuter.emit({
-      //   upload: false,
-      //   file: null,
-      //   type: this.uploadFileType
-      // });
-      this.fileOuter.emit({file, type: 'remove'})
-      return true;
-    }
-
-    change(param:any) {
-      // console.log(88888, param)
-    }
+  removeFile = (file: NzUploadFile) => {
+    this.fileOuter.emit({ file, type: 'remove', fileArray: this.fileArray });
+    return true;
+  };
 
   //#endregion
-
 }

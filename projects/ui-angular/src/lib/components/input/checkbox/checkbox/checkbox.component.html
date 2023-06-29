@@ -4,6 +4,6 @@
   [nzDisabled]="disabled"
   [nzChecked]="value"
   (nzCheckedChange)="onCheckedChange($event)"
-  >
-  <span>{{ title }}</span>
+>
+  <ng-content></ng-content>
 </label>

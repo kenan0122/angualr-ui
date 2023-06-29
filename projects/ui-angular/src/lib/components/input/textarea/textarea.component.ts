@@ -1,5 +1,19 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, TemplateRef, ViewEncapsulation } from '@angular/core';
-import { AbstractValueAccessor, MakeProvider } from '../asbstract-value-accessor';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  TemplateRef,
+  ViewEncapsulation,
+} from '@angular/core';
+import {
+  AbstractValueAccessor,
+  MakeProvider,
+} from '../asbstract-value-accessor';
+import { getDefaultLayout, getDefaultSetting } from '../input-setting';
+import { assignNullProps } from '@psylab/utils';
 
 @Component({
   selector: 'kf-textarea',
@@ -7,16 +21,12 @@ import { AbstractValueAccessor, MakeProvider } from '../asbstract-value-accessor
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: MakeProvider(TextareaComponent),
-  styleUrls: ['./textarea.component.scss']
+  styleUrls: ['./textarea.component.scss'],
 })
-
-export class TextareaComponent extends AbstractValueAccessor {
-  @Input() title: string = '';
-  // 控件名字
-  @Input() name: string = 'textarea';
-  @Input() rows: number = 1;
-  @Input() placeholder: string = '请输入文本';
-  @Input() flexDirection: string = 'kf-justify-center';
+export class TextareaComponent extends AbstractValueAccessor implements OnInit {
+  @Input() rows: number = 10;
+  @Input() setting: any = getDefaultSetting();
+  @Input() layout: any = getDefaultLayout('textarea');
 
   @Output() textareaOuter = new EventEmitter();
 
@@ -31,6 +41,11 @@ export class TextareaComponent extends AbstractValueAccessor {
 
   constructor() {
     super();
+  }
+
+  ngOnInit(): void {
+    assignNullProps(this.setting, getDefaultSetting());
+    assignNullProps(this.layout, getDefaultLayout('textarea'));
   }
 
   textareaChange(text: string) {

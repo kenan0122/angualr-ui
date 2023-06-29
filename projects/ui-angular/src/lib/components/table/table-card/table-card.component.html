@@ -1,0 +1,82 @@
+<div class="table-card">
+  <!-- 搜索 -->
+  <kf-form
+    *ngIf="jsonData.search"
+    #formChild
+    [formClass]="'kf-items-start'"
+    [fields]="jsonData.search?.fields"
+    [inputDto]="jsonData.action.dto"
+  >
+    <kf-button style="width: 6.25rem; height: 2.5rem" (click)="search()">
+      查询
+    </kf-button>
+  </kf-form>
+
+  <!-- 按钮数组: 例如添加,批量删除等 -->
+  <ng-container
+    *ngTemplateOutlet="btnTemplate; context: { $implicit: null }"
+  ></ng-container>
+
+  <nz-table
+    *ngIf="items"
+    #basicTable
+    nzBordered
+    [nzData]="items"
+    [nzTotal]="totalCount"
+    [nzPageSize]="pageSize"
+    [(nzPageIndex)]="pageNumber"
+    [nzFrontPagination]="false"
+    [nzHideOnSinglePage]="true"
+    [nzShowPagination]="jsonData.enablePagination"
+    (nzPageIndexChange)="pageNumberChange($event)"
+  >
+    <div class="table-card_body">
+      <ng-container *ngIf="basicTable.data.length > 0; else elseTemplateEmpty">
+        <ng-container *ngFor="let item of basicTable.data; let i = index">
+          <nz-card
+            nzHoverable
+            [nzCover]="coverTemplate"
+            [nzBorderless]="true"
+            [nzExtra]="extraTemplate"
+            [ngStyle]="{
+              'background-color': selectList.includes(item) ? '#e6f7ff' : '#fff'
+            }"
+            (click)="cardClick(item, $event)"
+          >
+            <nz-card-meta
+              [nzTitle]="titleTemplate"
+              [nzAvatar]="avatarTemplate"
+            ></nz-card-meta>
+          </nz-card>
+          <ng-template #extraTemplate>
+            <i
+              *ngIf="selectList.includes(item)"
+              class="fa fa-check-circle"
+              [ngClass]="{ 'checked-icon': selectList.includes(item) }"
+            ></i>
+          </ng-template>
+          <ng-template #titleTemplate>
+            <ng-container *ngIf="item.isFolder; else elseBlock">
+              <div class="folder-name" [title]="item.name">{{ item.name }}</div>
+            </ng-container>
+            <ng-template #elseBlock>
+              <div class="file-name" [title]="item.name">{{ item.name }}</div>
+            </ng-template>
+          </ng-template>
+          <ng-template #avatarTemplate>
+            <i *ngIf="item.isFolder" class="kf-icon kf-folder folder-icon"></i>
+          </ng-template>
+          <ng-template #coverTemplate>
+            <img
+              *ngIf="!item.isFolder"
+              alt="example"
+              src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+              style="width: 82px; height: 82px"
+            />
+          </ng-template>
+        </ng-container>
+      </ng-container>
+      <ng-template #elseTemplateEmpty> </ng-template>
+    </div>
+  </nz-table>
+</div>

@@ -1,0 +1,15 @@
+
+:host ::ng-deep{
+  .ant-list-item-meta-title {
+    margin-bottom: 0;
+  }
+
+  .ant-list-item-meta {
+    align-items: center;
+  }
+
+  .ant-list:hover {
+    background-color: #f5f7fa;
+    cursor: pointer;
+  }
+}
